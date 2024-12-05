@@ -1,11 +1,11 @@
 #pragma once
 #include "Character.hpp"
 #include "Game.hpp"
-#include "Instructions/InstructionParts.hpp"
+#include "Instructions/InstructionPart.hpp"
 #include <string>
 #include <vector>
 
-typedef std::vector<std::pair<std::string, InstructionParts>> ListOfParts;
+typedef std::vector<std::pair<std::string, InstructionPart>> ListOfParts;
 /*
  * @brief Represent an instruction interface
  */
