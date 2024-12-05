@@ -17,10 +17,16 @@ class InstructionWithValues : public Instruction {
 private:
   std::map<std::string, Value> values;
 
+protected:
   /*
-   * @brief Add/Insert a value to be altered
+   * @brief Add/Insert a value to be altered with name `key` and info `value`
    */
-  void upsert_value(std::string &&, Value);
+  void upsert_value(std::string &&key, Value value);
+
+  /*
+   * @brief Get a value with name `key`
+   */
+  Value &get_value(std::string &&key);
 
 public:
   virtual void execute();
