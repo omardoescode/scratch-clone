@@ -11,8 +11,8 @@ FetchContent_Declare(SFML
         GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-set (SOURCES src/GameView.cpp)
-set (HEADERS include/GameView.hpp)
+set (HEADERS include/App.hpp)
+set (SOURCES src/App.cpp)
 
 add_library(
   presentation
