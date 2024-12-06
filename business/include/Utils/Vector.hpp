@@ -36,7 +36,7 @@ public:
    */
   T length() { return std::sqrt(x * x + y * y); }
 
-private:
+public:
   T x;
   T y;
 };
