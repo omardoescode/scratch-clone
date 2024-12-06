@@ -8,7 +8,7 @@
 /*
  * @brief Position Vector
  */
-typedef Vector<float> PositionVector_t;
+typedef Vector<double> PositionVector_t;
 
 class Character : public Observable {
 public:

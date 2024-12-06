@@ -24,12 +24,17 @@ public:
    *
    * @note Must check length is not equal to 0
    */
-  Vector normalize(Vector vec) {
-    T len = std::sqrt(x * x + y * y);
+  Vector normalize() {
+    T len = length();
     assert(fabs(len) <= EPS);
 
     return {x / len, y / len};
   }
+
+  /*
+   * @brief Get the length of a vector
+   */
+  T length() { return std::sqrt(x * x + y * y); }
 
 private:
   T x;
