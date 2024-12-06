@@ -15,12 +15,6 @@ set(HEADERS
   include/Instructions/InstructionWithValues.hpp
   include/Instructions/InstructionWithStack.hpp
   include/Instructions/InstructionStack.hpp
-
-  # Utilities
-  include/Utils/Event.hpp
-  include/Utils/Observable.hpp
-  include/Utils/Observer.hpp
-  include/Utils/Vector.hpp
 )
 
 set(SOURCES 
@@ -32,13 +26,11 @@ set(SOURCES
   src/Instructions/InstructionWithValues.cpp
   src/Instructions/InstructionWithStack.cpp
   src/Instructions/InstructionStack.cpp
-
-  # Utilities
-  src/Utils/Observable.cpp
 )
 
 add_library(business ${SOURCES} ${HEADERS})
 
 target_include_directories(business PUBLIC
+    ${CMAKE_SOURCE_DIR}/utils/include
     ${PROJECT_SOURCE_DIR}/include
 )

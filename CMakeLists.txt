@@ -5,6 +5,7 @@ project(main VERSION 1.0)
 
 add_subdirectory(./business)
 add_subdirectory(./presentation)
+add_subdirectory(./utils)
 
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
@@ -12,6 +13,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(main src/main.cpp)
 
+target_link_libraries(main PRIVATE utils)
 target_link_libraries(main PRIVATE business)
 target_link_libraries(main PRIVATE presentation)
+
 target_include_directories(main PUBLIC ${PROJECT_SOURCE_DIR}/presentation/include)

@@ -1,6 +1,6 @@
 #pragma once
-#include "Utils/Event.hpp"
-#include "Utils/Observer.hpp"
+#include "Event.hpp"
+#include "Observer.hpp"
 #include <map>
 #include <memory>
 #include <vector>

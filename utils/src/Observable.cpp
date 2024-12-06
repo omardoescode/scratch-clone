@@ -1,4 +1,4 @@
-#include "Utils/Observable.hpp"
+#include "Observable.hpp"
 
 void Observable::register_observer(Event event,
                                    std::shared_ptr<Observer> observer) {

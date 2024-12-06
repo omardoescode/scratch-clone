@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Utils/Event.hpp"
+#include "Event.hpp"
 class Observer {
 public:
   virtual ~Observer() = default;

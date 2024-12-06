@@ -1,7 +1,7 @@
 #pragma once
 #include "Instructions/InstructionStack.hpp"
-#include "Utils/Observable.hpp"
-#include "Utils/Vector.hpp"
+#include "Observable.hpp"
+#include "Vector.hpp"
 #include "string"
 #include "vector"
 
