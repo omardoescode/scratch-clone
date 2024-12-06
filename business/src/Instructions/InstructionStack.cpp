@@ -8,9 +8,9 @@ void InstructionStack::execute(Game &game, Character &character) {
 bool InstructionStack::empty() { return list.empty(); }
 
 void InstructionStack::add_instruction(unsigned int index,
-                                       std::unique_ptr<Instruction> &ins) {
+                                       std::shared_ptr<Instruction> &ins) {
 
   auto it = list.begin();
   std::advance(it, index);
-  list.insert(it, std::move(ins));
+  list.insert(it, ins);
 }

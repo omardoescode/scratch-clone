@@ -5,10 +5,10 @@
 
 class InstructionStack {
 private:
-  std::list<std::unique_ptr<Instruction>> list;
+  std::list<std::shared_ptr<Instruction>> list;
 
 public:
   void execute(Game &, Character &);
   bool empty();
-  void add_instruction(unsigned int index, std::unique_ptr<Instruction> &);
+  void add_instruction(unsigned int index, std::shared_ptr<Instruction> &);
 };

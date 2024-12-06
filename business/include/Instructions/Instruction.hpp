@@ -1,9 +1,10 @@
 #pragma once
-#include "Character.hpp"
 #include "Game.hpp"
 #include "Instructions/InstructionPart.hpp"
 #include <string>
 #include <vector>
+
+class Character;
 
 typedef std::vector<std::pair<std::string, InstructionPart>> ListOfParts;
 /*
