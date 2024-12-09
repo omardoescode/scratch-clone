@@ -1,7 +1,6 @@
 #pragma once
 #include "CharacterManager.hpp"
-#include "Events/EventBroker.hpp"
-#include "Instructions/ScriptExecution.hpp"
+#include "Commands/ScriptExecution.hpp"
 #include "SymbolTable.hpp"
 #include <list>
 
@@ -47,6 +46,5 @@ private:
   SymbolTable symbol_table;
   CharacterManger character_manager;
   GameState state;
-  EventBroker event_broker;
   std::list<ScriptExecution> executions;
 };

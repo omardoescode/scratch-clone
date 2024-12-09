@@ -41,6 +41,11 @@ public:
    */
   void advance();
 
+  /*
+   * @brief Getter for character
+   */
+  std::shared_ptr<Character> get_character();
+
 private:
   std::stack<std::shared_ptr<Script>> scripts;
   std::stack<int> current_index;

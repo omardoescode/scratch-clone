@@ -1,16 +1,19 @@
 #pragma once
-#include "Instructions/InstructionStack.hpp"
-#include "Observable.hpp"
+#include "Commands/Script.hpp"
 #include "Vector.hpp"
 #include "string"
-#include "vector"
+#include <vector>
 
 /*
  * @brief Position Vector
  */
 typedef Vector<double> PositionVector_t;
 
-class Character : public Observable {
+/*
+ * Invariants:
+ *   - sprites.size() > 0
+ */
+class Character {
 public:
   /*
    * @brief Create a character with a given sprite as the initial default one
@@ -47,8 +50,6 @@ public:
 
   /*
    * @brief Update position
-   *
-   * @note Must notify with change in position
    */
   void update_position(PositionVector_t position);
 
@@ -67,12 +68,12 @@ public:
   /*
    * @brief Getter for Stacks
    */
-  std::vector<std::shared_ptr<InstructionStack>> get_instructions();
+  std::vector<std::shared_ptr<Script>> get_instructions();
 
   /*
    * @brief Add a stack to this character
    */
-  void add_stack(std::shared_ptr<InstructionStack> stack);
+  void add_stack(std::shared_ptr<Script> stack);
 
   /*
    * @brief Remove a stack to this character with index `index`
@@ -84,5 +85,6 @@ private:
   unsigned int current_sprite;
   PositionVector_t position;
   int rotation;
-  std::vector<std::shared_ptr<InstructionStack>> stacks;
+  std::vector<std::shared_ptr<Script>> stacks;
+  unsigned int size;
 };

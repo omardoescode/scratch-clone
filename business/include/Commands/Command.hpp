@@ -28,6 +28,12 @@ public:
    */
   const std::vector<CommandPart> &get_parts();
 
+protected:
+  /*
+   * @brief Setter for parts
+   */
+  void set_parts(std::vector<CommandPart> &&);
+
 private:
   Section section;
   std::vector<CommandPart> parts;

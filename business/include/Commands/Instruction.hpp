@@ -1,22 +1,19 @@
 #pragma once
+#include "CharacterManager.hpp"
 #include "Commands/Command.hpp"
 #include "SymbolTable.hpp"
 #include "Time.hpp"
 #include "Vector.hpp"
-#include <string>
-#include <vector>
 
 class Character;
 class ScriptExecution;
 
-class Instruction : Command {
+class Instruction : public Command {
 public:
   /*
    * @brief Constructor
-   *
-   * @param starter The value of `starter`
    */
-  Instruction(bool starter);
+  Instruction(Section section);
 
   /*
    * @brief Execute the instruction
@@ -28,7 +25,7 @@ public:
    * @param time The time since the game has started
    */
 
-  virtual void execute(Character &character, SymbolTable &symbol_table,
+  virtual void execute(CharacterManager &character, SymbolTable &symbol_table,
                        ScriptExecution &exeuction, Vector<double> mouse_pointer,
                        Time time) = 0;
 
@@ -36,6 +33,11 @@ public:
    * @brief Destructor
    */
   virtual ~Instruction() = default;
+
+  /*
+   * @brief Set Starter
+   */
+  void set_starter(bool starter);
 
 private:
   bool starter; // `true` if the instruction is one that handles the evntBus and

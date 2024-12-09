@@ -29,25 +29,10 @@ void Character::change_sprite(unsigned int index) {
   assert(0 <= index && index < sprites.size());
 
   current_sprite = 0;
-  notify_observers(Event::CHARACTER_CHANGE_SPRITE);
 }
 
 PositionVector_t Character::get_position() { return position; }
 void Character::update_position(PositionVector_t pos) { position = pos; }
 
 int Character::get_rotation() { return rotation; }
-void Character::update_rotation(int rot) {
-  rotation = rot;
-  notify_observers(Event::CHARACTER_CHANGE_ROTATION);
-}
-
-std::vector<std::shared_ptr<InstructionStack>> Character::get_instructions() {
-  return stacks;
-}
-
-void Character::add_stack(std::shared_ptr<InstructionStack> stack) {
-  stacks.push_back(stack);
-}
-void Character::remove_stack(unsigned int index) {
-  stacks.erase(stacks.begin() + index);
-}
+void Character::update_rotation(int rot) { rotation = rot; }

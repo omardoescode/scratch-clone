@@ -4,7 +4,7 @@
 
 class Character;
 
-class CharacterManger {
+class CharacterManager {
 public:
   /*
    * @brief Subscribe to all events by all characters scripts
