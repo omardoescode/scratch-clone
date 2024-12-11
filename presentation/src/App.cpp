@@ -1,7 +1,6 @@
 #include "App.hpp"
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Mouse.hpp>
-#include <iostream>
 
 App::App() { init_window(); }
 

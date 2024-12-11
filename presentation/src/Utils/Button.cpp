@@ -34,7 +34,7 @@ void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 }
 
 bool Button::is_hovered(sf::Vector2f point) {
-  return rect->getGlobalBounds().contains(point);
+  return rect->getGlobalBounds().contains(point.x, point.y);
 }
 
 void Button::set_handler(std::function<void(void)> func) { handler = func; }

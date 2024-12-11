@@ -15,6 +15,7 @@ add_executable(main src/main.cpp)
 
 target_link_libraries(main PRIVATE utils)
 target_link_libraries(main PRIVATE business)
+target_link_libraries(main PRIVATE sfml-graphics sfml-window sfml-system)
 target_link_libraries(main PRIVATE presentation)
 
 target_include_directories(main PUBLIC ${PROJECT_SOURCE_DIR}/presentation/include)

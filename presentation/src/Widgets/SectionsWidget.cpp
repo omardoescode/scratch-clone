@@ -1,5 +1,6 @@
 #include "Widgets/SectionsWidget.hpp"
 #include "SFML/Graphics/RectangleShape.hpp"
+#include "SFML/System/Vector2.hpp"
 #include "Utils/Button.hpp"
 #include "Utils/TextBuilder.hpp"
 #include <cmath>
@@ -24,20 +25,15 @@ void SectionsWidget::render(sf::RenderWindow *window) {
 }
 void SectionsWidget::handle_events(const sf::RenderWindow *window,
                                    const sf::Event &event) {
-  // TODO: Fix the bug of not detecting the clicks
   if (event.type == event.MouseButtonPressed &&
       event.mouseButton.button == sf::Mouse::Left) {
 
-    auto worldPos = window->mapPixelToCoords(sf::Mouse::getPosition());
-    std::cout << "checking a click on " << worldPos.x << " " << worldPos.y
-              << std::endl;
+    sf::Vector2f mousePos(sf::Mouse::getPosition(*window));
 
-    for (auto &sec : sections_buttons) {
-      if (sec->is_hovered(worldPos)) {
-        std::cout << "mouse positions " << sf::Mouse::getPosition().x << " "
-                  << sf::Mouse::getPosition().y << std::endl;
-      }
-    }
+    // Handle Clicks
+    for (auto &sec : sections_buttons)
+      if (sec->is_hovered(mousePos))
+        sec->handle_click();
   }
 }
 
