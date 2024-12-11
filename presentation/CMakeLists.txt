@@ -11,8 +11,31 @@ FetchContent_Declare(SFML
         GIT_TAG 2.6.x)
 FetchContent_MakeAvailable(SFML)
 
-set (HEADERS include/App.hpp)
-set (SOURCES src/App.cpp)
+set (HEADERS 
+  include/App.hpp
+  include/AppWindow.hpp
+  include/Widget.hpp
+
+  # Widgets
+  include/Widgets/SectionsWidget.hpp
+
+  # Components
+  include/Utils/BorderRectangle.hpp
+  include/Utils/TextBuilder.hpp
+  include/Utils/Button.hpp
+)
+set (SOURCES 
+  src/App.cpp
+  src/AppWindow.cpp
+
+  # Widgets
+  src/Widgets/SectionsWidget.cpp
+
+  # Components
+  src/Utils/BorderRectangle.cpp
+  src/Utils/TextBuilder.cpp
+  src/Utils/Button.cpp
+)
 
 add_library(
   presentation
@@ -22,21 +45,9 @@ add_library(
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
 
-target_link_libraries(presentation PRIVATE sfml-graphics sfml-audio)
+target_link_libraries(presentation PRIVATE sfml-graphics sfml-audio sfml-system)
 target_compile_features(presentation PRIVATE cxx_std_17)
 
 target_include_directories(presentation PUBLIC
     ${PROJECT_SOURCE_DIR}/include
 )
-target_link_libraries(presentation PRIVATE sfml-graphics sfml-audio)
-target_compile_features(presentation PRIVATE cxx_std_17)
-
-if(WIN32)
-    add_custom_command(
-            TARGET presentation
-            COMMENT "Copy OpenAL DLL"
-            PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy ${SFML_SOURCE_DIR}/extlibs/bin/$<IF:$<EQUAL:${CMAKE_SIZEOF_VOID_P},8>,x64,x86>/openal32.dll $<TARGET_FILE_DIR:main>
-            VERBATIM)
-endif()
-
-# install(TARGETS p)

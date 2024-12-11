@@ -1,7 +1,12 @@
 #pragma once
+#include "AppWindow.hpp"
 #include "SFML/Graphics.hpp"
 
 class App {
+private:
+  static constexpr double window_width = 1800;
+  static constexpr double window_height = 1012.5;
+
 public:
   App();
 
@@ -20,7 +25,7 @@ private:
    * @brief Detect Events
    * @note Must check for children events
    */
-  void event_loop();
+  void handle_events();
 
   /*
    * @brief Presentation Logic Before rendering
@@ -34,6 +39,5 @@ private:
 
 private:
   sf::RenderWindow *window;
-  static constexpr double window_width = 1800;
-  static constexpr double window_height = 1012.5;
+  AppWindow app_window;
 };
