@@ -22,6 +22,7 @@ set (HEADERS
   # Utils
   include/Utils/BorderRectangle.hpp
   include/Utils/TextBuilder.hpp
+  include/Utils/FontFactory.hpp
   include/Utils/Button.hpp
   include/Utils/Text.hpp
 )
@@ -35,6 +36,7 @@ set (SOURCES
   # Utils
   src/Utils/BorderRectangle.cpp
   src/Utils/TextBuilder.cpp
+  src/Utils/FontFactory.cpp
   src/Utils/Button.cpp
   src/Utils/Text.cpp
 )

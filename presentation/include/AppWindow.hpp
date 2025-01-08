@@ -1,7 +1,7 @@
 #include "SFML/Graphics.hpp"
 #include "Widgets/SectionsWidget.hpp"
 
-class AppWindow : public Widget {
+class AppWindow {
 private:
   SectionsWidget sections;
 
