@@ -7,6 +7,11 @@ public:
   FontFactory &operator=(const FontFactory &) = delete;
 
   /**
+   * @brief Get The single istance of this class
+   */
+  static FontFactory &get_instance();
+
+  /**
    * @brief Get The primary font
    */
   std::unique_ptr<sf::Font> get_primary_font();
