@@ -15,25 +15,25 @@ public:
    *
    * @param ren Current Render Data
    */
-  virtual void render(RenderData) = 0;
+  virtual void render(RenderData);
 
   /*
    * @brief Handle Events for the widget
    *
    * @param dat Current Event Data
    */
-  virtual void handle_events(EventData) = 0;
+  virtual void handle_events(EventData);
 
   /**
    * @brief Update the widget
    */
-  virtual void update(UpdateData) = 0;
+  virtual void update(UpdateData);
 
   /**
    * @brief Get Global Bounds
    */
-  virtual sf::FloatRect get_global_bounds() const = 0;
+  virtual sf::FloatRect get_global_bounds() const;
 
-protected:
+private:
   std::unique_ptr<Widget> _widget;
 };
