@@ -27,14 +27,15 @@ public:
   /**
    * @brief Constructor by one value for multiple directions
    */
-  EdgeInsets(int direction, float value);
+  explicit EdgeInsets(int direction, float value);
   /**
    * @brief Constructor for all 4 directions
    *
    * @details If a value is -1, this means, it should mirror the opposite one
    * (This is the default value for bottom and right)
    */
-  EdgeInsets(float top, float left = 0, float bottom = -1, float right = -1);
+  explicit EdgeInsets(float top, float left = 0, float bottom = -1,
+                      float right = -1);
 
   /**
    * @brief Getter for top offset

@@ -57,11 +57,10 @@ void SectionsWidget::init_sections() {
 
     btn->set_handler([str]() { std::cout << str << std::endl; });
 
-    auto borders = std::make_unique<RectangularBorder>(
-        std::move(btn), 3, sf::Color(r, g, b), RectangularBorder::LEFT);
-
-    _sections_btns.push_back(std::make_unique<Padding>(
-        std::move(borders), EdgeInsets(EdgeInsets::ALL, 10)));
+    _sections_btns.push_back(std::make_unique<RectangularBorder>(
+        std::make_unique<Padding>(std::move(btn),
+                                  EdgeInsets(EdgeInsets::ALL, 10)),
+        sf::Color(r, g, b), EdgeInsets(EdgeInsets::LEFT, 3)));
   }
 }
 
