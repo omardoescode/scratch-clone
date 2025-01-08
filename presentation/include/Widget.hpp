@@ -4,9 +4,7 @@
 #include "Data/RenderData.hpp"
 #include "Data/UpdateData.hpp"
 #include "SFML/Graphics/Rect.hpp"
-#include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/System/Vector2.hpp"
-#include "SFML/Window/Event.hpp"
 
 class Widget {
 public:
@@ -53,6 +51,11 @@ public:
    * @brief Handle click
    */
   virtual void handle_click();
+
+  /**
+   * @brief Get the background of the widget
+   */
+  virtual sf::Color get_background_color();
 
 protected:
   sf::Vector2f _pos;

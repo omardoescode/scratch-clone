@@ -4,16 +4,19 @@
 #include "SFML/System/Vector2.hpp"
 #include "Utils/Button.hpp"
 #include "Utils/ButtonConfig.hpp"
+#include "Utils/EdgeInsets.hpp"
 #include "Utils/FontFactory.hpp"
 #include "Utils/Padding.hpp"
 #include "Utils/RectangularBorder.hpp"
 #include "Utils/TextBuilder.hpp"
 #include <memory>
 
-SectionsWidget::SectionsWidget(unsigned width, unsigned height) {
+SectionsWidget::SectionsWidget(unsigned width, unsigned height,
+                               sf::Color background)
+    : _bg_color(background) {
   sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(width, height));
-  rect.setFillColor(sf::Color(0x111111));
-  box = std::make_unique<sf::RectangleShape>(std::move(rect));
+  rect.setFillColor(sf::Color(_bg_color));
+  _box = std::make_unique<sf::RectangleShape>(std::move(rect));
 
   init_sections();
 
@@ -21,26 +24,26 @@ SectionsWidget::SectionsWidget(unsigned width, unsigned height) {
 }
 
 void SectionsWidget::render(RenderData ren) {
-  ren.window.draw(*box);
-  for (auto &btn : sections_buttons)
+  ren.window.draw(*_box);
+  for (auto &btn : _sections_btns)
     btn->render(ren);
 }
 
 void SectionsWidget::handle_events(EventData evt) {
-  for (auto &btn : sections_buttons)
+  for (auto &btn : _sections_btns)
     btn->handle_events(evt);
 }
 
 void SectionsWidget::update(UpdateData upd) {
-  for (auto &btn : sections_buttons)
+  for (auto &btn : _sections_btns)
     btn->update(upd);
 }
 
 void SectionsWidget::init_sections() {
-  sections = Game::get_instance().get_sections();
+  _sections = Game::get_instance().get_sections();
   TextBuilder builder;
 
-  for (auto &[str, color] : sections) {
+  for (auto &[str, color] : _sections) {
     auto &[r, g, b] = color;
     auto text = builder.setSize(14)
                     .setText(str)
@@ -48,10 +51,7 @@ void SectionsWidget::init_sections() {
                     .setFont(FontFactory::get_instance().get_primary_font())
                     .build();
 
-    ButtonConfig config = {
-        .text = text,
-        .width = 80,
-    };
+    ButtonConfig config = {.text = text, .width = 80};
 
     auto btn = std::make_unique<Button>(config);
 
@@ -60,22 +60,23 @@ void SectionsWidget::init_sections() {
     auto borders = std::make_unique<RectangularBorder>(
         std::move(btn), 3, sf::Color(r, g, b), RectangularBorder::LEFT);
 
-    sections_buttons.push_back(
-        std::make_unique<Padding>(std::move(borders), 10, 10));
+    _sections_btns.push_back(std::make_unique<Padding>(
+        std::move(borders), EdgeInsets(EdgeInsets::ALL, 10)));
   }
 }
 
 sf::FloatRect SectionsWidget::get_global_bounds() const {
-  return box->getGlobalBounds();
+  return _box->getGlobalBounds();
 }
 
 void SectionsWidget::set_position(float _x, float _y) {
+  _box->setPosition(_x, _y);
   float x = _x, y = _y;
   float xOffset = 120.f;
   float yOffset = 40.f;
   int columns = 0;
 
-  for (auto &btn : sections_buttons) {
+  for (auto &btn : _sections_btns) {
     btn->set_position(x, y);
     columns++;
     if (columns == 2) {
@@ -87,3 +88,5 @@ void SectionsWidget::set_position(float _x, float _y) {
     }
   }
 }
+
+sf::Color SectionsWidget::get_background_color() { return _bg_color; }

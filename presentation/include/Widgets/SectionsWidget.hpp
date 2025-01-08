@@ -10,13 +10,14 @@
 // TODO: Document This class
 class SectionsWidget : public Widget {
 public:
-  SectionsWidget(unsigned width, unsigned height);
+  SectionsWidget(unsigned width, unsigned height, sf::Color background);
 
   void render(RenderData) override;
   void handle_events(EventData) override;
   void update(UpdateData) override;
   sf::FloatRect get_global_bounds() const override;
   void set_position(float x, float y) override;
+  sf::Color get_background_color() override;
 
 private:
   /*
@@ -26,7 +27,8 @@ private:
 
 private:
   // Setup a getter for sections in the business layer
-  std::vector<DTO::Section> sections;
-  std::unique_ptr<sf::RectangleShape> box; // The Box for sections
-  std::vector<std::unique_ptr<Widget>> sections_buttons;
+  std::vector<DTO::Section> _sections;
+  std::unique_ptr<sf::RectangleShape> _box; // The Box for sections
+  std::vector<std::unique_ptr<Widget>> _sections_btns;
+  sf::Color _bg_color;
 };

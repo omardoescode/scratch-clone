@@ -6,7 +6,8 @@
 #include <memory>
 
 // TODO: Integrate Button Borders in here
-Button::Button(const ButtonConfig &config) : _text{config.text} {
+Button::Button(const ButtonConfig &config)
+    : _text{config.text}, _bg_color(config.color) {
   auto &[text, color, conf_width, conf_height] = config;
 
   // Get text bounds
@@ -57,3 +58,4 @@ sf::FloatRect Button::get_global_bounds() const {
 }
 
 void Button::handle_click() { _handler(); }
+sf::Color Button::get_background_color() { return _bg_color; }

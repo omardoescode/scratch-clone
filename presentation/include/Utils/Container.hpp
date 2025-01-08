@@ -44,6 +44,11 @@ public:
    */
   virtual void handle_click() override;
 
+  /**
+   * @brief Get the widget background color
+   */
+  virtual sf::Color get_background_color() override;
+
 private:
   std::unique_ptr<Widget> _widget;
 };

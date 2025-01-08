@@ -28,6 +28,7 @@ set (HEADERS
   include/Utils/ButtonConfig.hpp
   include/Utils/Text.hpp
   include/Utils/Padding.hpp
+  include/Utils/EdgeInsets.hpp
 )
 set (SOURCES 
   src/App.cpp
@@ -45,6 +46,7 @@ set (SOURCES
   src/Utils/Button.cpp
   src/Utils/Text.cpp
   src/Utils/Padding.cpp
+  src/Utils/EdgeInsets.cpp
 )
 
 add_library(

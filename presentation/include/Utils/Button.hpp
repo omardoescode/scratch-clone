@@ -57,10 +57,16 @@ public:
    */
   void handle_click() override;
 
+  /**
+   * @brief Return the background color for the button
+   */
+  sf::Color get_background_color() override;
+
 private:
   Text _text;
   std::unique_ptr<sf::RectangleShape> _rect;
   std::function<void(void)> _handler;
   float padding_x;
   float padding_y;
+  sf::Color _bg_color;
 };
