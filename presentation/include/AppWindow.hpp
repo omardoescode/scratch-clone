@@ -2,10 +2,15 @@
 #include "Widgets/SectionsWidget.hpp"
 
 class AppWindow {
-private:
-  SectionsWidget sections;
+public: // Constants for the scratc
+  static constexpr unsigned SIDEBAR_WIDTH = 250;
+  static constexpr unsigned SECTIONS_HEIGHT = 200;
 
 public:
+  /*
+   * @brief Constructor for initializing all widgets
+   */
+  AppWindow();
   /*
    * @brief Handle SFML Events
    *
@@ -22,4 +27,7 @@ public:
    * @brief Update The app state
    */
   void update(UpdateData);
+
+private:
+  std::unique_ptr<SectionsWidget> sections;
 };

@@ -8,8 +8,8 @@
 #include "Utils/TextBuilder.hpp"
 #include <memory>
 
-SectionsWidget::SectionsWidget() {
-  sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(WIDTH, HEIGHT));
+SectionsWidget::SectionsWidget(unsigned width, unsigned height) {
+  sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(width, height));
   rect.setFillColor(sf::Color(0x111111));
   box = std::make_unique<sf::RectangleShape>(std::move(rect));
 

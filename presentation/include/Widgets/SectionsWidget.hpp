@@ -9,10 +9,8 @@
 
 // TODO: Document This class
 class SectionsWidget : public Widget {
-  static constexpr unsigned long WIDTH = 300, HEIGHT = 200;
-
 public:
-  SectionsWidget();
+  SectionsWidget(unsigned width, unsigned height);
 
   void render(RenderData) override;
   void handle_events(EventData) override;
