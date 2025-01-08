@@ -17,6 +17,11 @@ public:
   Text(std::unique_ptr<sf::Text>, std::unique_ptr<sf::Font>);
 
   /**
+   * @brief Copy Constructor
+   */
+  Text(const Text &);
+
+  /**
    * @brief Render the text
    */
   void render(RenderData) override;
@@ -30,6 +35,12 @@ public:
    * @brief Update the Text
    */
   void update(UpdateData) override;
+
+  /**
+   * @brief Get the global bounds for the text
+   */
+  sf::FloatRect get_global_bounds() const override;
+
   /**
    * @brief Setter the Text
    */
@@ -59,6 +70,21 @@ public:
    * @brief Change the text string (rvalue)
    */
   void set_string(std::string &&value);
+
+  /**
+   * @brief Set Position for the button
+   *
+   * @param x The X Position
+   * @param y The Y Position
+   */
+  void set_position(float x, float y);
+
+  /**
+   * @brief Set Position for the button
+   *
+   * @param pos The vector to the position
+   */
+  void set_position(const sf::Vector2f &pos);
 
 private:
   std::unique_ptr<sf::Text> _text;
