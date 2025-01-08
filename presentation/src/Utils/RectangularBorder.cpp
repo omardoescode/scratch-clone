@@ -5,7 +5,7 @@
 RectangularBorder::RectangularBorder(std::unique_ptr<Widget> widget,
                                      int thickness, sf::Color color,
                                      int direction)
-    : _widget{std::move(widget)} {
+    : Container(std::move(widget)) {
   bool has_top = direction & TOP, has_bottom = direction & BOTTOM,
        has_left = direction & LEFT, has_right = direction & RIGHT;
 

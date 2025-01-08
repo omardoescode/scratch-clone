@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Widget.hpp"
+#include "Utils/Container.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <vector>
 
 // TODO: Document This Widget
-class RectangularBorder : public Widget {
+class RectangularBorder : public Container {
 public:
   enum Direction {
     TOP = 1,
@@ -25,6 +25,5 @@ public:
   sf::FloatRect get_global_bounds() const override;
 
 private:
-  std::unique_ptr<Widget> _widget;
   std::vector<sf::RectangleShape> _borders;
 };

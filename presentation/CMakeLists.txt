@@ -20,6 +20,7 @@ set (HEADERS
   include/Widgets/SectionsWidget.hpp
 
   # Utils
+  include/Utils/Container.hpp
   include/Utils/RectangularBorder.hpp
   include/Utils/TextBuilder.hpp
   include/Utils/FontFactory.hpp
@@ -35,6 +36,7 @@ set (SOURCES
   src/Widgets/SectionsWidget.cpp
 
   # Utils
+  src/Utils/Container.cpp
   src/Utils/RectangularBorder.cpp
   src/Utils/TextBuilder.cpp
   src/Utils/FontFactory.cpp
