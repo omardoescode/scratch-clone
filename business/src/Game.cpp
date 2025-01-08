@@ -10,11 +10,5 @@ Game &Game::get_instance() {
 }
 
 std::vector<DTO::Section> Game::get_sections() {
-  auto sections = Command::get_sections();
-  std::vector<DTO::Section> result;
-
-  // for (auto &sec : sections)
-  //   result.push_back({sec.first, sec.second});
-
-  return result;
+  return Command::get_sections();
 }
