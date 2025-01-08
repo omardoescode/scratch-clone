@@ -1,5 +1,6 @@
 #pragma once
 #include "Commands/Script.hpp"
+
 #include "Vector.hpp"
 #include "string"
 #include <vector>

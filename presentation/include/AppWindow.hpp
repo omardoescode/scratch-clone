@@ -1,7 +1,7 @@
 #include "SFML/Graphics.hpp"
 #include "Widgets/SectionsWidget.hpp"
 
-class AppWindow {
+class AppWindow : public Widget {
 private:
   SectionsWidget sections;
 
@@ -11,10 +11,15 @@ public:
    *
    * @param event The event to handle
    */
-  void handle_events(const sf::RenderWindow *window, const sf::Event &event);
+  void handle_events(EventData);
 
   /*
    * @brief Render the Entire Application in `window`
    */
-  void render(sf::RenderWindow *window);
+  void render(RenderData);
+
+  /**
+   * @brief Update The app state
+   */
+  void update(UpdateData);
 };

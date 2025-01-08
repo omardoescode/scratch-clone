@@ -1,8 +1,5 @@
 #include "AppWindow.hpp"
 
-void AppWindow::handle_events(const sf::RenderWindow *window,
-                              const sf::Event &event) {
-  sections.handle_events(window, event);
-}
-
-void AppWindow::render(sf::RenderWindow *window) { sections.render(window); }
+void AppWindow::handle_events(EventData evt) { sections.handle_events(evt); }
+void AppWindow::render(RenderData ren) { sections.render(ren); }
+void AppWindow::update(UpdateData upd) { sections.update(upd); }

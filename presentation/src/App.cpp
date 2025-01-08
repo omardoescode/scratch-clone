@@ -30,7 +30,7 @@ void App::handle_events() {
           sf::View(sf::FloatRect(0, 0, static_cast<float>(window->getSize().x),
                                  static_cast<float>(window->getSize().y))));
     } else {
-      app_window.handle_events(window, event);
+      app_window.handle_events({event, sf::Mouse::getPosition(*window)});
     }
   }
 }
@@ -40,7 +40,7 @@ void App::update() {}
 void App::render() {
   window->clear(sf::Color::White);
 
-  app_window.render(window);
+  app_window.render({*window});
 
   window->display();
 }

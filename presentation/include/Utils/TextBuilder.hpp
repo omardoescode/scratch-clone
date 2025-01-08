@@ -1,27 +1,20 @@
 #pragma once
 
+#include "Utils/Text.hpp"
 #include <SFML/Graphics.hpp>
+#include <memory>
 #include <string>
 
+// TODO: Document this class
 class TextBuilder {
 public:
-  static const std::string font_dir;
-
-public:
-  TextBuilder();
-
   TextBuilder &setText(const std::string &);
   TextBuilder &setText(std::string &&);
   TextBuilder &setColor(sf::Color);
+  TextBuilder &setFont(std::unique_ptr<sf::Font>);
   TextBuilder &setSize(int);
-  sf::Text build();
+  Text build();
 
 private:
-  void init_font();
-  void reset();
-
-private:
-  sf::Text text;
-  static sf::Font font;
-  static bool font_initialized;
+  Text _text;
 };

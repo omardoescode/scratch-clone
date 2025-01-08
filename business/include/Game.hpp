@@ -1,6 +1,7 @@
 #pragma once
 #include "CharacterManager.hpp"
 #include "Commands/ScriptExecution.hpp"
+#include "DTOs/Sections.hpp"
 #include "SymbolTable.hpp"
 #include <list>
 
@@ -9,7 +10,12 @@ private:
   enum GameState { RUNNING, EDITING };
 
 public:
-  Game();
+  Game(const Game &) = delete;            // <delete the copy constructor
+  Game &operator=(const Game &) = delete; // <delete the copy assignment
+  /*
+   * @brief Get the one instance of Game
+   */
+  static Game &get_instance();
 
   /*
    * @brief Start the game
@@ -29,7 +35,17 @@ public:
    */
   void run_next();
 
+  /*
+   * @brief Return the sections as DTOs
+   */
+  std::vector<DTO::Section> get_sections();
+
 private:
+  /*
+   * @brief Private Construcotr
+   */
+  Game();
+
   /*
    * @brief Add all commands to the command set
    */
@@ -44,7 +60,7 @@ private:
 
 private:
   SymbolTable symbol_table;
-  CharacterManger character_manager;
+  CharacterManager character_manager;
   GameState state;
   std::list<ScriptExecution> executions;
 };

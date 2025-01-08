@@ -15,7 +15,7 @@ public:
   /*
    * @brief Detect Button Hover over the rectangle
    */
-  bool is_hovered(sf::Vector2f point);
+  bool is_hovered(sf::Vector2i point);
 
   /*
    * @brief Set a handle that runs when the button is clicked

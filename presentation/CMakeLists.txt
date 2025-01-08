@@ -19,10 +19,11 @@ set (HEADERS
   # Widgets
   include/Widgets/SectionsWidget.hpp
 
-  # Components
+  # Utils
   include/Utils/BorderRectangle.hpp
   include/Utils/TextBuilder.hpp
   include/Utils/Button.hpp
+  include/Utils/Text.hpp
 )
 set (SOURCES 
   src/App.cpp
@@ -31,10 +32,11 @@ set (SOURCES
   # Widgets
   src/Widgets/SectionsWidget.cpp
 
-  # Components
+  # Utils
   src/Utils/BorderRectangle.cpp
   src/Utils/TextBuilder.cpp
   src/Utils/Button.cpp
+  src/Utils/Text.cpp
 )
 
 add_library(
@@ -45,9 +47,16 @@ add_library(
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
 
+# TODO: Link business to here to use Game::get_instance()
+include_directories(${CMAKE_SOURCE_DIR}/business/include)
+include_directories(${CMAKE_SOURCE_DIR}/utils/include)
 target_link_libraries(presentation PRIVATE sfml-graphics sfml-audio sfml-system)
 target_compile_features(presentation PRIVATE cxx_std_17)
 
 target_include_directories(presentation PUBLIC
     ${PROJECT_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/business/include
+)
+target_precompile_headers(
+presentation PUBLIC ${PROJECT_SOURCE_DIR}/include/Precompiled/header.hpp
 )

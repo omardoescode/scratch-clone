@@ -1,4 +1,5 @@
 #include "Widgets/SectionsWidget.hpp"
+#include "Game.hpp"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/System/Vector2.hpp"
 #include "Utils/Button.hpp"
@@ -17,51 +18,50 @@ SectionsWidget::SectionsWidget() {
   TextBuilder builder;
 }
 
-void SectionsWidget::render(sf::RenderWindow *window) {
-  window->draw(*box);
+void SectionsWidget::render(RenderData ren) {
+  ren.window.draw(*box);
   for (auto &sec : sections_buttons) {
-    window->draw(*sec);
+    ren.window.draw(*sec);
   }
 }
-void SectionsWidget::handle_events(const sf::RenderWindow *window,
-                                   const sf::Event &event) {
-  if (event.type == event.MouseButtonPressed &&
-      event.mouseButton.button == sf::Mouse::Left) {
-
-    sf::Vector2f mousePos(sf::Mouse::getPosition(*window));
+void SectionsWidget::handle_events(EventData evt) {
+  if (evt.event.type == evt.event.MouseButtonPressed &&
+      evt.event.mouseButton.button == sf::Mouse::Left) {
 
     // Handle Clicks
     for (auto &sec : sections_buttons)
-      if (sec->is_hovered(mousePos))
+      if (sec->is_hovered(evt.mouse_position))
         sec->handle_click();
   }
 }
 
 void SectionsWidget::init_sections() {
-  sections = {"Motion", "Control", "Sensing",
-              "Sections"}; // TODO: Fix this initialization
+  sections = Game::get_instance().get_sections();
   TextBuilder builder;
 
   float x = 10.f, y = 10.f;
-  float xOffset = 120.f;
-  float yOffset = 50.f;
+  float xOffset = 100.f;
+  float yOffset = 40.f;
   int columns = 0;
 
-  for (auto &sec : sections) {
-    auto text =
-        builder.setSize(15).setText(sec).setColor(sf::Color::White).build();
-    sections_buttons.push_back(std::make_unique<Button>(
-        std::move(text), sf::Color(10, 10, 10), 20, 10, sf::Vector2f{x, y}));
-    sections_buttons.back()->set_handler(
-        [sec]() { std::cout << sec << std::endl; });
-
-    columns++;
-    if (columns == std::ceil(sections.size() / 2.f)) {
-      columns = 0;  // Reset to the first column
-      x = 10.f;     // Reset to initial x position
-      y += yOffset; // Move down to the next row
-    } else {
-      x += xOffset; // Move to the next column
-    }
-  }
+  // for (auto &[str, color] : sections) {
+  //   auto &[r, g, b] = color;
+  //   auto text =
+  //       builder.setSize(13).setText(str).setColor(sf::Color::White).build();
+  //   sections_buttons.push_back(std::make_unique<Button>(
+  //       std::move(str), sf::Color(r, g, b), 20, 10, sf::Vector2f{x, y}));
+  //   sections_buttons.back()->set_handler(
+  //       [str]() { std::cout << str << std::endl; });
+  //
+  //   columns++;
+  //   if (columns == 2) {
+  //     columns = 0;  // Reset to the first column
+  //     x = 10.f;     // Reset to initial x position
+  //     y += yOffset; // Move down to the next row
+  //   } else {
+  //     x += xOffset; // Move to the next column
+  //   }
+  // }
 }
+
+void SectionsWidget::update(UpdateData) {}

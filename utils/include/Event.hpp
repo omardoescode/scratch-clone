@@ -1,6 +1,2 @@
 #pragma once
-enum class Event {
-  CHARACTER_CHANGE_SPRITE,
-  CHARACTER_CHANGE_POSITION,
-  CHARACTER_CHANGE_ROTATION
-};
+enum class Event {};

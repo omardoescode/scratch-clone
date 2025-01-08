@@ -41,6 +41,9 @@ set(HEADERS
 set(SOURCES 
   src/Game.cpp
   src/Character.cpp
+
+  # Commands
+  src/Commands/Command.cpp
 )
 
 add_library(business ${SOURCES} ${HEADERS})

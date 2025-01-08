@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Data/EventData.hpp"
+#include "Data/RenderData.hpp"
+#include "Data/UpdateData.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "SFML/Window/Event.hpp"
 class Widget {
@@ -7,16 +10,19 @@ public:
   /*
    * @brief Render the widget in the given window
    *
-   * @param window The window to render to
+   * @param ren Current Render Data
    */
-  virtual void render(sf::RenderWindow *window) = 0;
+  virtual void render(RenderData) = 0;
 
   /*
    * @brief Handle Events for the widget
    *
-   * @param window the render target
-   * @param event The event to check against
+   * @param dat Current Event Data
    */
-  virtual void handle_events(const sf::RenderWindow *window,
-                             const sf::Event &event) = 0;
+  virtual void handle_events(EventData) = 0;
+
+  /**
+   * @brief Update the widget
+   */
+  virtual void update(UpdateData) = 0;
 };

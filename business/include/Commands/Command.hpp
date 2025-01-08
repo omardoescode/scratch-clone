@@ -1,5 +1,6 @@
 #pragma once
 #include "Commands/CommandPart.hpp"
+#include "DTOs/Sections.hpp"
 #include <vector>
 
 class Command {
@@ -27,6 +28,11 @@ public:
    * @brief Getter for parts
    */
   const std::vector<CommandPart> &get_parts();
+
+  /*
+   * @brief Return all sections names and colors
+   */
+  static std::vector<DTO::Section> get_sections();
 
 protected:
   /*
