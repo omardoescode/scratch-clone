@@ -21,6 +21,12 @@ Text::Text(const Text &rhs) {
   _text->setFont(*_font);
 }
 
+void Text::operator=(const Text &rhs) {
+  _text = std::make_unique<sf::Text>(*rhs._text);
+  _font = std::make_unique<sf::Font>(*rhs._font);
+  _text->setFont(*_font);
+}
+
 void Text::render(RenderData ren) {
   assert(_text);
   ren.window.draw(*_text);

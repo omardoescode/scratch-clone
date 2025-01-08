@@ -6,9 +6,9 @@
 #include <memory>
 
 // TODO: Integrate Button Borders in here
-Button::Button(Text str, sf::Color color, float paddingX, float paddingY,
-               sf::Vector2f pos)
-    : _text{str} {
+Button::Button(const ButtonConfig &config) : _text{config.text} {
+  auto &[text, color, pos, paddingX, paddingY] = config;
+
   // Get text bounds
   sf::FloatRect textBounds = _text.get_global_bounds();
 

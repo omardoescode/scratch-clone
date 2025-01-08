@@ -3,8 +3,10 @@
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/System/Vector2.hpp"
 #include "Utils/Button.hpp"
+#include "Utils/ButtonConfig.hpp"
 #include "Utils/FontFactory.hpp"
 #include "Utils/TextBuilder.hpp"
+#include <memory>
 
 SectionsWidget::SectionsWidget() {
   sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(WIDTH, HEIGHT));
@@ -49,8 +51,16 @@ void SectionsWidget::init_sections() {
                     .setFont(FontFactory::get_instance().get_primary_font())
                     .build();
 
-    sections_buttons.push_back(std::make_unique<Button>(
-        text, sf::Color(r, g, b), 20, 10, sf::Vector2f{x, y}));
+    ButtonConfig config = {
+        .text = text,
+        .color = sf::Color(r, g, b),
+        .pos = {x, y},
+        .paddingX = 20,
+        .paddingY = 10,
+    };
+
+    sections_buttons.push_back(std::make_unique<Button>(config));
+
     sections_buttons.back()->set_handler(
         [str]() { std::cout << str << std::endl; });
 

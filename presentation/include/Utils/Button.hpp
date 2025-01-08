@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SFML/Graphics/Rect.hpp"
+#include "Utils/ButtonConfig.hpp"
 #include "Utils/Text.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <functional>
@@ -9,8 +10,7 @@
 // TODO: Document This Class
 class Button : public Widget {
 public:
-  Button(Text text, sf::Color color = sf::Color::Black, float paddingX = 0,
-         float paddingY = 0, sf::Vector2f pos = {0, 0});
+  explicit Button(const ButtonConfig &);
 
 public:
   /*

@@ -22,6 +22,11 @@ public:
   Text(const Text &);
 
   /**
+   * @brief Copy Constructor
+   */
+  void operator=(const Text &);
+
+  /**
    * @brief Render the text
    */
   void render(RenderData) override;

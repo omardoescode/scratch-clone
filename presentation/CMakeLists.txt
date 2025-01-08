@@ -24,6 +24,7 @@ set (HEADERS
   include/Utils/TextBuilder.hpp
   include/Utils/FontFactory.hpp
   include/Utils/Button.hpp
+  include/Utils/ButtonConfig.hpp
   include/Utils/Text.hpp
 )
 set (SOURCES 
