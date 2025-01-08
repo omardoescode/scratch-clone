@@ -7,16 +7,19 @@
 
 // TODO: Integrate Button Borders in here
 Button::Button(const ButtonConfig &config) : _text{config.text} {
-  auto &[text, color, pos, paddingX, paddingY] = config;
+  auto &[text, color, pos, paddingX, paddingY, conf_width, conf_height] =
+      config;
 
   // Get text bounds
   sf::FloatRect textBounds = _text.get_global_bounds();
 
+  // Calculate Width & Height
+  auto width = conf_width != -1 ? conf_width : textBounds.width;
+  auto height = conf_height != -1 ? conf_height : textBounds.height;
+
   // Calculate the box size based on the text's bounds and padding
   sf::RectangleShape box;
-
-  box.setSize(sf::Vector2f(textBounds.width + 2 * paddingX,
-                           textBounds.height + 2 * paddingY));
+  box.setSize(sf::Vector2f(width + 2 * paddingX, height + 2 * paddingY));
 
   box.setPosition(pos.x, pos.y);
   box.setFillColor(color);

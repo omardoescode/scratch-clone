@@ -1,19 +1,20 @@
 #include "Utils/BorderRectangle.hpp"
 #include "iostream"
+#include <memory>
 
-BorderRectangle::BorderRectangle(const sf::RectangleShape &shape, int thickness,
+BorderRectangle::BorderRectangle(std::shared_ptr<Widget> widget, int thickness,
                                  sf::Color color, int direction)
-    : rect(shape) {
+    : widget{widget} {
   // Check directions
   bool has_top = direction & TOP, has_bottom = direction & BOTTOM,
        has_left = direction & LEFT, has_right = direction & RIGHT;
 
+  auto [x, y, width, height] = widget->get_global_bounds();
+
   if (has_top) {
     sf::RectangleShape topBorder;
-    topBorder.setSize(
-        {shape.getSize().x + 2 * thickness, static_cast<float>(thickness)});
-    topBorder.setPosition(shape.getPosition().x - thickness,
-                          shape.getPosition().y - thickness);
+    topBorder.setSize({x + 2 * thickness, static_cast<float>(thickness)});
+    topBorder.setPosition(x - thickness, y - thickness);
     topBorder.setFillColor(color);
     borders.push_back(topBorder);
     std::cout << "Adding top" << std::endl;
@@ -21,10 +22,8 @@ BorderRectangle::BorderRectangle(const sf::RectangleShape &shape, int thickness,
 
   if (has_bottom) {
     sf::RectangleShape bottomBorder;
-    bottomBorder.setSize(
-        {shape.getSize().x + 2 * thickness, static_cast<float>(thickness)});
-    bottomBorder.setPosition(shape.getPosition().x - thickness,
-                             shape.getPosition().y + shape.getSize().y);
+    bottomBorder.setSize({x + 2 * thickness, static_cast<float>(thickness)});
+    bottomBorder.setPosition(x - thickness, y + height);
     bottomBorder.setFillColor(color);
     borders.push_back(bottomBorder);
     std::cout << "Adding bottom" << std::endl;
@@ -32,10 +31,8 @@ BorderRectangle::BorderRectangle(const sf::RectangleShape &shape, int thickness,
 
   if (has_left) {
     sf::RectangleShape leftBorder;
-    leftBorder.setSize(
-        {static_cast<float>(thickness), shape.getSize().y + 2 * thickness});
-    leftBorder.setPosition(shape.getPosition().x - thickness,
-                           shape.getPosition().y - thickness);
+    leftBorder.setSize({static_cast<float>(thickness), y + 2 * thickness});
+    leftBorder.setPosition(x - thickness, y - thickness);
     leftBorder.setFillColor(color);
     borders.push_back(leftBorder);
     std::cout << "Adding left" << std::endl;
@@ -43,19 +40,22 @@ BorderRectangle::BorderRectangle(const sf::RectangleShape &shape, int thickness,
 
   if (has_right) {
     sf::RectangleShape rightBorder;
-    rightBorder.setSize(
-        {static_cast<float>(thickness), shape.getSize().y + 2 * thickness});
-    rightBorder.setPosition(shape.getPosition().x + shape.getSize().x,
-                            shape.getPosition().y - thickness);
+    rightBorder.setSize({static_cast<float>(thickness), y + 2 * thickness});
+    rightBorder.setPosition(x + width, y - thickness);
     rightBorder.setFillColor(color);
     borders.push_back(rightBorder);
     std::cout << "Adding right" << std::endl;
   }
 }
 
-void BorderRectangle::draw(sf::RenderTarget &target,
-                           sf::RenderStates states) const {
-  target.draw(rect, states);
-  for (const auto &border : borders)
-    target.draw(border, states);
+void BorderRectangle::render(RenderData ren) {
+  widget->render(ren);
+  for (auto &brd : borders)
+    ren.window.draw(brd);
+}
+void BorderRectangle::handle_events(EventData) {}
+void BorderRectangle::update(UpdateData) {}
+sf::FloatRect BorderRectangle::get_global_bounds() const {
+  // TODO: Fix This to include width of borders
+  return widget->get_global_bounds();
 }

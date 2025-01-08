@@ -1,10 +1,12 @@
 #pragma once
 
+#include "Widget.hpp"
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <vector>
 
-class BorderRectangle : public sf::RectangleShape {
+// TODO: Document This Widget
+class BorderRectangle : public Widget {
 public:
   enum Directions {
     TOP = 1,
@@ -13,12 +15,15 @@ public:
     RIGHT = 8,
   };
 
-  BorderRectangle(const sf::RectangleShape &shape, int thickness,
+  BorderRectangle(std::shared_ptr<Widget> widget, int thickness,
                   sf::Color color, int direction);
 
-private:
-  sf::RectangleShape rect;
-  std::vector<sf::RectangleShape> borders;
+  void render(RenderData) override;
+  void handle_events(EventData) override;
+  void update(UpdateData) override;
+  sf::FloatRect get_global_bounds() const override;
 
-  virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+private:
+  std::shared_ptr<Widget> widget;
+  std::vector<sf::RectangleShape> borders;
 };

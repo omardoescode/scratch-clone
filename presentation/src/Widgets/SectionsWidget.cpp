@@ -39,13 +39,13 @@ void SectionsWidget::init_sections() {
   TextBuilder builder;
 
   float x = 10.f, y = 10.f;
-  float xOffset = 100.f;
+  float xOffset = 120.f;
   float yOffset = 40.f;
   int columns = 0;
 
   for (auto &[str, color] : sections) {
     auto &[r, g, b] = color;
-    auto text = builder.setSize(13)
+    auto text = builder.setSize(14)
                     .setText(str)
                     .setColor(sf::Color::White)
                     .setFont(FontFactory::get_instance().get_primary_font())
@@ -53,16 +53,17 @@ void SectionsWidget::init_sections() {
 
     ButtonConfig config = {
         .text = text,
-        .color = sf::Color(r, g, b),
         .pos = {x, y},
-        .paddingX = 20,
-        .paddingY = 10,
+        .paddingX = 10,
+        .paddingY = 8,
+        .width = 80,
     };
 
-    sections_buttons.push_back(std::make_unique<Button>(config));
+    auto btn = std::make_shared<Button>(config);
 
-    sections_buttons.back()->set_handler(
-        [str]() { std::cout << str << std::endl; });
+    btn->set_handler([str]() { std::cout << str << std::endl; });
+
+    sections_buttons.push_back(btn);
 
     columns++;
     if (columns == 2) {
