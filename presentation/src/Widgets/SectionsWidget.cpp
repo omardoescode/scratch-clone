@@ -5,9 +5,6 @@
 #include "Utils/Button.hpp"
 #include "Utils/FontFactory.hpp"
 #include "Utils/TextBuilder.hpp"
-#include <cmath>
-#include <iostream>
-#include <memory>
 
 SectionsWidget::SectionsWidget() {
   sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(WIDTH, HEIGHT));
@@ -30,9 +27,13 @@ void SectionsWidget::handle_events(EventData evt) {
     btn->handle_events(evt);
 }
 
+void SectionsWidget::update(UpdateData upd) {
+  for (auto &btn : sections_buttons)
+    btn->update(upd);
+}
+
 void SectionsWidget::init_sections() {
   sections = Game::get_instance().get_sections();
-  std::cout << sections.size() << std::endl;
   TextBuilder builder;
 
   float x = 10.f, y = 10.f;
@@ -64,7 +65,6 @@ void SectionsWidget::init_sections() {
   }
 }
 
-void SectionsWidget::update(UpdateData) {}
 sf::FloatRect SectionsWidget::get_global_bounds() const {
   return box->getGlobalBounds();
 }

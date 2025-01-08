@@ -38,7 +38,15 @@ void Button::render(RenderData ren) {
   _text.render(ren);
 }
 
-void Button::handle_events(EventData evt) {}
+void Button::handle_events(EventData evt) {
+  if (is_hovered(evt.mouse_position)) {
+    // TODO: Handle change the rect background
+
+    // Handle Clicks
+    if (evt.event.type == sf::Event::MouseButtonPressed)
+      _handler();
+  }
+}
 void Button::update(UpdateData dat) {}
 
 sf::FloatRect Button::get_global_bounds() const {

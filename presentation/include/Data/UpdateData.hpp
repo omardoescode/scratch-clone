@@ -1,3 +1,5 @@
 #pragma once
 
-struct UpdateData {};
+struct UpdateData {
+  sf::Vector2i mouse_pointer;
+};

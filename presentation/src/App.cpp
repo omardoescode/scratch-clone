@@ -35,7 +35,7 @@ void App::handle_events() {
   }
 }
 
-void App::update() {}
+void App::update() { app_window.update({sf::Mouse::getPosition(*window)}); }
 
 void App::render() {
   window->clear(sf::Color::White);
