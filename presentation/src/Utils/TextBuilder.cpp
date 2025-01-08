@@ -1,7 +1,12 @@
 #include "Utils/TextBuilder.hpp"
+#include <memory>
 
 TextBuilder &TextBuilder::setSize(int size) {
   _text.set_character_size(size);
+  return *this;
+}
+TextBuilder &TextBuilder::setFont(std::unique_ptr<sf::Font> font) {
+  _text.set_font(std::move(font));
   return *this;
 }
 TextBuilder &TextBuilder::setText(const std::string &value) {
