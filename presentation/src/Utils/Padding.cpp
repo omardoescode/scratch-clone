@@ -4,7 +4,7 @@
 #include "Utils/Container.hpp"
 
 // TODO: Figure out what to do with all of this
-Padding::Padding(std::unique_ptr<Container> widget, float padding_x,
+Padding::Padding(std::unique_ptr<Widget> widget, float padding_x,
                  float padding_y)
     : Container(std::move(widget)), _padding_x(padding_x),
       _padding_y(padding_y) {

@@ -6,7 +6,7 @@
 
 class Padding : public Container {
 public:
-  Padding(std::unique_ptr<Container>, float padding_x = 0, float padding_y = 0);
+  Padding(std::unique_ptr<Widget>, float padding_x = 0, float padding_y = 0);
 
   void render(RenderData) override;
   void handle_events(EventData) override;

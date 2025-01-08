@@ -69,7 +69,8 @@ sf::FloatRect SectionsWidget::get_global_bounds() const {
   return box->getGlobalBounds();
 }
 
-void SectionsWidget::set_position(float x, float y) {
+void SectionsWidget::set_position(float _x, float _y) {
+  float x = _x, y = _y;
   float xOffset = 120.f;
   float yOffset = 40.f;
   int columns = 0;
@@ -79,7 +80,7 @@ void SectionsWidget::set_position(float x, float y) {
     columns++;
     if (columns == 2) {
       columns = 0;  // Reset to the first column
-      x = 0.f;      // Reset to initial x position
+      x = _x;       // Reset to initial x position
       y += yOffset; // Move down to the next row
     } else {
       x += xOffset; // Move to the next column
