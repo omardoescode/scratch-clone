@@ -57,16 +57,16 @@ void RectangularBorder::set_position(float x, float y) {
   int i = 0;
   auto bounds = get_global_bounds();
   if (_offsets.top())
-    _borders[i++].setPosition(x - _offsets.left(), y - _offsets.top());
+    _borders[i++].setPosition(x, y);
 
   if (_offsets.bottom())
-    _borders[i++].setPosition(x - _offsets.left(), y + bounds.height);
+    _borders[i++].setPosition(x, y + bounds.height);
 
   if (_offsets.left())
-    _borders[i++].setPosition(x - _offsets.left(), y - _offsets.top());
+    _borders[i++].setPosition(x, y);
 
   if (_offsets.right()) {
-    _borders[i++].setPosition(x + bounds.width, y - _offsets.top());
+    _borders[i++].setPosition(x + bounds.width, y);
   }
 
   Container::set_position(x + _offsets.left(), y + _offsets.right());
