@@ -27,5 +27,5 @@ private:
   // Setup a getter for sections in the business layer
   std::vector<DTO::Section> sections;
   std::unique_ptr<sf::RectangleShape> box; // The Box for sections
-  std::vector<std::shared_ptr<Widget>> sections_buttons;
+  std::vector<std::unique_ptr<Widget>> sections_buttons;
 };

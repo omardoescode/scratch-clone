@@ -5,6 +5,7 @@
 #include "Utils/Button.hpp"
 #include "Utils/ButtonConfig.hpp"
 #include "Utils/FontFactory.hpp"
+#include "Utils/RectangularBorder.hpp"
 #include "Utils/TextBuilder.hpp"
 #include <memory>
 
@@ -59,11 +60,14 @@ void SectionsWidget::init_sections() {
         .width = 80,
     };
 
-    auto btn = std::make_shared<Button>(config);
+    auto btn = std::make_unique<Button>(config);
 
     btn->set_handler([str]() { std::cout << str << std::endl; });
 
-    sections_buttons.push_back(btn);
+    auto borders = std::make_unique<RectangularBorder>(
+        std::move(btn), 3, sf::Color(r, g, b), RectangularBorder::LEFT);
+
+    sections_buttons.push_back(std::move(borders));
 
     columns++;
     if (columns == 2) {

@@ -6,17 +6,18 @@
 #include <vector>
 
 // TODO: Document This Widget
-class BorderRectangle : public Widget {
+class RectangularBorder : public Widget {
 public:
-  enum Directions {
+  enum Direction {
     TOP = 1,
     BOTTOM = 2,
     LEFT = 4,
     RIGHT = 8,
+    ALL = TOP | BOTTOM | LEFT | RIGHT,
   };
 
-  BorderRectangle(std::shared_ptr<Widget> widget, int thickness,
-                  sf::Color color, int direction);
+  RectangularBorder(std::unique_ptr<Widget> widget, int thickness,
+                    sf::Color color, int direction);
 
   void render(RenderData) override;
   void handle_events(EventData) override;
@@ -24,6 +25,6 @@ public:
   sf::FloatRect get_global_bounds() const override;
 
 private:
-  std::shared_ptr<Widget> widget;
-  std::vector<sf::RectangleShape> borders;
+  std::unique_ptr<Widget> _widget;
+  std::vector<sf::RectangleShape> _borders;
 };

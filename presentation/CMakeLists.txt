@@ -20,7 +20,7 @@ set (HEADERS
   include/Widgets/SectionsWidget.hpp
 
   # Utils
-  include/Utils/BorderRectangle.hpp
+  include/Utils/RectangularBorder.hpp
   include/Utils/TextBuilder.hpp
   include/Utils/FontFactory.hpp
   include/Utils/Button.hpp
@@ -35,7 +35,7 @@ set (SOURCES
   src/Widgets/SectionsWidget.cpp
 
   # Utils
-  src/Utils/BorderRectangle.cpp
+  src/Utils/RectangularBorder.cpp
   src/Utils/TextBuilder.cpp
   src/Utils/FontFactory.cpp
   src/Utils/Button.cpp
