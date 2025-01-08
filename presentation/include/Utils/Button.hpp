@@ -42,13 +42,25 @@ public:
 
   /**
    * @brief Return the global bounds of the button
-   *
-   * TODO: Consider the case of rectangles
    */
   sf::FloatRect get_global_bounds() const override;
+
+  /**
+   * @brief Set the button position
+   */
+  void set_position(float x, float y) override;
+
+  /**
+   * @brief Handle click
+   *
+   * @details Run the handler
+   */
+  void handle_click() override;
 
 private:
   Text _text;
   std::unique_ptr<sf::RectangleShape> _rect;
   std::function<void(void)> _handler;
+  float padding_x;
+  float padding_y;
 };

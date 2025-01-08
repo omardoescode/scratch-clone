@@ -29,5 +29,5 @@ public:
   void update(UpdateData);
 
 private:
-  std::unique_ptr<SectionsWidget> sections;
+  std::unique_ptr<Widget> sections;
 };

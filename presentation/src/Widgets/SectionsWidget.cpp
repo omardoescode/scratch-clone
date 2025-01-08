@@ -5,6 +5,7 @@
 #include "Utils/Button.hpp"
 #include "Utils/ButtonConfig.hpp"
 #include "Utils/FontFactory.hpp"
+#include "Utils/Padding.hpp"
 #include "Utils/RectangularBorder.hpp"
 #include "Utils/TextBuilder.hpp"
 #include <memory>
@@ -39,11 +40,6 @@ void SectionsWidget::init_sections() {
   sections = Game::get_instance().get_sections();
   TextBuilder builder;
 
-  float x = 10.f, y = 10.f;
-  float xOffset = 120.f;
-  float yOffset = 40.f;
-  int columns = 0;
-
   for (auto &[str, color] : sections) {
     auto &[r, g, b] = color;
     auto text = builder.setSize(14)
@@ -54,9 +50,6 @@ void SectionsWidget::init_sections() {
 
     ButtonConfig config = {
         .text = text,
-        .pos = {x, y},
-        .paddingX = 10,
-        .paddingY = 8,
         .width = 80,
     };
 
@@ -67,19 +60,29 @@ void SectionsWidget::init_sections() {
     auto borders = std::make_unique<RectangularBorder>(
         std::move(btn), 3, sf::Color(r, g, b), RectangularBorder::LEFT);
 
-    sections_buttons.push_back(std::move(borders));
-
-    columns++;
-    if (columns == 2) {
-      columns = 0;  // Reset to the first column
-      x = 10.f;     // Reset to initial x position
-      y += yOffset; // Move down to the next row
-    } else {
-      x += xOffset; // Move to the next column
-    }
+    sections_buttons.push_back(
+        std::make_unique<Padding>(std::move(borders), 10, 10));
   }
 }
 
 sf::FloatRect SectionsWidget::get_global_bounds() const {
   return box->getGlobalBounds();
+}
+
+void SectionsWidget::set_position(float x, float y) {
+  float xOffset = 120.f;
+  float yOffset = 40.f;
+  int columns = 0;
+
+  for (auto &btn : sections_buttons) {
+    btn->set_position(x, y);
+    columns++;
+    if (columns == 2) {
+      columns = 0;  // Reset to the first column
+      x = 0.f;      // Reset to initial x position
+      y += yOffset; // Move down to the next row
+    } else {
+      x += xOffset; // Move to the next column
+    }
+  }
 }

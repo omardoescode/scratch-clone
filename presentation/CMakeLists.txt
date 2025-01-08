@@ -27,10 +27,12 @@ set (HEADERS
   include/Utils/Button.hpp
   include/Utils/ButtonConfig.hpp
   include/Utils/Text.hpp
+  include/Utils/Padding.hpp
 )
 set (SOURCES 
   src/App.cpp
   src/AppWindow.cpp
+  src/Widget.cpp
 
   # Widgets
   src/Widgets/SectionsWidget.cpp
@@ -42,6 +44,7 @@ set (SOURCES
   src/Utils/FontFactory.cpp
   src/Utils/Button.cpp
   src/Utils/Text.cpp
+  src/Utils/Padding.cpp
 )
 
 add_library(

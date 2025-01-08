@@ -7,8 +7,7 @@
 
 // TODO: Integrate Button Borders in here
 Button::Button(const ButtonConfig &config) : _text{config.text} {
-  auto &[text, color, pos, paddingX, paddingY, conf_width, conf_height] =
-      config;
+  auto &[text, color, conf_width, conf_height] = config;
 
   // Get text bounds
   sf::FloatRect textBounds = _text.get_global_bounds();
@@ -19,15 +18,16 @@ Button::Button(const ButtonConfig &config) : _text{config.text} {
 
   // Calculate the box size based on the text's bounds and padding
   sf::RectangleShape box;
-  box.setSize(sf::Vector2f(width + 2 * paddingX, height + 2 * paddingY));
+  box.setSize(sf::Vector2f(width, height));
 
-  box.setPosition(pos.x, pos.y);
   box.setFillColor(color);
 
-  _text.set_position(pos.x + paddingX - textBounds.left,
-                     pos.y + paddingY - textBounds.top);
-
   _rect = std::make_unique<sf::RectangleShape>(std::move(box));
+}
+
+void Button::set_position(float x, float y) {
+  _rect->setPosition(x, y);
+  _text.set_position(x, y);
 }
 
 bool Button::is_hovered(sf::Vector2i point) {
@@ -47,7 +47,7 @@ void Button::handle_events(EventData evt) {
 
     // Handle Clicks
     if (evt.event.type == sf::Event::MouseButtonPressed)
-      _handler();
+      handle_click();
   }
 }
 void Button::update(UpdateData dat) {}
@@ -55,3 +55,5 @@ void Button::update(UpdateData dat) {}
 sf::FloatRect Button::get_global_bounds() const {
   return _rect->getGlobalBounds();
 }
+
+void Button::handle_click() { _handler(); }

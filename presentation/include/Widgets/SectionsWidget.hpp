@@ -16,6 +16,7 @@ public:
   void handle_events(EventData) override;
   void update(UpdateData) override;
   sf::FloatRect get_global_bounds() const override;
+  void set_position(float x, float y) override;
 
 private:
   /*

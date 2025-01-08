@@ -15,24 +15,34 @@ public:
    *
    * @param ren Current Render Data
    */
-  virtual void render(RenderData);
+  virtual void render(RenderData) override;
 
   /*
    * @brief Handle Events for the widget
    *
    * @param dat Current Event Data
    */
-  virtual void handle_events(EventData);
+  virtual void handle_events(EventData) override;
 
   /**
    * @brief Update the widget
    */
-  virtual void update(UpdateData);
+  virtual void update(UpdateData) override;
 
   /**
    * @brief Get Global Bounds
    */
-  virtual sf::FloatRect get_global_bounds() const;
+  virtual sf::FloatRect get_global_bounds() const override;
+
+  /**
+   * @brief Setter for position
+   */
+  virtual void set_position(float x, float y) override;
+
+  /**
+   * @brief Click Handler
+   */
+  virtual void handle_click() override;
 
 private:
   std::unique_ptr<Widget> _widget;

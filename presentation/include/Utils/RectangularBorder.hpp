@@ -19,11 +19,6 @@ public:
   RectangularBorder(std::unique_ptr<Widget> widget, int thickness,
                     sf::Color color, int direction);
 
-  void render(RenderData) override;
-  void handle_events(EventData) override;
-  void update(UpdateData) override;
-  sf::FloatRect get_global_bounds() const override;
-
 private:
   std::vector<sf::RectangleShape> _borders;
 };
