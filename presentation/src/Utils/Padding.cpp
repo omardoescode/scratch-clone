@@ -23,10 +23,10 @@ void Padding::handle_events(EventData ren) {
                                            ren.mouse_position.y) &&
       !Container::get_global_bounds().contains(ren.mouse_position.x,
                                                ren.mouse_position.y))
-    handle_click();
+    Container::handle_click();
   else {
     // TODO: Should I use a flag to check if has been clickd to prevent multiple
-    // clicks or just use an else statement here
+    // clicks or just use an else statement here?
     Container::handle_events(ren);
   }
 }
@@ -42,5 +42,5 @@ sf::FloatRect Padding::get_global_bounds() const {
 
 void Padding::set_position(float x, float y) {
   _paddings.setPosition(x, y);
-  Container::set_position(x + _offsets.left(), y + _offsets.right());
+  Container::set_position(x + _offsets.left(), y + _offsets.top());
 }

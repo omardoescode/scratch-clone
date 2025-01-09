@@ -58,5 +58,5 @@ public:
   virtual sf::Color get_background_color();
 
 protected:
-  sf::Vector2f _pos;
+  sf::Vector2f __pos;
 };

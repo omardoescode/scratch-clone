@@ -5,12 +5,14 @@
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "Utils/Button.hpp"
 #include "Widget.hpp"
+#include <functional>
 #include <memory>
 
 // TODO: Document This class
 class SectionsWidget : public Widget {
 public:
-  SectionsWidget(unsigned width, unsigned height, sf::Color background);
+  SectionsWidget(unsigned width, unsigned height, sf::Color background,
+                 std::function<void(DTO::SectionType)> handler);
 
   void render(RenderData) override;
   void handle_events(EventData) override;
@@ -22,8 +24,10 @@ public:
 private:
   /*
    * @brief Initialize the sections buttons
+   *
+   * @param The handler to run when the section is clicked on
    */
-  void init_sections();
+  void init_sections(std::function<void(DTO::SectionType)> handler);
 
 private:
   // Setup a getter for sections in the business layer

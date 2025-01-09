@@ -29,6 +29,7 @@ set (HEADERS
   include/Utils/Text.hpp
   include/Utils/Padding.hpp
   include/Utils/EdgeInsets.hpp
+  include/Utils/Center.hpp
 )
 set (SOURCES 
   src/App.cpp
@@ -47,6 +48,7 @@ set (SOURCES
   src/Utils/Text.cpp
   src/Utils/Padding.cpp
   src/Utils/EdgeInsets.cpp
+  src/Utils/Center.cpp
 )
 
 add_library(

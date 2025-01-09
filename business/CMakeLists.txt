@@ -42,6 +42,9 @@ set(SOURCES
   src/Game.cpp
   src/Character.cpp
 
+  # DTOS
+  src/DTOS/Sections.cpp
+
   # Commands
   src/Commands/Command.cpp
 )

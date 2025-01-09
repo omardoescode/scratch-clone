@@ -4,9 +4,9 @@
 // By building a class class DataInitalizer or GameInitializer
 std::vector<DTO::Section> Command::get_sections() {
   return {
-      {"Motion", {0xFF, 00, 00}},  {"Control", {11, 11, 11}},
-      {"Sensing", {11, 11, 11}},   {"Looks", {11, 11, 11}},
-      {"Sound", {11, 11, 11}},     {"Operators", {11, 11, 11}},
-      {"Variables", {11, 11, 11}},
+      {DTO::MOTION, {0xFF, 00, 00}},  {DTO::CONTROL, {11, 11, 11}},
+      {DTO::SENSING, {11, 11, 11}},   {DTO::LOOKS, {11, 11, 11}},
+      {DTO::SOUND, {11, 11, 11}},     {DTO::OPERATORS, {11, 11, 11}},
+      {DTO::VARIABLES, {11, 11, 11}},
   };
 }

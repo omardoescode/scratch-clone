@@ -1,3 +1,4 @@
+#include "DTOs/Sections.hpp"
 #include "SFML/Graphics.hpp"
 #include "Widgets/SectionsWidget.hpp"
 
@@ -29,5 +30,12 @@ public:
   void update(UpdateData);
 
 private:
+  /**
+   * @brief Updates the current instruction set to be of the chosen section
+   */
+  void set_current_section(DTO::SectionType type);
+
+private:
   std::unique_ptr<Widget> sections;
+  DTO::SectionType current;
 };

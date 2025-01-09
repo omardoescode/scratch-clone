@@ -1,4 +1,5 @@
 #include "Widgets/SectionsWidget.hpp"
+#include "DTOs/Sections.hpp"
 #include "Game.hpp"
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/System/Vector2.hpp"
@@ -12,13 +13,14 @@
 #include <memory>
 
 SectionsWidget::SectionsWidget(unsigned width, unsigned height,
-                               sf::Color background)
+                               sf::Color background,
+                               std::function<void(DTO::SectionType)> handler)
     : _bg_color(background) {
   sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(width, height));
   rect.setFillColor(sf::Color(_bg_color));
   _box = std::make_unique<sf::RectangleShape>(std::move(rect));
 
-  init_sections();
+  init_sections(handler);
 
   TextBuilder builder;
 }
@@ -39,14 +41,15 @@ void SectionsWidget::update(UpdateData upd) {
     btn->update(upd);
 }
 
-void SectionsWidget::init_sections() {
+void SectionsWidget::init_sections(
+    std::function<void(DTO::SectionType)> handler) {
   _sections = Game::get_instance().get_sections();
   TextBuilder builder;
 
-  for (auto &[str, color] : _sections) {
+  for (auto &[type, color] : _sections) {
     auto &[r, g, b] = color;
     auto text = builder.setSize(14)
-                    .setText(str)
+                    .setText(DTO::sectiontype_name_mapper(type))
                     .setColor(sf::Color::White)
                     .setFont(FontFactory::get_instance().get_primary_font())
                     .build();
@@ -55,11 +58,10 @@ void SectionsWidget::init_sections() {
 
     auto btn = std::make_unique<Button>(config);
 
-    btn->set_handler([str]() { std::cout << str << std::endl; });
+    btn->set_handler([type, handler]() { handler(type); });
 
     _sections_btns.push_back(std::make_unique<RectangularBorder>(
-        std::make_unique<Padding>(std::move(btn),
-                                  EdgeInsets(EdgeInsets::ALL, 10)),
+        std::make_unique<Padding>(std::move(btn), EdgeInsets(8.f, 6.f)),
         sf::Color(r, g, b), EdgeInsets(EdgeInsets::LEFT, 3)));
   }
 }
