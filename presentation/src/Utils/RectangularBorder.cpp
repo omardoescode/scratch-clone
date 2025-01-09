@@ -52,8 +52,10 @@ void RectangularBorder::render(RenderData ren) {
     ren.window.draw(brd);
 }
 
-// TODO: Adjust the set_position method to set all borders to the right position
+// TODO: Use unordered map to map borders to direction instead of using a
+// counter that uses the same order as the constructor
 void RectangularBorder::set_position(float x, float y) {
+  Widget::set_position(x, y);
   int i = 0;
   auto bounds = get_global_bounds();
   if (_offsets.top())

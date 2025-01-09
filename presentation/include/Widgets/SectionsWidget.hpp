@@ -4,6 +4,7 @@
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
 #include "Utils/Button.hpp"
+#include "Utils/GridView.hpp"
 #include "Widget.hpp"
 #include <functional>
 #include <memory>
@@ -19,7 +20,6 @@ public:
   void update(UpdateData) override;
   sf::FloatRect get_global_bounds() const override;
   void set_position(float x, float y) override;
-  sf::Color get_background_color() override;
 
 private:
   /*
@@ -30,9 +30,5 @@ private:
   void init_sections(std::function<void(DTO::SectionType)> handler);
 
 private:
-  // Setup a getter for sections in the business layer
-  std::vector<DTO::Section> _sections;
-  std::unique_ptr<sf::RectangleShape> _box; // The Box for sections
-  std::vector<std::unique_ptr<Widget>> _sections_btns;
-  sf::Color _bg_color;
+  std::unique_ptr<GridView> _grid;
 };

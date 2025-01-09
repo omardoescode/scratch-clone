@@ -1,8 +1,6 @@
 #include "Widgets/SectionsWidget.hpp"
 #include "DTOs/Sections.hpp"
 #include "Game.hpp"
-#include "SFML/Graphics/RectangleShape.hpp"
-#include "SFML/System/Vector2.hpp"
 #include "Utils/Button.hpp"
 #include "Utils/ButtonConfig.hpp"
 #include "Utils/EdgeInsets.hpp"
@@ -14,39 +12,36 @@
 
 SectionsWidget::SectionsWidget(unsigned width, unsigned height,
                                sf::Color background,
-                               std::function<void(DTO::SectionType)> handler)
-    : _bg_color(background) {
-  sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(width, height));
-  rect.setFillColor(sf::Color(_bg_color));
-  _box = std::make_unique<sf::RectangleShape>(std::move(rect));
-
+                               std::function<void(DTO::SectionType)> handler) {
+  // sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(width, height));
+  // rect.setFillColor(sf::Color(_bg_color));
+  // _box = std::make_unique<sf::RectangleShape>(std::move(rect));
+  //
   init_sections(handler);
-
-  TextBuilder builder;
 }
 
 void SectionsWidget::render(RenderData ren) {
-  ren.window.draw(*_box);
-  for (auto &btn : _sections_btns)
-    btn->render(ren);
+  assert(_grid);
+  _grid->render(ren);
 }
 
 void SectionsWidget::handle_events(EventData evt) {
-  for (auto &btn : _sections_btns)
-    btn->handle_events(evt);
+  assert(_grid);
+  _grid->handle_events(evt);
 }
 
 void SectionsWidget::update(UpdateData upd) {
-  for (auto &btn : _sections_btns)
-    btn->update(upd);
+  assert(_grid);
+  _grid->update(upd);
 }
 
 void SectionsWidget::init_sections(
     std::function<void(DTO::SectionType)> handler) {
-  _sections = Game::get_instance().get_sections();
+  auto sections = Game::get_instance().get_sections();
+  std::list<std::unique_ptr<Widget>> btns;
   TextBuilder builder;
 
-  for (auto &[type, color] : _sections) {
+  for (auto &[type, color] : sections) {
     auto &[r, g, b] = color;
     auto text = builder.setSize(14)
                     .setText(DTO::sectiontype_name_mapper(type))
@@ -60,34 +55,20 @@ void SectionsWidget::init_sections(
 
     btn->set_handler([type, handler]() { handler(type); });
 
-    _sections_btns.push_back(std::make_unique<RectangularBorder>(
+    btns.push_back(std::make_unique<RectangularBorder>(
         std::make_unique<Padding>(std::move(btn), EdgeInsets(8.f, 6.f)),
         sf::Color(r, g, b), EdgeInsets(EdgeInsets::LEFT, 3)));
   }
+
+  _grid = std::make_unique<GridView>(std::move(btns), 2, 120, 50);
 }
 
-sf::FloatRect SectionsWidget::get_global_bounds() const {
-  return _box->getGlobalBounds();
+sf::FloatRect SectionsWidget::get_global_bounds() const { return {0, 0, 0, 0}; }
+
+void SectionsWidget::set_position(float x, float y) {
+  Widget::set_position(x, y);
+  assert(_grid);
+  _grid->set_position(x, y);
 }
 
-void SectionsWidget::set_position(float _x, float _y) {
-  _box->setPosition(_x, _y);
-  float x = _x, y = _y;
-  float xOffset = 120.f;
-  float yOffset = 40.f;
-  int columns = 0;
-
-  for (auto &btn : _sections_btns) {
-    btn->set_position(x, y);
-    columns++;
-    if (columns == 2) {
-      columns = 0;  // Reset to the first column
-      x = _x;       // Reset to initial x position
-      y += yOffset; // Move down to the next row
-    } else {
-      x += xOffset; // Move to the next column
-    }
-  }
-}
-
-sf::Color SectionsWidget::get_background_color() { return _bg_color; }
+// sf::Color SectionsWidget::get_background_color() { return _bg_color; }

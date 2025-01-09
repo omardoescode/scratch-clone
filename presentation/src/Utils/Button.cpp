@@ -27,6 +27,7 @@ Button::Button(const ButtonConfig &config)
 }
 
 void Button::set_position(float x, float y) {
+  Widget::set_position(x, y);
   _rect->setPosition(x, y);
   _text.set_position(x, y);
 }

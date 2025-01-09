@@ -30,6 +30,7 @@ set (HEADERS
   include/Utils/Padding.hpp
   include/Utils/EdgeInsets.hpp
   include/Utils/Center.hpp
+  include/Utils/GridView.hpp
 )
 set (SOURCES 
   src/App.cpp
@@ -49,6 +50,7 @@ set (SOURCES
   src/Utils/Padding.cpp
   src/Utils/EdgeInsets.cpp
   src/Utils/Center.cpp
+  src/Utils/GridView.cpp
 )
 
 add_library(

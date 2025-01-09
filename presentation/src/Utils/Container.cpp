@@ -10,7 +10,10 @@ void Container::update(UpdateData dat) { _widget->update(dat); }
 sf::FloatRect Container::get_global_bounds() const {
   return _widget->get_global_bounds();
 }
-void Container::set_position(float x, float y) { _widget->set_position(x, y); }
+void Container::set_position(float x, float y) {
+  Widget::set_position(x, y);
+  _widget->set_position(x, y);
+}
 sf::Color Container::get_background_color() {
   return _widget->get_background_color();
 }

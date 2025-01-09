@@ -66,5 +66,8 @@ void Text::set_string(std::string &&value) {
   _text->setString(std::move(value));
 }
 
-void Text::set_position(float x, float y) { _text->setPosition(x, y); }
+void Text::set_position(float x, float y) {
+  Widget::set_position(x, y);
+  _text->setPosition(x, y);
+}
 void Text::set_position(const sf::Vector2f &pos) { _text->setPosition(pos); }
