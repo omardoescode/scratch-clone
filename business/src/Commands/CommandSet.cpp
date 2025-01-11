@@ -1,11 +1,24 @@
 #include "Commands/CommandSet.hpp"
+#include "Commands/CommandSet/MoveStepsInstruction.hpp"
+#include "DTOs/Sections.hpp"
+#include <memory>
+#include <stdexcept>
 
-std::map<Command::Section, std::string> CommandSet::colors = {
-    {Command::Section::MOTION, "#687eec"},
-    {Command::Section::SENSING, "#687eec"},
-    {Command::Section::CONTROL, "#687eec"},
-    {Command::Section::LOOKS, "#687eec"},
-    {Command::Section::SOUND, "#687eec"},
-    {Command::Section::OPERATORS, "#687eec"},
-    {Command::Section::VARIABLES, "#687eec"},
-};
+CommandSet::CommandSet() { initialize_commands(); }
+
+CommandSet &CommandSet::get_instance() {
+  static CommandSet instance;
+  return instance;
+}
+
+void CommandSet::initialize_commands() {
+  commands[DTO::MOTION].push_back(std::make_shared<MoveStepsInstruction>());
+}
+
+std::vector<std::shared_ptr<Command>>
+CommandSet::get_section_commands(DTO::SectionType section) const {
+  auto itr = commands.find(section);
+  if (itr == commands.end())
+    throw std::runtime_error("Uninitialized section yet!");
+  return itr->second;
+}

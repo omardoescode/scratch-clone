@@ -5,9 +5,38 @@ public:
   /*
    * @brief Constructor
    *
-   * @param value The initial value for `value`
+   * @param type The data type for the value
+   * @param value The initial value for `value` (lvalue)
    */
-  Constant(DataType type, Value value);
+  Constant(DataType type, const Value &value);
+
+  /*
+   * @brief Constructor
+   *
+   * @param type The data type for the value
+   * @param value The initial value for `value` (lvalue)
+   */
+  Constant(DataType type, Value &&value);
+
+  /**
+   * @brief Constructor for string value (lvalue)
+   */
+  Constant(const std::string &);
+
+  /**
+   * @brief Constructor for string value (rvalue)
+   */
+  Constant(std::string &&);
+
+  /**
+   * @brief Constructor for numbers
+   */
+  Constant(float);
+
+  /**
+   * @brief Constructor for booleans
+   */
+  Constant(bool);
 
   /*
    * @brief Constant

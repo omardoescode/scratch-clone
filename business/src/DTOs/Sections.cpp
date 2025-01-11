@@ -1,8 +1,11 @@
 #include "DTOs/Sections.hpp"
+#include <stdexcept>
 namespace DTO {
 std::string sectiontype_name_mapper(SectionType type) {
   {
     switch (type) {
+    case UNKNOWN:
+      return "";
     case MOTION:
       return "Motion";
     case CONTROL:

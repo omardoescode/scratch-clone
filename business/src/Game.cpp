@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-Game::Game() {
+Game::Game() : state{EDITING} {
   // TODO: Initialize Game State
 }
 
@@ -11,4 +11,9 @@ Game &Game::get_instance() {
 
 std::vector<DTO::Section> Game::get_sections() {
   return Command::get_sections();
+}
+
+std::vector<std::unique_ptr<Instruction>>
+Game::get_instructions(DTO::SectionType) {
+  return {};
 }

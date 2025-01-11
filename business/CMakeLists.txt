@@ -43,10 +43,23 @@ set(SOURCES
   src/Character.cpp
 
   # DTOS
-  src/DTOS/Sections.cpp
+  src/DTOs/Sections.cpp
 
-  # Commands
+  # Command
+  src/Commands/CommandSet.cpp
   src/Commands/Command.cpp
+  src/Commands/IExpression.cpp
+  src/Commands/Constant.cpp
+  src/Commands/Instruction.cpp
+  src/Commands/InstructionWithStack.cpp
+  src/Commands/InstructionWithExpressions.cpp
+  src/Commands/InstructionSet.cpp
+  src/Commands/InstructionWithValues.cpp
+  src/Commands/Script.cpp
+  src/Commands/ScriptExecution.cpp
+
+  # Command Set
+  src/Commands/CommandSet/MoveStepsInstruction.cpp
 )
 
 add_library(business ${SOURCES} ${HEADERS})

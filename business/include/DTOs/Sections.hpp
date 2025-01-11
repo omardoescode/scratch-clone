@@ -1,10 +1,10 @@
 #pragma once
 
 #include "DTOs/DTO.hpp"
-#include <stdexcept>
 #include <string>
 namespace DTO {
 enum SectionType {
+  UNKNOWN = -1,
   MOTION,
   CONTROL,
   LOOKS,

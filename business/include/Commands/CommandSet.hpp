@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Commands/Command.hpp"
+#include "DTOs/Sections.hpp"
+#include <future>
 #include <map>
 #include <string>
 #include <vector>
@@ -10,12 +12,13 @@ public:
   /*
    * @brief Give access to the singleton's instance
    */
-  CommandSet &get_instance();
+  static CommandSet &get_instance();
 
   /*
    * @brief Getter for a section's commands
    */
-  const std::vector<Command> &get_section_commands(Command::Section) const;
+  std::vector<std::shared_ptr<Command>>
+      get_section_commands(DTO::SectionType) const;
 
 private:
   /*
@@ -31,6 +34,5 @@ private:
   void initialize_commands();
 
 private:
-  std::map<Command::Section, std::vector<Command>> commands;
-  static std::map<Command::Section, std::string> colors;
+  std::map<DTO::SectionType, std::vector<std::shared_ptr<Command>>> commands;
 };

@@ -1,6 +1,7 @@
 #pragma once
 #include "Commands/IExpression.hpp"
 #include "Commands/Instruction.hpp"
+#include "DTOs/Sections.hpp"
 #include <map>
 #include <memory>
 #include <string>
@@ -11,7 +12,7 @@
 class InstructionWithExpressions : public Instruction {
 
 public:
-  InstructionWithExpressions(Section section);
+  InstructionWithExpressions(DTO::SectionType section);
 
   virtual void execute(CharacterManager &character, SymbolTable &symbol_table,
                        ScriptExecution &exeuction, Vector<double> mouse_pointer,

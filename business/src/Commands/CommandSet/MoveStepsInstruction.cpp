@@ -5,14 +5,14 @@
 #include "Commands/Instruction.hpp"
 #include "Commands/InstructionWithExpressions.hpp"
 #include "Commands/ScriptExecution.hpp"
-#include "DataType.hpp"
+#include "DTOs/Sections.hpp"
 #include <cassert>
 #include <cmath>
 #include <memory>
 
 MoveStepsInstruction::MoveStepsInstruction()
-    : InstructionWithExpressions(Section::MOTION) {
-  auto initial_value = std::make_shared<Constant>(DataType::NUMBER, 0);
+    : InstructionWithExpressions(DTO::MOTION) {
+  auto initial_value = std::make_shared<Constant>(0.f);
   set_expression("steps", initial_value);
 
   set_parts({{CommandPartType::TEXT, "move "},

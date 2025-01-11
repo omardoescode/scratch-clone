@@ -13,7 +13,7 @@ public:
   /*
    * @brief Constructor
    */
-  Instruction(Section section);
+  Instruction(DTO::SectionType section);
 
   /*
    * @brief Execute the instruction

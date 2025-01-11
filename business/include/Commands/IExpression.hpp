@@ -3,6 +3,7 @@
 #include "CharacterManager.hpp"
 #include "Commands/Command.hpp"
 #include "Commands/Instruction.hpp"
+#include "DTOs/Sections.hpp"
 #include "DataType.hpp"
 #include "SymbolTable.hpp"
 #include "Value.hpp"
@@ -13,7 +14,7 @@ public:
    *
    * @param The return type for IExpression
    */
-  IExpression(DataType return_type);
+  IExpression(DTO::SectionType type, DataType return_type);
 
   /*
    * @brief Execute the expression
@@ -22,6 +23,11 @@ public:
                         ScriptExecution &exeuction,
                         Vector<double> mouse_pointer, Time time) = 0;
 
+  /**
+   * @brief Getter for return type
+   */
+  DataType get_return_type() const;
+
 private:
-  DataType return_type;
+  DataType _return_type;
 };

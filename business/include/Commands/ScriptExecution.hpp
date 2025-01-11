@@ -15,7 +15,9 @@ class Script;
  * represents the block that is currently running
  *
  * An execution may have more than one script with instructions that support
- * scripts as children like `forever`, `repeat` and `if`
+ * scripts as children like `forever`, `repeat` and `if`. The current
+ * instruciton runs by fetching both the latest stack and the latest current
+ * index and execute the instruction at that index
  *
  * The execution runs instructions[index] of the current stack and the
  * instructions are responsible for determining if it's allowed to proceed to
@@ -25,7 +27,7 @@ class Script;
 
 class ScriptExecution {
 public:
-  ScriptExecution();
+  ScriptExecution(std::shared_ptr<Character>);
 
   /*
    * @brief run the next instruction in the current stack
@@ -47,8 +49,8 @@ public:
   std::shared_ptr<Character> get_character();
 
 private:
-  std::stack<std::shared_ptr<Script>> scripts;
-  std::stack<int> current_index;
-  std::shared_ptr<Character> character;
-  bool is_finished;
+  std::stack<std::shared_ptr<Script>> _scripts;
+  std::stack<int> _current_index;
+  std::shared_ptr<Character> _character;
+  bool _is_finished;
 };

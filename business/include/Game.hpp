@@ -40,6 +40,11 @@ public:
    */
   std::vector<DTO::Section> get_sections();
 
+  /*
+   * @brief Return the instructino of a specific section
+   */
+  std::vector<std::unique_ptr<Instruction>> get_instructions(DTO::SectionType);
+
 private:
   /*
    * @brief Private Construcotr
@@ -63,4 +68,6 @@ private:
   CharacterManager character_manager;
   GameState state;
   std::list<ScriptExecution> executions;
+  std::map<DTO::SectionType, std::vector<std::unique_ptr<Instruction>>>
+      instruction_set;
 };
