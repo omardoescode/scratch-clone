@@ -26,17 +26,17 @@ AppWindow::AppWindow() : _current_section(static_cast<DTO::SectionType>(0)) {
                  .setSize(12)
                  .build();
 
-  ButtonConfig conf = {txt};
+  ButtonConfig conf = {std::make_unique<Text>(std::move(txt))};
 
   auto lst = std::list<std::unique_ptr<Widget>>();
-  lst.emplace_back(std::make_unique<Button>(conf));
-  lst.emplace_back(std::make_unique<Button>(conf));
+  lst.emplace_back(std::make_unique<Button>(std::move(conf)));
   _instruction_set = std::make_unique<GridView>(std::move(lst), 1);
   _instruction_set->set_position(0, SECTIONS_HEIGHT);
 }
 void AppWindow::handle_events(EventData evt) {
   _sections_widget->handle_events(evt);
 }
+
 void AppWindow::render(RenderData ren) {
   _sections_widget->render(ren);
   _instruction_set->render(ren);

@@ -1,21 +1,22 @@
 
 #include "Utils/Button.hpp"
 #include "SFML/System/Vector2.hpp"
+#include "Utils/Container.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <memory>
 
 // TODO: Integrate Button Borders in here
-Button::Button(const ButtonConfig &config)
-    : _text{config.text}, _bg_color(config.color) {
+Button::Button(ButtonConfig config)
+    : Container(std::move(config.widget)), _bg_color(config.color) {
   auto &[text, color, conf_width, conf_height] = config;
 
   // Get text bounds
-  sf::FloatRect textBounds = _text.get_global_bounds();
+  sf::FloatRect widget_bounds = Container::get_global_bounds();
 
   // Calculate Width & Height
-  auto width = conf_width != -1 ? conf_width : textBounds.width;
-  auto height = conf_height != -1 ? conf_height : textBounds.height;
+  auto width = conf_width != -1 ? conf_width : widget_bounds.width;
+  auto height = conf_height != -1 ? conf_height : widget_bounds.height;
 
   // Calculate the box size based on the text's bounds and padding
   sf::RectangleShape box;
@@ -29,7 +30,7 @@ Button::Button(const ButtonConfig &config)
 void Button::set_position(float x, float y) {
   Widget::set_position(x, y);
   _rect.setPosition(x, y);
-  _text.set_position(x, y);
+  Container::set_position(x, y);
 }
 
 bool Button::is_hovered(sf::Vector2i point) {
@@ -40,7 +41,7 @@ void Button::set_handler(std::function<void(void)> func) { _handler = func; }
 
 void Button::render(RenderData ren) {
   ren.window.draw(_rect);
-  _text.render(ren);
+  Container::render(ren);
 }
 
 void Button::handle_events(EventData evt) {

@@ -49,9 +49,10 @@ void SectionsWidget::init_sections(
                     .setSize(14)
                     .build();
 
-    ButtonConfig config = {.text = text, .width = 80};
+    ButtonConfig config = {.widget = std::make_unique<Text>(std::move(text)),
+                           .width = 80};
 
-    auto btn = std::make_unique<Button>(config);
+    auto btn = std::make_unique<Button>(std::move(config));
 
     btn->set_handler([type, handler]() { handler(type); });
 

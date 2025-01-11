@@ -2,14 +2,15 @@
 
 #include "SFML/Graphics/Rect.hpp"
 #include "Utils/ButtonConfig.hpp"
+#include "Utils/Container.hpp"
 #include "Utils/Text.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <functional>
 
 // TODO: Document This Class
-class Button : public Widget {
+class Button : public Container {
 public:
-  explicit Button(const ButtonConfig &);
+  explicit Button(ButtonConfig);
 
   /*
    * @brief Detect Button Hover over the rectangle
@@ -61,7 +62,6 @@ public:
   sf::Color get_background_color() override;
 
 private:
-  Text _text;
   sf::RectangleShape _rect;
   std::function<void(void)> _handler;
   float padding_x;
