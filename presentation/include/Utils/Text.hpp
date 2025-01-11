@@ -14,17 +14,7 @@ public:
    *
    * @details Pass the text and font as members
    */
-  Text(std::unique_ptr<sf::Text>, std::unique_ptr<sf::Font>);
-
-  /**
-   * @brief Copy Constructor
-   */
-  Text(const Text &);
-
-  /**
-   * @brief Copy Constructor
-   */
-  void operator=(const Text &);
+  Text(std::shared_ptr<sf::Text>, std::shared_ptr<sf::Font>);
 
   /**
    * @brief Render the text
@@ -82,7 +72,7 @@ public:
    * @param x The X Position
    * @param y The Y Position
    */
-  void set_position(float x, float y);
+  void set_position(float x, float y) override;
 
   /**
    * @brief Set Position for the button
@@ -92,6 +82,6 @@ public:
   void set_position(const sf::Vector2f &pos);
 
 private:
-  std::unique_ptr<sf::Text> _text;
-  std::unique_ptr<sf::Font> _font;
+  std::shared_ptr<sf::Text> _text;
+  std::shared_ptr<sf::Font> _font;
 };

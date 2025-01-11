@@ -43,10 +43,10 @@ void SectionsWidget::init_sections(
 
   for (auto &[type, color] : sections) {
     auto &[r, g, b] = color;
-    auto text = builder.setSize(14)
-                    .setText(DTO::sectiontype_name_mapper(type))
+    auto text = builder.setText(DTO::sectiontype_name_mapper(type))
                     .setColor(sf::Color::White)
                     .setFont(FontFactory::get_instance().get_primary_font())
+                    .setSize(14)
                     .build();
 
     ButtonConfig config = {.text = text, .width = 80};

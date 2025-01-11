@@ -26,5 +26,6 @@ TextBuilder &TextBuilder::setColor(sf::Color color) {
 
 Text TextBuilder::build() {
   Text ret = std::move(_text);
+  _text = Text(); // Create a new instance for next text
   return ret;
 }

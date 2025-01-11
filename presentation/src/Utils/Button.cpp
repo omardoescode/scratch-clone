@@ -23,23 +23,23 @@ Button::Button(const ButtonConfig &config)
 
   box.setFillColor(color);
 
-  _rect = std::make_unique<sf::RectangleShape>(std::move(box));
+  _rect = box;
 }
 
 void Button::set_position(float x, float y) {
   Widget::set_position(x, y);
-  _rect->setPosition(x, y);
+  _rect.setPosition(x, y);
   _text.set_position(x, y);
 }
 
 bool Button::is_hovered(sf::Vector2i point) {
-  return _rect->getGlobalBounds().contains(point.x, point.y);
+  return _rect.getGlobalBounds().contains(point.x, point.y);
 }
 
 void Button::set_handler(std::function<void(void)> func) { _handler = func; }
 
 void Button::render(RenderData ren) {
-  ren.window.draw(*_rect);
+  ren.window.draw(_rect);
   _text.render(ren);
 }
 
@@ -55,7 +55,7 @@ void Button::handle_events(EventData evt) {
 void Button::update(UpdateData dat) {}
 
 sf::FloatRect Button::get_global_bounds() const {
-  return _rect->getGlobalBounds();
+  return _rect.getGlobalBounds();
 }
 
 void Button::handle_click() { _handler(); }

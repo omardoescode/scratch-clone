@@ -5,16 +5,25 @@ GridView::GridView(std::list<std::unique_ptr<Widget>> widgets,
                    unsigned widgets_per_row, unsigned main_axis_spacing,
                    unsigned cross_axis_spacing)
     : _widgets_per_row(widgets_per_row), _main_axis_spacing(main_axis_spacing),
-      _cross_axis_spacing(cross_axis_spacing), _widgets(std::move(widgets)) {
+      _cross_axis_spacing(cross_axis_spacing) {
   assert(widgets_per_row > 0);
   assert(main_axis_spacing >= 0);
   assert(cross_axis_spacing >= 0);
+
+  for (auto &widget : widgets)
+    _widgets.push_back(std::move(widget));
 }
 
 GridView::GridView(std::list<std::unique_ptr<Widget>> widgets,
                    unsigned widgets_per_row, unsigned axis_spacing)
-    : GridView(std::move(widgets), widgets_per_row, axis_spacing,
-               axis_spacing) {}
+    : _widgets_per_row(widgets_per_row), _main_axis_spacing(axis_spacing),
+      _cross_axis_spacing(axis_spacing) {
+  assert(widgets_per_row > 0);
+  assert(axis_spacing >= 0);
+
+  for (auto &widget : widgets)
+    _widgets.push_back(std::move(widget));
+}
 
 void GridView::operator=(GridView &&rhs) {
   for (auto &widget : rhs._widgets)

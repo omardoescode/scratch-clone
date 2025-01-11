@@ -5,14 +5,12 @@
 #include "Utils/Text.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <functional>
-#include <memory>
 
 // TODO: Document This Class
 class Button : public Widget {
 public:
   explicit Button(const ButtonConfig &);
 
-public:
   /*
    * @brief Detect Button Hover over the rectangle
    */
@@ -64,7 +62,7 @@ public:
 
 private:
   Text _text;
-  std::unique_ptr<sf::RectangleShape> _rect;
+  sf::RectangleShape _rect;
   std::function<void(void)> _handler;
   float padding_x;
   float padding_y;

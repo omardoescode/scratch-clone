@@ -1,17 +1,48 @@
 #include "AppWindow.hpp"
+#include "Commands/CommandSet.hpp"
 #include "DTOs/Sections.hpp"
+#include "Utils/Button.hpp"
+#include "Utils/ButtonConfig.hpp"
 #include "Utils/Center.hpp"
 #include "Utils/EdgeInsets.hpp"
+#include "Utils/FontFactory.hpp"
 #include "Utils/Padding.hpp"
+#include "Utils/TextBuilder.hpp"
 #include <memory>
 
-AppWindow::AppWindow() {
-  sections = std::make_unique<SectionsWidget>(
+AppWindow::AppWindow() : _current_section(static_cast<DTO::SectionType>(0)) {
+  _sections_widget = std::make_unique<SectionsWidget>(
       SIDEBAR_WIDTH, SECTIONS_HEIGHT, sf::Color(216, 203, 219),
       [this](DTO::SectionType type) { set_current_section(type); });
-  sections->set_position(0, 0);
+  _sections_widget->set_position(0, 0);
+
+  // Get Instructions
+  auto instructions =
+      CommandSet::get_instance().get_section_commands(_current_section);
+
+  TextBuilder builder;
+  Text txt = builder.setFont(FontFactory::get_instance().get_primary_font())
+                 .setText(DTO::sectiontype_name_mapper(_current_section))
+                 .setSize(12)
+                 .build();
+
+  ButtonConfig conf = {txt};
+
+  auto lst = std::list<std::unique_ptr<Widget>>();
+  lst.emplace_back(std::make_unique<Button>(conf));
+  lst.emplace_back(std::make_unique<Button>(conf));
+  _instruction_set = std::make_unique<GridView>(std::move(lst), 1);
+  _instruction_set->set_position(0, SECTIONS_HEIGHT);
 }
-void AppWindow::handle_events(EventData evt) { sections->handle_events(evt); }
-void AppWindow::render(RenderData ren) { sections->render(ren); }
-void AppWindow::update(UpdateData upd) { sections->update(upd); }
-void AppWindow::set_current_section(DTO::SectionType type) { current = type; }
+void AppWindow::handle_events(EventData evt) {
+  _sections_widget->handle_events(evt);
+}
+void AppWindow::render(RenderData ren) {
+  _sections_widget->render(ren);
+  _instruction_set->render(ren);
+}
+
+void AppWindow::update(UpdateData upd) { _sections_widget->update(upd); }
+void AppWindow::set_current_section(DTO::SectionType type) {
+  _current_section = type;
+}

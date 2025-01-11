@@ -16,6 +16,7 @@ public:
            unsigned widgets_per_row = 1, unsigned axis_spacing = 0);
 
   void operator=(GridView &&);
+
   /*
    * @brief Render the Grid View
    */

@@ -8,7 +8,24 @@
 #include <memory>
 class Container : public Widget {
 public:
-  Container(std::unique_ptr<Widget> width);
+  /**
+   * @brief Basic Constructor
+   */
+  Container(std::unique_ptr<Widget> wid);
+
+  /**
+   * @brief Move Constructor
+   */
+  Container(Container &&rhs);
+
+  /**
+   * @brief Move Assignment
+   */
+  void operator=(Container &&rhs);
+
+  // Delete Copying
+  Container(const Container &rhs) = delete;
+  void operator=(const Container &rhs) = delete;
 
   /*
    * @brief Render the widget in the given window

@@ -36,6 +36,7 @@ private:
   void set_current_section(DTO::SectionType type);
 
 private:
-  std::unique_ptr<Widget> sections;
-  DTO::SectionType current;
+  std::unique_ptr<Widget> _sections_widget;
+  std::unique_ptr<Widget> _instruction_set;
+  DTO::SectionType _current_section;
 };

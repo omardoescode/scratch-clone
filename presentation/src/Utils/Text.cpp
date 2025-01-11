@@ -3,27 +3,15 @@
 #include <memory>
 
 Text::Text()
-    : _text(std::make_unique<sf::Text>()), _font(std::make_unique<sf::Font>()) {
+    : _text(std::make_shared<sf::Text>()), _font(std::make_shared<sf::Font>()) {
 }
 
-Text::Text(std::unique_ptr<sf::Text> text, std::unique_ptr<sf::Font> font)
-    : _text(std::move(text)), _font(std::move(font)) {
+Text::Text(std::shared_ptr<sf::Text> text, std::shared_ptr<sf::Font> font)
+    : _text(text), _font(font) {
   assert(_text);
   assert(_font);
 
   // Initialize the font
-  _text->setFont(*_font);
-}
-
-Text::Text(const Text &rhs) {
-  _text = std::make_unique<sf::Text>(*rhs._text);
-  _font = std::make_unique<sf::Font>(*rhs._font);
-  _text->setFont(*_font);
-}
-
-void Text::operator=(const Text &rhs) {
-  _text = std::make_unique<sf::Text>(*rhs._text);
-  _font = std::make_unique<sf::Font>(*rhs._font);
   _text->setFont(*_font);
 }
 
@@ -51,7 +39,7 @@ void Text::set_font(std::unique_ptr<sf::Font> font) {
 }
 
 void Text::set_character_size(unsigned size) {
-  assert(_text);
+  assert(_text != nullptr);
   _text->setCharacterSize(size);
 }
 

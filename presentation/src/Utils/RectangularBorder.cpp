@@ -32,7 +32,6 @@ RectangularBorder::RectangularBorder(std::unique_ptr<Widget> widget,
     border.setPosition(x - _offsets.left(), y - _offsets.top());
     border.setFillColor(color);
     _borders.push_back(border);
-    std::cout << border.getSize().x << " " << border.getSize().y << std::endl;
   }
 
   if (_offsets.right()) {
@@ -42,7 +41,6 @@ RectangularBorder::RectangularBorder(std::unique_ptr<Widget> widget,
     border.setPosition(x + width, y - _offsets.top());
     border.setFillColor(color);
     _borders.push_back(border);
-    std::cout << "Adding right" << std::endl;
   }
 }
 
