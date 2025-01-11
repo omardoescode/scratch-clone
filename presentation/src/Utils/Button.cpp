@@ -15,8 +15,10 @@ Button::Button(ButtonConfig config)
   sf::FloatRect widget_bounds = Container::get_global_bounds();
 
   // Calculate Width & Height
-  auto width = conf_width != -1 ? conf_width : widget_bounds.width;
-  auto height = conf_height != -1 ? conf_height : widget_bounds.height;
+  auto width = conf_width != -1 ? std::max(conf_width, widget_bounds.width)
+                                : widget_bounds.width;
+  auto height = conf_height != -1 ? std::max(conf_height, widget_bounds.height)
+                                  : widget_bounds.height;
 
   // Calculate the box size based on the text's bounds and padding
   sf::RectangleShape box;
