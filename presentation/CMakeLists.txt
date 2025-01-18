@@ -38,6 +38,7 @@ set (HEADERS
   include/Utils/WidgetList.hpp
   include/Utils/WidgetListBuilder.hpp
   include/Utils/Row.hpp
+  include/Utils/WithBackground.hpp
 )
 set (SOURCES 
   src/App.cpp
@@ -66,6 +67,7 @@ set (SOURCES
   src/Utils/WidgetList.cpp
   src/Utils/WidgetListBuilder.cpp
   src/Utils/Row.cpp
+  src/Utils/WithBackground.cpp
 )
 
 add_library(

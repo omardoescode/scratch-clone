@@ -1,12 +1,10 @@
 #pragma once
 
-#include "SFML/Graphics/Rect.hpp"
-#include "Utils/Container.hpp"
-#include <SFML/Graphics/RectangleShape.hpp>
+#include "Utils/WithBackground.hpp"
 #include <functional>
 
 // TODO: Document This Class
-class Button : public Container {
+class Button : public WithBackground {
 public:
   explicit Button(std::unique_ptr<Widget> widget, float width = -1,
                   float height = -1, sf::Color color = sf::Color::Black);
@@ -55,15 +53,8 @@ public:
    */
   void handle_click() override;
 
-  /**
-   * @brief Return the background color for the button
-   */
-  sf::Color get_background_color() override;
-
 private:
-  sf::RectangleShape _rect;
   std::function<void(void)> _handler;
   float _padding_x;
   float _padding_y;
-  sf::Color _bg_color;
 };
