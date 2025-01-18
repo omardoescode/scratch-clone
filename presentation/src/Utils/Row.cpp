@@ -2,7 +2,8 @@
 #include "Data/RenderData.hpp"
 #include <algorithm>
 
-Row::Row(WidgetList lst) : _list(std::move(lst)) {}
+Row::Row(WidgetList lst, int space_between)
+    : _list(std::move(lst)), _space_between(space_between) {}
 
 void Row::render(RenderData ren) {
   for (auto &widget : _list.widgets())
@@ -26,6 +27,9 @@ sf::FloatRect Row::get_global_bounds() const {
     width += bounds.width;
   }
 
+  // Add the spaces between to width
+  width += (_list.size() - 1) * _space_between;
+
   return {__pos.x, __pos.y, width, max_height};
 }
 
@@ -43,6 +47,6 @@ void Row::set_position(float x, float y) {
   for (auto &widget : _list.widgets()) {
     auto wid_bounds = widget->get_global_bounds();
     widget->set_position(cur_x, cur_y - wid_bounds.height / 2);
-    cur_x += wid_bounds.width;
+    cur_x += wid_bounds.width + _space_between;
   }
 }

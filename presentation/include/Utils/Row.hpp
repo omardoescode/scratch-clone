@@ -5,7 +5,7 @@
 
 class Row : public Widget {
 public:
-  Row(WidgetList elements);
+  Row(WidgetList elements, int space_between = 0);
 
   void render(RenderData) override;
   void handle_events(EventData) override;
@@ -15,4 +15,5 @@ public:
 
 private:
   WidgetList _list;
+  int _space_between;
 };

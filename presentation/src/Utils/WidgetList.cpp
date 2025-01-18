@@ -18,3 +18,7 @@ const std::list<std::unique_ptr<Widget>> &WidgetList::widgets() const {
 }
 
 unsigned int WidgetList::size() const { return _elems.size(); }
+
+void WidgetList::append_item(std::unique_ptr<Widget> element) {
+  _elems.emplace_back(std::move(element));
+}

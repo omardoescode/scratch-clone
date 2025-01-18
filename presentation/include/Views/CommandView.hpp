@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Commands/Command.hpp"
+#include "Utils/Row.hpp"
 #include "Utils/Text.hpp"
 #include "Widget.hpp"
 class CommandView : public Widget {
@@ -12,8 +13,7 @@ public:
   sf::FloatRect get_global_bounds() const;
   void set_position(float x, float y);
   void handle_click();
-  sf::Color get_background_color();
 
 private:
-  Text txt;
+  Row parts;
 };

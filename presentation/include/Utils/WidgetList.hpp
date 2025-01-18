@@ -40,6 +40,11 @@ public:
    */
   unsigned int size() const;
 
+  /**
+   * @brief Append elements to the widget list
+   */
+  void append_item(std::unique_ptr<Widget>);
+
 private:
   std::list<std::unique_ptr<Widget>> _elems;
   bool valid;

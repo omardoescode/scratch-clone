@@ -27,4 +27,8 @@ void SectionInstructionSetView::update(UpdateData upd) {
 sf::FloatRect SectionInstructionSetView::get_global_bounds() const {
   return {0, 0, 0, 0};
 }
-void SectionInstructionSetView::set_position(float x, float y) {}
+void SectionInstructionSetView::set_position(float x, float y) {
+  // TODO: FIX THIS to add a constant offset
+  for (auto &cmd : _commands)
+    cmd->set_position(x, y);
+}
