@@ -2,8 +2,6 @@
 #include "DTOs/Sections.hpp"
 #include "Game.hpp"
 #include "Utils/Button.hpp"
-#include "Utils/ButtonConfig.hpp"
-#include "Utils/EdgeInsets.hpp"
 #include "Utils/FontFactory.hpp"
 #include "Utils/Padding.hpp"
 #include "Utils/RectangularBorder.hpp"
@@ -50,11 +48,12 @@ void SectionsWidget::init_sections(
                     .setSize(14)
                     .build();
 
-    ButtonConfig config = {.widget = std::make_unique<Text>(std::move(text)),
-                           .width = 80};
+    auto btn =
+        std::make_unique<Button>(std::make_unique<Text>(std::move(text)), 80);
 
-    auto btn = std::make_unique<Button>(std::move(config));
+    // clang -Wc++20-extensions
     btn->set_handler([type, handler]() { handler(type); });
+
     return std::make_unique<RectangularBorder>(
         std::make_unique<Padding>(std::move(btn), EdgeInsets(8.f, 6.f)),
         sf::Color(r, g, b), EdgeInsets(EdgeInsets::LEFT, 3));

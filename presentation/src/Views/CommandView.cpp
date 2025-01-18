@@ -1,38 +1,38 @@
 #include "Views/CommandView.hpp"
+#include "Commands/CommandPart.hpp"
+#include "Utils/Button.hpp"
+#include "Utils/EdgeInsets.hpp"
 #include "Utils/FontFactory.hpp"
+#include "Utils/Padding.hpp"
+#include "Utils/Row.hpp"
 #include "Utils/TextBuilder.hpp"
-#include <iostream>
+#include "Utils/WidgetListBuilder.hpp"
+#include <memory>
 
-CommandView::CommandView(std::shared_ptr<Command>) : parts(WidgetList()) {
+CommandView::CommandView(std::shared_ptr<Command> cmd) {
   TextBuilder builder;
-  WidgetList lst;
-  lst.append_item(std::make_unique<Text>(
-      builder.setText("Hello")
-          .setSize(30)
-          .setColor(sf::Color::Red)
-          .setFont(FontFactory::get_instance().get_primary_font())
-          .build()));
+  auto parts = cmd->get_parts();
+  WidgetList lst = WidgetListBuilder::build(parts.size(), [&](int index) {
+    auto part = parts[index];
+    return std::make_unique<Text>(
+        builder.setText(part.part_name)
+            .setColor(sf::Color::Red)
+            .setFont(FontFactory::get_instance().get_primary_font())
+            .setSize(20)
+            .build());
+  });
 
-  lst.append_item(std::make_unique<Text>(
-      builder.setText("Worl\nd")
-          .setSize(30)
-          .setColor(sf::Color::Red)
-          .setFont(FontFactory::get_instance().get_primary_font())
-          .build()));
-  lst.append_item(std::make_unique<Text>(
-      builder.setText("Hello")
-          .setSize(30)
-          .setColor(sf::Color::Red)
-          .setFont(FontFactory::get_instance().get_primary_font())
-          .build()));
-  parts = Row(std::move(lst));
+  _widget =
+      std::make_unique<Button>(std::make_unique<Row>(Row(std::move(lst))));
 }
-void CommandView::render(RenderData ren) { parts.render(ren); }
+void CommandView::render(RenderData ren) { _widget->render(ren); }
 
-void CommandView::handle_events(EventData evt) { parts.handle_events(evt); }
-void CommandView::update(UpdateData dat) { parts.update(dat); }
+void CommandView::handle_events(EventData evt) { _widget->handle_events(evt); }
+void CommandView::update(UpdateData dat) { _widget->update(dat); }
 sf::FloatRect CommandView::get_global_bounds() const {
-  return parts.get_global_bounds();
+  return _widget->get_global_bounds();
 }
-void CommandView::set_position(float x, float y) { parts.set_position(x, y); }
+void CommandView::set_position(float x, float y) {
+  _widget->set_position(x, y);
+}
 void CommandView::handle_click() {}

@@ -1,16 +1,15 @@
 #pragma once
 
 #include "SFML/Graphics/Rect.hpp"
-#include "Utils/ButtonConfig.hpp"
 #include "Utils/Container.hpp"
-#include "Utils/Text.hpp"
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <functional>
 
 // TODO: Document This Class
 class Button : public Container {
 public:
-  explicit Button(ButtonConfig);
+  explicit Button(std::unique_ptr<Widget> widget, float width = -1,
+                  float height = -1, sf::Color color = sf::Color::Black);
 
   /*
    * @brief Detect Button Hover over the rectangle
@@ -64,7 +63,7 @@ public:
 private:
   sf::RectangleShape _rect;
   std::function<void(void)> _handler;
-  float padding_x;
-  float padding_y;
+  float _padding_x;
+  float _padding_y;
   sf::Color _bg_color;
 };

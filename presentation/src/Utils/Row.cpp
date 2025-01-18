@@ -42,7 +42,7 @@ void Row::set_position(float x, float y) {
   // https://api.flutter.dev/flutter/rendering/MainAxisAlignment.html
 
   auto bounds = get_global_bounds();
-  float cur_x = x, cur_y = bounds.height / 2;
+  float cur_x = x, cur_y = y + bounds.height / 2;
 
   for (auto &widget : _list.widgets()) {
     auto wid_bounds = widget->get_global_bounds();

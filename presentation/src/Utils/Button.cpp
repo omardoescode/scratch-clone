@@ -1,27 +1,21 @@
-
 #include "Utils/Button.hpp"
-#include "SFML/System/Vector2.hpp"
 #include "Utils/Container.hpp"
-#include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/Graphics/RenderTarget.hpp>
-#include <memory>
 
-Button::Button(ButtonConfig config)
-    : Container(std::move(config.widget)), _bg_color(config.color) {
-  auto &[text, color, conf_width, conf_height] = config;
-
+Button::Button(std::unique_ptr<Widget> widget, float width, float height,
+               sf::Color color)
+    : Container(std::move(widget)), _bg_color(color) {
   // Get text bounds
   sf::FloatRect widget_bounds = Container::get_global_bounds();
 
-  // Calculate Width & Height
-  auto width = conf_width != -1 ? std::max(conf_width, widget_bounds.width)
-                                : widget_bounds.width;
-  auto height = conf_height != -1 ? std::max(conf_height, widget_bounds.height)
-                                  : widget_bounds.height;
+  // Calculate Actual Width & Height
+  auto act_width =
+      width != -1 ? std::max(width, widget_bounds.width) : widget_bounds.width;
+  auto act_height = height != -1 ? std::max(height, widget_bounds.height)
+                                 : widget_bounds.height;
 
   // Calculate the box size based on the text's bounds and padding
   sf::RectangleShape box;
-  box.setSize(sf::Vector2f(width, height));
+  box.setSize(sf::Vector2f(act_width, act_height));
 
   box.setFillColor(color);
 

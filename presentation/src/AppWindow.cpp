@@ -27,6 +27,7 @@ AppWindow::AppWindow() : _current_section(static_cast<DTO::SectionType>(0)) {
   // _instruction_set = std::make_unique<GridView>(std::move(lst), 1);
   // _instruction_set->set_position(0, SECTIONS_HEIGHT);
   _instruction_set = std::make_unique<InstructionSetView>();
+  _instruction_set->set_position(500, 500);
 }
 void AppWindow::handle_events(EventData evt) {
   _sections_widget->handle_events(evt);

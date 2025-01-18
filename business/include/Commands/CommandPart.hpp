@@ -16,4 +16,7 @@ enum class CommandPartType { TEXT, EXPRESSION };
  *          -> Must be either InstructionWithExpression or RcursiveExpression,
  * where we will find the pointer to the expression mapped to this value
  */
-typedef std::pair<CommandPartType, std::string> CommandPart;
+typedef struct {
+  CommandPartType type;
+  std::string part_name;
+} CommandPart;

@@ -15,3 +15,5 @@ std::vector<DTO::Section> Command::get_sections() {
       {DTO::VARIABLES, {11, 11, 11}},
   };
 }
+
+const std::vector<CommandPart> &Command::get_parts() { return _parts; }

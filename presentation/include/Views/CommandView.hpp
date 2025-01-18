@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Commands/Command.hpp"
-#include "Utils/Row.hpp"
-#include "Utils/Text.hpp"
 #include "Widget.hpp"
 class CommandView : public Widget {
 public:
@@ -15,5 +13,5 @@ public:
   void handle_click();
 
 private:
-  Row parts;
+  std::unique_ptr<Widget> _widget;
 };
