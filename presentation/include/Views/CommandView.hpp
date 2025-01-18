@@ -2,6 +2,7 @@
 
 #include "Commands/Command.hpp"
 #include "Widget.hpp"
+// TODO: Switch to Container
 class CommandView : public Widget {
 public:
   CommandView(std::shared_ptr<Command>);
