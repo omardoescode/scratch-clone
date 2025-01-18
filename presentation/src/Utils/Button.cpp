@@ -6,7 +6,6 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <memory>
 
-// TODO: Integrate Button Borders in here
 Button::Button(ButtonConfig config)
     : Container(std::move(config.widget)), _bg_color(config.color) {
   auto &[text, color, conf_width, conf_height] = config;

@@ -16,8 +16,13 @@ set (HEADERS
   include/AppWindow.hpp
   include/Widget.hpp
 
+  # Views
+  include/Views/SectionInstructionSetView.hpp
+  include/Views/CommandView.hpp
+
   # Widgets
   include/Widgets/SectionsWidget.hpp
+  include/Widgets/InstructionSetView.hpp
 
   # Utils
   include/Utils/Container.hpp
@@ -31,14 +36,22 @@ set (HEADERS
   include/Utils/EdgeInsets.hpp
   include/Utils/Center.hpp
   include/Utils/GridView.hpp
+  include/Utils/WidgetList.hpp
+  include/Utils/WidgetListBuilder.hpp
+  include/Utils/Row.hpp
 )
 set (SOURCES 
   src/App.cpp
   src/AppWindow.cpp
   src/Widget.cpp
 
+  # Views
+  src/Views/SectionInstructionSetView.cpp
+  src/Views/CommandView.cpp
+
   # Widgets
   src/Widgets/SectionsWidget.cpp
+  src/Widgets/InstructionSetView.cpp
 
   # Utils
   src/Utils/Container.cpp
@@ -51,6 +64,9 @@ set (SOURCES
   src/Utils/EdgeInsets.cpp
   src/Utils/Center.cpp
   src/Utils/GridView.cpp
+  src/Utils/WidgetList.cpp
+  src/Utils/WidgetListBuilder.cpp
+  src/Utils/Row.cpp
 )
 
 add_library(

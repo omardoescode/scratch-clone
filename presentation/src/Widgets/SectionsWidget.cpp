@@ -8,10 +8,11 @@
 #include "Utils/Padding.hpp"
 #include "Utils/RectangularBorder.hpp"
 #include "Utils/TextBuilder.hpp"
+#include "Utils/WidgetList.hpp"
+#include "Utils/WidgetListBuilder.hpp"
 #include <memory>
 
-SectionsWidget::SectionsWidget(unsigned width, unsigned height,
-                               sf::Color background,
+SectionsWidget::SectionsWidget(sf::Color background,
                                std::function<void(DTO::SectionType)> handler) {
   // sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(width, height));
   // rect.setFillColor(sf::Color(_bg_color));
@@ -38,10 +39,10 @@ void SectionsWidget::update(UpdateData upd) {
 void SectionsWidget::init_sections(
     std::function<void(DTO::SectionType)> handler) {
   auto sections = Game::get_instance().get_sections();
-  std::list<std::unique_ptr<Widget>> btns;
   TextBuilder builder;
 
-  for (auto &[type, color] : sections) {
+  WidgetList btns = WidgetListBuilder::build(sections.size(), [&](int index) {
+    auto &[type, color] = sections[index];
     auto &[r, g, b] = color;
     auto text = builder.setText(DTO::sectiontype_name_mapper(type))
                     .setColor(sf::Color::White)
@@ -53,13 +54,11 @@ void SectionsWidget::init_sections(
                            .width = 80};
 
     auto btn = std::make_unique<Button>(std::move(config));
-
     btn->set_handler([type, handler]() { handler(type); });
-
-    btns.push_back(std::make_unique<RectangularBorder>(
+    return std::make_unique<RectangularBorder>(
         std::make_unique<Padding>(std::move(btn), EdgeInsets(8.f, 6.f)),
-        sf::Color(r, g, b), EdgeInsets(EdgeInsets::LEFT, 3)));
-  }
+        sf::Color(r, g, b), EdgeInsets(EdgeInsets::LEFT, 3));
+  });
 
   _grid = std::make_unique<GridView>(std::move(btns), 2, 120, 50);
 }

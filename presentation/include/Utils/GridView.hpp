@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Utils/WidgetList.hpp"
 #include "Widget.hpp"
 #include <list>
 #include <memory>
@@ -9,13 +10,11 @@ public:
   /**
    * @brief Constructor
    */
-  GridView(std::list<std::unique_ptr<Widget>> widgets, unsigned widgets_per_row,
+  GridView(WidgetList widgets, unsigned widgets_per_row,
            unsigned main_axis_spacing, unsigned cross_axis_spacing);
 
-  GridView(std::list<std::unique_ptr<Widget>> widgets,
-           unsigned widgets_per_row = 1, unsigned axis_spacing = 0);
-
-  void operator=(GridView &&);
+  GridView(WidgetList widgets, unsigned widgets_per_row = 1,
+           unsigned axis_spacing = 0);
 
   /*
    * @brief Render the Grid View
@@ -64,5 +63,5 @@ private:
   unsigned _widgets_per_row;
   unsigned _main_axis_spacing;
   unsigned _cross_axis_spacing;
-  std::list<std::unique_ptr<Widget>> _widgets;
+  WidgetList _list;
 };

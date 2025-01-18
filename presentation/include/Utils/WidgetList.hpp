@@ -4,7 +4,6 @@
  * @brief A list of unique pointers of widgets
  */
 #include "Widget.hpp"
-#include <functional>
 #include <list>
 #include <memory>
 class WidgetList : public std::list<std::unique_ptr<Widget>> {
@@ -43,4 +42,5 @@ public:
 
 private:
   std::list<std::unique_ptr<Widget>> _elems;
+  bool valid;
 };

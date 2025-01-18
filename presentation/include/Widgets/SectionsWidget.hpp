@@ -12,7 +12,7 @@
 // TODO: Document This class
 class SectionsWidget : public Widget {
 public:
-  SectionsWidget(unsigned width, unsigned height, sf::Color background,
+  SectionsWidget(sf::Color background,
                  std::function<void(DTO::SectionType)> handler);
 
   void render(RenderData) override;

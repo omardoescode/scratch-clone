@@ -1,9 +1,11 @@
 #include "DTOs/Sections.hpp"
-#include "SFML/Graphics.hpp"
-#include "Widgets/SectionsWidget.hpp"
+#include "Data/EventData.hpp"
+#include "Data/RenderData.hpp"
+#include "Data/UpdateData.hpp"
+#include "Widget.hpp"
 
 class AppWindow {
-public: // Constants for the scratc
+public:
   static constexpr unsigned SIDEBAR_WIDTH = 250;
   static constexpr unsigned SECTIONS_HEIGHT = 200;
 
