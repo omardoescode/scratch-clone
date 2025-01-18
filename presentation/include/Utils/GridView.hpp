@@ -2,8 +2,6 @@
 
 #include "Utils/WidgetList.hpp"
 #include "Widget.hpp"
-#include <list>
-#include <memory>
 
 class GridView : public Widget {
 public:
