@@ -27,7 +27,7 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
                   .setSize(20)
                   .build());
         case CommandPartType::EXPRESSION:
-          return std::make_unique<Input>();
+          return std::make_unique<Input>(sf::Color::Black);
         default:
           throw std::runtime_error("Unknown Command part type");
         }

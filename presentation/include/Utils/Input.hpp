@@ -9,7 +9,11 @@
 
 class Input : public Widget, public Hoverable {
 public:
-  Input();
+  static constexpr int CURSOR_CHANGE_DELAY = 500;
+
+public:
+  Input(sf::Color clr = sf::Color::Black,
+        sf::Color background = sf::Color::White);
 
   void render(RenderData) override;
   void handle_events(EventData) override;
@@ -26,4 +30,6 @@ private:
   std::shared_ptr<unsigned> _cursor_change_id;
   std::function<void()> _cursor_change_callback;
   bool _is_focused;
+  sf::Color _txt_color;
+  sf::Color _bg_color;
 };
