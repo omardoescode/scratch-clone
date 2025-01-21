@@ -28,10 +28,9 @@ void Button::handle_events(EventData evt) {
   WithBackground::handle_events(evt);
 }
 
-void Button::update(UpdateData dat) {}
-
-sf::FloatRect Button::get_global_bounds() const {
-  return __rect.getGlobalBounds();
+void Button::update(UpdateData dat) {
+  WithBackground::update(dat);
+  // TODO: Hover change bg color
 }
 
 void Button::handle_click() {

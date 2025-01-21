@@ -13,7 +13,8 @@ public:
 
 public:
   Input(sf::Color clr = sf::Color::Black,
-        sf::Color background = sf::Color::White);
+        sf::Color background = sf::Color::White,
+        unsigned maximum_char_length = -1);
 
   void render(RenderData) override;
   void handle_events(EventData) override;
@@ -32,4 +33,5 @@ private:
   bool _is_focused;
   sf::Color _txt_color;
   sf::Color _bg_color;
+  unsigned _maximum_char_length;
 };

@@ -2,11 +2,9 @@
 #include "Data/RenderData.hpp"
 #include "Utils/Container.hpp"
 
+// FIX: The size of this thing is fixed, and won't change
 WithBackground::WithBackground(std::shared_ptr<Widget> widget, sf::Color color)
     : Container(widget) {
-  auto bounds = get_global_bounds();
-  __rect.setSize(sf::Vector2f(bounds.width, bounds.height));
-
   __rect.setFillColor(color);
 }
 
@@ -21,3 +19,10 @@ void WithBackground::set_position(float x, float y) {
 }
 
 sf::Color WithBackground::get_background_color() { return _bg_color; }
+
+void WithBackground::update(UpdateData upd) {
+  auto bounds = get_global_bounds();
+  __rect.setSize(sf::Vector2f(bounds.width, bounds.height));
+
+  Container::update(upd);
+}

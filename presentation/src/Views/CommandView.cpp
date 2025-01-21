@@ -1,6 +1,7 @@
 #include "Views/CommandView.hpp"
 #include "Commands/CommandPart.hpp"
 #include "Utils/Button.hpp"
+#include "Utils/Center.hpp"
 #include "Utils/EdgeInsets.hpp"
 #include "Utils/FontFactory.hpp"
 #include "Utils/Input.hpp"
@@ -8,7 +9,6 @@
 #include "Utils/Row.hpp"
 #include "Utils/TextBuilder.hpp"
 #include "Utils/WidgetListBuilder.hpp"
-#include <algorithm>
 #include <memory>
 #include <stdexcept>
 
@@ -16,18 +16,23 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
   TextBuilder builder;
   auto parts = cmd->get_parts();
   WidgetList lst = WidgetListBuilder::build(
-      parts.size(), [&](int index) -> std::unique_ptr<Widget> {
+      parts.size(), [&](int index) -> std::shared_ptr<Widget> {
         auto part = parts[index];
         switch (part.type) {
         case CommandPartType::TEXT:
-          return std::make_unique<Text>(
+          return std::make_shared<Text>(
               builder.setText(part.part_name)
                   .setColor(sf::Color::Red)
                   .setFont(FontFactory::get_instance().get_primary_font())
                   .setSize(20)
                   .build());
-        case CommandPartType::EXPRESSION:
-          return std::make_unique<Input>(sf::Color::Black);
+        case CommandPartType::EXPRESSION: {
+          auto inp =
+              std::make_shared<Input>(sf::Color::Black, sf::Color::White, 10);
+          auto bounds = inp->get_global_bounds();
+          return std::make_shared<Center>(inp, 400,
+                                          inp->get_global_bounds().height);
+        }
         default:
           throw std::runtime_error("Unknown Command part type");
         }
@@ -40,11 +45,15 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
 void CommandView::render(RenderData ren) { _widget->render(ren); }
 
 void CommandView::handle_events(EventData evt) { _widget->handle_events(evt); }
-void CommandView::update(UpdateData dat) { _widget->update(dat); }
+void CommandView::update(UpdateData dat) {
+  _widget->set_position(__pos.x, __pos.y);
+  _widget->update(dat);
+}
 sf::FloatRect CommandView::get_global_bounds() const {
   return _widget->get_global_bounds();
 }
 void CommandView::set_position(float x, float y) {
+  Widget::set_position(x, y);
   _widget->set_position(x, y);
 }
 void CommandView::handle_click() {}

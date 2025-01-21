@@ -33,11 +33,6 @@ public:
   void update(UpdateData) override;
 
   /**
-   * @brief Return the global bounds of the button
-   */
-  sf::FloatRect get_global_bounds() const override;
-
-  /**
    * @brief Set the button position
    */
   void set_position(float x, float y) override;

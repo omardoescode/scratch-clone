@@ -7,6 +7,7 @@ public:
   WithBackground(std::shared_ptr<Widget> widget, sf::Color color);
 
   void render(RenderData) override;
+  void update(UpdateData) override;
   void set_position(float x, float y) override;
   sf::Color get_background_color() override;
 

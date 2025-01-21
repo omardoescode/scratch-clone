@@ -33,11 +33,9 @@ void Padding::handle_events(EventData ren) {
 
 sf::FloatRect Padding::get_global_bounds() const {
   auto bounds = Container::get_global_bounds();
-  bounds.left -= _offsets.left();
-  bounds.top -= _offsets.top();
   bounds.width += _offsets.left() + _offsets.right();
   bounds.height += _offsets.top() + _offsets.bottom();
-  return bounds;
+  return {__pos.x, __pos.y, bounds.width, bounds.height};
 }
 
 void Padding::set_position(float x, float y) {
