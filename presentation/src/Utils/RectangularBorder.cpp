@@ -11,7 +11,7 @@ RectangularBorder::RectangularBorder(std::shared_ptr<Widget> widget,
     sf::RectangleShape border;
     border.setSize({width + _offsets.left() + _offsets.right(),
                     static_cast<float>(_offsets.top())});
-    border.setPosition(x - _offsets.left(), y - _offsets.top());
+    border.setPosition(x, y);
     border.setFillColor(color);
     _borders[EdgeInsets::TOP] = border;
   }
@@ -20,7 +20,7 @@ RectangularBorder::RectangularBorder(std::shared_ptr<Widget> widget,
     sf::RectangleShape border;
     border.setSize({width + _offsets.left() + _offsets.right(),
                     static_cast<float>(_offsets.bottom())});
-    border.setPosition(x - _offsets.left(), y + height);
+    border.setPosition(x, y + height);
     border.setFillColor(color);
     _borders[EdgeInsets::BOTTOM] = border;
   }
@@ -29,16 +29,16 @@ RectangularBorder::RectangularBorder(std::shared_ptr<Widget> widget,
     sf::RectangleShape border;
     border.setSize({static_cast<float>(_offsets.left()),
                     height + _offsets.top() + _offsets.bottom()});
-    border.setPosition(x - _offsets.left(), y - _offsets.top());
+    border.setPosition(x, y);
     border.setFillColor(color);
     _borders[EdgeInsets::LEFT] = border;
   }
 
   if (_offsets.right()) {
     sf::RectangleShape border;
-    border.setSize({static_cast<float>(_offsets.bottom()),
+    border.setSize({static_cast<float>(_offsets.right()),
                     height + _offsets.top() + _offsets.bottom()});
-    border.setPosition(x + width, y - _offsets.top());
+    border.setPosition(x + width, y);
     border.setFillColor(color);
     _borders[EdgeInsets::RIGHT] = border;
   }
@@ -52,21 +52,35 @@ void RectangularBorder::render(RenderData ren) {
 
 void RectangularBorder::set_position(float x, float y) {
   Widget::set_position(x, y);
-  int i = 0;
-  auto bounds = get_global_bounds();
-  std::map<EdgeInsets::Direction, sf::RectangleShape>::iterator itr;
+  auto bounds = Container::get_global_bounds();
 
-  if ((itr = _borders.find(EdgeInsets::TOP)) != _borders.end())
-    _borders[EdgeInsets::TOP].setPosition(x, y);
+  float left = x;
+  float right = x + bounds.width;
+  float top = y;
+  float bottom = y + bounds.height;
 
-  if ((itr = _borders.find(EdgeInsets::BOTTOM)) != _borders.end())
-    _borders[EdgeInsets::BOTTOM].setPosition(x, y + bounds.height);
+  if (auto itr = _borders.find(EdgeInsets::TOP); itr != _borders.end())
+    itr->second.setPosition(left, top);
 
-  if ((itr = _borders.find(EdgeInsets::LEFT)) != _borders.end())
-    _borders[EdgeInsets::LEFT].setPosition(x, y);
+  if (auto itr = _borders.find(EdgeInsets::BOTTOM); itr != _borders.end())
+    itr->second.setPosition(left, bottom);
 
-  if ((itr = _borders.find(EdgeInsets::RIGHT)) != _borders.end())
-    _borders[EdgeInsets::RIGHT].setPosition(x + bounds.width, y);
+  if (auto itr = _borders.find(EdgeInsets::LEFT); itr != _borders.end())
+    itr->second.setPosition(left, top);
 
-  Container::set_position(x + _offsets.left(), y + _offsets.right());
+  if (auto itr = _borders.find(EdgeInsets::RIGHT); itr != _borders.end())
+    itr->second.setPosition(right, top);
+
+  Container::set_position(x + _offsets.left(), y + _offsets.top());
+}
+
+void RectangularBorder::set_thickness(EdgeInsets thickness) {
+  _offsets = thickness;
+}
+
+sf::FloatRect RectangularBorder::get_global_bounds() const {
+  auto bounds = Container::get_global_bounds();
+  bounds.width += _offsets.left() + _offsets.right();
+  bounds.height += _offsets.top() + _offsets.bottom();
+  return bounds;
 }
