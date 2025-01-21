@@ -1,5 +1,5 @@
 #include "Utils/RectangularBorder.hpp"
-#include "iostream"
+#include "Utils/EdgeInsets.hpp"
 #include <memory>
 
 RectangularBorder::RectangularBorder(std::shared_ptr<Widget> widget,
@@ -13,7 +13,7 @@ RectangularBorder::RectangularBorder(std::shared_ptr<Widget> widget,
                     static_cast<float>(_offsets.top())});
     border.setPosition(x - _offsets.left(), y - _offsets.top());
     border.setFillColor(color);
-    _borders.push_back(border);
+    _borders[EdgeInsets::TOP] = border;
   }
 
   if (_offsets.bottom()) {
@@ -22,7 +22,7 @@ RectangularBorder::RectangularBorder(std::shared_ptr<Widget> widget,
                     static_cast<float>(_offsets.bottom())});
     border.setPosition(x - _offsets.left(), y + height);
     border.setFillColor(color);
-    _borders.push_back(border);
+    _borders[EdgeInsets::BOTTOM] = border;
   }
 
   if (_offsets.left()) {
@@ -31,7 +31,7 @@ RectangularBorder::RectangularBorder(std::shared_ptr<Widget> widget,
                     height + _offsets.top() + _offsets.bottom()});
     border.setPosition(x - _offsets.left(), y - _offsets.top());
     border.setFillColor(color);
-    _borders.push_back(border);
+    _borders[EdgeInsets::LEFT] = border;
   }
 
   if (_offsets.right()) {
@@ -40,34 +40,33 @@ RectangularBorder::RectangularBorder(std::shared_ptr<Widget> widget,
                     height + _offsets.top() + _offsets.bottom()});
     border.setPosition(x + width, y - _offsets.top());
     border.setFillColor(color);
-    _borders.push_back(border);
+    _borders[EdgeInsets::RIGHT] = border;
   }
 }
 
 void RectangularBorder::render(RenderData ren) {
   Container::render(ren);
-  for (auto brd : _borders)
+  for (auto [dir, brd] : _borders)
     ren.window.draw(brd);
 }
 
-// TODO: Use unordered map to map borders to direction instead of using a
-// counter that uses the same order as the constructor
 void RectangularBorder::set_position(float x, float y) {
   Widget::set_position(x, y);
   int i = 0;
   auto bounds = get_global_bounds();
-  if (_offsets.top())
-    _borders[i++].setPosition(x, y);
+  std::map<EdgeInsets::Direction, sf::RectangleShape>::iterator itr;
 
-  if (_offsets.bottom())
-    _borders[i++].setPosition(x, y + bounds.height);
+  if ((itr = _borders.find(EdgeInsets::TOP)) != _borders.end())
+    _borders[EdgeInsets::TOP].setPosition(x, y);
 
-  if (_offsets.left())
-    _borders[i++].setPosition(x, y);
+  if ((itr = _borders.find(EdgeInsets::BOTTOM)) != _borders.end())
+    _borders[EdgeInsets::BOTTOM].setPosition(x, y + bounds.height);
 
-  if (_offsets.right()) {
-    _borders[i++].setPosition(x + bounds.width, y);
-  }
+  if ((itr = _borders.find(EdgeInsets::LEFT)) != _borders.end())
+    _borders[EdgeInsets::LEFT].setPosition(x, y);
+
+  if ((itr = _borders.find(EdgeInsets::RIGHT)) != _borders.end())
+    _borders[EdgeInsets::RIGHT].setPosition(x + bounds.width, y);
 
   Container::set_position(x + _offsets.left(), y + _offsets.right());
 }

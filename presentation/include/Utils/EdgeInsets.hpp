@@ -13,15 +13,20 @@ public:
     float right = 0;
   };
 
-  enum Direction {
-    TOP = 1,
-    BOTTOM = 2,
-    LEFT = 4,
-    RIGHT = 8,
+  enum BaseDirection {
+    TOP = 0b1,
+    BOTTOM = 0b10,
+    LEFT = 0b100,
+    RIGHT = 0b1000,
+  };
+
+  enum ExtraDirection {
     VERTICAL = TOP | BOTTOM,
     HORIZONTAL = LEFT | RIGHT,
     ALL = VERTICAL | HORIZONTAL,
   };
+
+  using Direction = int;
 
 public:
   /**

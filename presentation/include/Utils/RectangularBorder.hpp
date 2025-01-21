@@ -10,12 +10,17 @@
 class RectangularBorder : public Container {
 public:
   RectangularBorder(std::shared_ptr<Widget> widget, sf::Color color,
-                    EdgeInsets offset);
+                    EdgeInsets thickness);
 
   void render(RenderData) override;
   void set_position(float x, float y) override;
 
+  /**
+   * @brief Change the thickness of the border
+   */
+  void set_thickness(EdgeInsets new_thickness);
+
 private:
-  std::vector<sf::RectangleShape> _borders;
+  std::map<EdgeInsets::Direction, sf::RectangleShape> _borders;
   EdgeInsets _offsets;
 };
