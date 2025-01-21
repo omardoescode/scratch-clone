@@ -59,3 +59,5 @@ void Text::set_position(float x, float y) {
   _text->setPosition(x, y);
 }
 void Text::set_position(const sf::Vector2f &pos) { _text->setPosition(pos); }
+
+std::string Text::get_string() const { return _text->getString(); }

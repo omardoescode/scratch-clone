@@ -1,18 +1,14 @@
 #pragma once
 
+#include "Interfaces/Hoverable.hpp"
 #include "Utils/WithBackground.hpp"
 #include <functional>
 
 // TODO: Document This Class
-class Button : public WithBackground {
+class Button : public WithBackground, public Hoverable {
 public:
   explicit Button(std::unique_ptr<Widget> widget, float width = -1,
                   float height = -1, sf::Color color = sf::Color::Black);
-
-  /*
-   * @brief Detect Button Hover over the rectangle
-   */
-  bool is_hovered(sf::Vector2i point);
 
   /*
    * @brief Set a handle that runs when the button is clicked

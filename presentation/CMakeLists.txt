@@ -16,6 +16,11 @@ set (HEADERS
   include/AppWindow.hpp
   include/Widget.hpp
 
+  # Interfaces
+  include/Interfaces/Observable.hpp
+  include/Interfaces/Observer.hpp
+  include/Interfaces/Hoverable.hpp
+
   # Views
   include/Views/SectionInstructionSetView.hpp
   include/Views/CommandView.hpp
@@ -39,11 +44,15 @@ set (HEADERS
   include/Utils/WidgetListBuilder.hpp
   include/Utils/Row.hpp
   include/Utils/WithBackground.hpp
-)
+  include/Utils/Input.hpp)
+
 set (SOURCES 
   src/App.cpp
   src/AppWindow.cpp
   src/Widget.cpp
+
+  # Interfaces 
+  src/Interfaces/Hoverable.cpp
 
   # Views
   src/Views/SectionInstructionSetView.cpp
@@ -68,6 +77,7 @@ set (SOURCES
   src/Utils/WidgetListBuilder.cpp
   src/Utils/Row.cpp
   src/Utils/WithBackground.cpp
+  src/Utils/Input.cpp
 )
 
 add_library(

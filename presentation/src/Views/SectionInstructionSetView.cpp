@@ -17,8 +17,9 @@ void SectionInstructionSetView::render(RenderData ren) {
     cmd->render(ren);
 }
 void SectionInstructionSetView::handle_events(EventData evt) {
-  for (auto &cmd : _commands)
+  for (auto &cmd : _commands) {
     cmd->handle_events(evt);
+  }
 }
 void SectionInstructionSetView::update(UpdateData upd) {
   for (auto &cmd : _commands)

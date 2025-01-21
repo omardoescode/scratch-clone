@@ -67,6 +67,11 @@ public:
   void set_string(std::string &&value);
 
   /**
+   * @brief Getter for text
+   */
+  std::string get_string() const;
+
+  /**
    * @brief Set Position for the button
    *
    * @param x The X Position
