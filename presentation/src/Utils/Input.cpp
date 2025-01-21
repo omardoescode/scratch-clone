@@ -2,7 +2,7 @@
 #include "Data/RenderData.hpp"
 #include "Utils/FontFactory.hpp"
 #include "Utils/Text.hpp"
-#include "Utils/WithBackground.hpp"
+#include <cctype>
 #include <memory>
 
 Input::Input() : _is_focused(false) {
@@ -20,10 +20,13 @@ void Input::handle_events(EventData evt) {
   if (evt.event.type == sf::Event::MouseButtonPressed) {
     _is_focused = is_hovered(*_widget, evt.mouse_position);
   } else if (_is_focused && evt.event.type == sf::Event::TextEntered) {
-    std::string neww = _widget->get_string();
-    neww += evt.event.text.unicode;
-    _widget->set_string(neww);
-    std::cout << evt.event.text.unicode;
+    char new_char = evt.event.text.unicode;
+    if (is_valid_char(new_char))
+      _widget->set_string(_widget->get_string() + new_char);
+    else if (new_char == '\b') {
+      std::string new_string = _widget->get_string();
+      _widget->set_string(new_string.substr(0, new_string.length() - 1));
+    }
   }
 }
 void Input::update(UpdateData) {}
@@ -31,3 +34,7 @@ sf::FloatRect Input::get_global_bounds() const {
   return _widget->get_global_bounds();
 }
 void Input::set_position(float x, float y) { _widget->set_position(x, y); }
+
+bool Input::is_valid_char(char c) const {
+  return std::isalpha(c) || std::isdigit(c);
+}
