@@ -23,5 +23,7 @@ private:
   std::shared_ptr<Container> _widget;
   std::shared_ptr<Text> _txt_widget;
   std::shared_ptr<RectangularBorder> _border;
+  std::shared_ptr<unsigned> _cursor_change_id;
+  std::function<void()> _cursor_change_callback;
   bool _is_focused;
 };

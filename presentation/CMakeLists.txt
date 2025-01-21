@@ -44,7 +44,11 @@ set (HEADERS
   include/Utils/WidgetListBuilder.hpp
   include/Utils/Row.hpp
   include/Utils/WithBackground.hpp
-  include/Utils/Input.hpp)
+  include/Utils/Input.hpp
+
+  # Timer
+  include/Timer/Timer.hpp
+)
 
 set (SOURCES 
   src/App.cpp
@@ -78,6 +82,9 @@ set (SOURCES
   src/Utils/Row.cpp
   src/Utils/WithBackground.cpp
   src/Utils/Input.cpp
+
+  # Timer
+  src/Timer/Timer.cpp
 )
 
 add_library(

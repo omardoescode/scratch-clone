@@ -22,7 +22,18 @@ public:
    */
   void set_thickness(EdgeInsets new_thickness);
 
+  /**
+   * @brief Get color for borders
+   */
+  sf::Color get_color() const;
+
+  /**
+   * @brief Set Color
+   */
+  void set_color(sf::Color);
+
 private:
   std::map<EdgeInsets::BaseDirection, sf::RectangleShape> _borders;
   EdgeInsets _offsets;
+  sf::Color _color;
 };

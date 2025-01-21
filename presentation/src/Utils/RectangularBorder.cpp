@@ -4,7 +4,7 @@
 
 RectangularBorder::RectangularBorder(std::shared_ptr<Widget> widget,
                                      sf::Color color, EdgeInsets offsets)
-    : Container(std::move(widget)), _offsets(offsets) {
+    : Container(std::move(widget)), _offsets(offsets), _color(color) {
   auto [x, y, width, height] = get_global_bounds();
 
   if (_offsets.top()) {
@@ -12,7 +12,7 @@ RectangularBorder::RectangularBorder(std::shared_ptr<Widget> widget,
     border.setSize({width + _offsets.left() + _offsets.right(),
                     static_cast<float>(_offsets.top())});
     border.setPosition(x, y);
-    border.setFillColor(color);
+    border.setFillColor(_color);
     _borders[EdgeInsets::TOP] = border;
   }
 
@@ -21,7 +21,7 @@ RectangularBorder::RectangularBorder(std::shared_ptr<Widget> widget,
     border.setSize({width + _offsets.left() + _offsets.right(),
                     static_cast<float>(_offsets.bottom())});
     border.setPosition(x, y + height);
-    border.setFillColor(color);
+    border.setFillColor(_color);
     _borders[EdgeInsets::BOTTOM] = border;
   }
 
@@ -30,7 +30,7 @@ RectangularBorder::RectangularBorder(std::shared_ptr<Widget> widget,
     border.setSize({static_cast<float>(_offsets.left()),
                     height + _offsets.top() + _offsets.bottom()});
     border.setPosition(x, y);
-    border.setFillColor(color);
+    border.setFillColor(_color);
     _borders[EdgeInsets::LEFT] = border;
   }
 
@@ -39,7 +39,7 @@ RectangularBorder::RectangularBorder(std::shared_ptr<Widget> widget,
     border.setSize({static_cast<float>(_offsets.right()),
                     height + _offsets.top() + _offsets.bottom()});
     border.setPosition(x + width, y);
-    border.setFillColor(color);
+    border.setFillColor(_color);
     _borders[EdgeInsets::RIGHT] = border;
   }
 }
@@ -83,4 +83,12 @@ sf::FloatRect RectangularBorder::get_global_bounds() const {
   bounds.width += _offsets.left() + _offsets.right();
   bounds.height += _offsets.top() + _offsets.bottom();
   return bounds;
+}
+
+sf::Color RectangularBorder::get_color() const { return _color; }
+
+void RectangularBorder::set_color(sf::Color color) {
+  _color = color;
+  for (auto &[dir, brd] : _borders)
+    brd.setFillColor(color);
 }
