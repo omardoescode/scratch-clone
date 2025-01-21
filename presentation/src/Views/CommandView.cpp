@@ -1,8 +1,10 @@
 #include "Views/CommandView.hpp"
 #include "Commands/CommandPart.hpp"
 #include "Utils/Button.hpp"
+#include "Utils/EdgeInsets.hpp"
 #include "Utils/FontFactory.hpp"
 #include "Utils/Input.hpp"
+#include "Utils/Padding.hpp"
 #include "Utils/Row.hpp"
 #include "Utils/TextBuilder.hpp"
 #include "Utils/WidgetListBuilder.hpp"
@@ -31,8 +33,9 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
         }
       });
 
-  _widget =
-      std::make_unique<Button>(std::make_unique<Row>(Row(std::move(lst))));
+  _widget = std::make_shared<Button>(
+      std::make_shared<Padding>(std::make_shared<Row>(Row(std::move(lst))),
+                                EdgeInsets(EdgeInsets::ALL, 3)));
 }
 void CommandView::render(RenderData ren) { _widget->render(ren); }
 

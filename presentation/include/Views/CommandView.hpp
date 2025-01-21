@@ -14,5 +14,5 @@ public:
   void handle_click();
 
 private:
-  std::unique_ptr<Widget> _widget;
+  std::shared_ptr<Widget> _widget;
 };

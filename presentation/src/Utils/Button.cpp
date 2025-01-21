@@ -21,8 +21,6 @@ void Button::render(RenderData ren) {
 
 void Button::handle_events(EventData evt) {
   if (is_hovered(__rect, evt.mouse_position)) {
-    // TODO: Handle change the rect background
-
     // Handle Clicks
     if (evt.event.type == sf::Event::MouseButtonPressed)
       handle_click();
@@ -38,7 +36,7 @@ sf::FloatRect Button::get_global_bounds() const {
 
 void Button::handle_click() {
   if (!_handler)
-    std::cerr << "Handler has not been setup";
+    std::cerr << "Handler has not been setup" << std::endl;
   else
     _handler();
 }

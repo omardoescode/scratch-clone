@@ -24,13 +24,33 @@ void Text::handle_events(EventData) {}
 void Text::update(UpdateData) {}
 
 sf::FloatRect Text::get_global_bounds() const {
-  return _text->getGlobalBounds();
-}
+  if (!_text || !_font) {
+    return sf::FloatRect(); // Return an empty rectangle if text or font is
+                            // missing
+  }
 
+  // Get the base global bounds from SFML
+  sf::FloatRect baseBounds = _text->getGlobalBounds();
+
+  // Adjust the bounds based on font metrics
+  float ascent = _font->getLineSpacing(_text->getCharacterSize());
+  float descent = _font->getUnderlineThickness(_text->getCharacterSize());
+
+  // Extend the height to include descent (optional: tune the adjustment
+  // further)
+  float adjustedHeight = ascent + descent;
+
+  return sf::FloatRect(
+      baseBounds.left,
+      baseBounds.top -
+          (ascent - baseBounds.height), // Shift to include proper ascent
+      baseBounds.width, adjustedHeight);
+}
 void Text::set_text(std::unique_ptr<sf::Text> text) {
   assert(text);
   _text = std::move(text);
 }
+
 void Text::set_font(std::unique_ptr<sf::Font> font) {
   assert(_text);
   assert(font);

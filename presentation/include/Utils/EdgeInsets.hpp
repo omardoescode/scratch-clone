@@ -14,10 +14,10 @@ public:
   };
 
   enum BaseDirection {
-    TOP = 0b1,
-    BOTTOM = 0b10,
-    LEFT = 0b100,
-    RIGHT = 0b1000,
+    TOP = 1,
+    BOTTOM = TOP * 2,
+    LEFT = BOTTOM * 2,
+    RIGHT = LEFT * 2,
   };
 
   enum ExtraDirection {

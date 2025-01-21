@@ -3,6 +3,8 @@
 #include "Data/UpdateData.hpp"
 #include "Interfaces/Hoverable.hpp"
 #include "Utils/Container.hpp"
+#include "Utils/RectangularBorder.hpp"
+#include "Utils/Text.hpp"
 #include "Widget.hpp"
 
 class Input : public Widget, public Hoverable {
@@ -18,6 +20,8 @@ public:
   virtual bool is_valid_char(char c) const;
 
 private:
-  std::unique_ptr<Container> _widget;
+  std::shared_ptr<Container> _widget;
+  std::shared_ptr<Text> _txt_widget;
+  std::shared_ptr<RectangularBorder> _border;
   bool _is_focused;
 };

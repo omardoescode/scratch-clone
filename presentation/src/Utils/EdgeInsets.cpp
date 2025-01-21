@@ -1,18 +1,13 @@
 #include "Utils/EdgeInsets.hpp"
 
 EdgeInsets::EdgeInsets(int direction, float value) {
-  bool has_top = direction & TOP;
-  bool has_bottom = direction & BOTTOM;
-  bool has_left = direction & LEFT;
-  bool has_right = direction & RIGHT;
-
-  if (has_top)
+  if (direction & TOP)
     _offsets.top = value;
-  if (has_bottom)
+  if (direction & BOTTOM)
     _offsets.bottom = value;
-  if (has_left)
+  if (direction & LEFT)
     _offsets.left = value;
-  if (has_right)
+  if (direction & RIGHT)
     _offsets.right = value;
 }
 
