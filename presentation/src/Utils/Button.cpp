@@ -3,9 +3,9 @@
 #include <memory>
 #include <stdexcept>
 
-Button::Button(std::unique_ptr<Widget> widget, float width, float height,
+Button::Button(std::shared_ptr<Widget> widget, float width, float height,
                sf::Color color)
-    : WithBackground(std::move(widget), color) {}
+    : WithBackground(widget, color) {}
 
 void Button::set_position(float x, float y) {
   Widget::set_position(x, y);

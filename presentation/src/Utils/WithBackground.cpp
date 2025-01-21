@@ -2,8 +2,8 @@
 #include "Data/RenderData.hpp"
 #include "Utils/Container.hpp"
 
-WithBackground::WithBackground(std::unique_ptr<Widget> widget, sf::Color color)
-    : Container(std::move(widget)) {
+WithBackground::WithBackground(std::shared_ptr<Widget> widget, sf::Color color)
+    : Container(widget) {
   auto bounds = get_global_bounds();
   __rect.setSize(sf::Vector2f(bounds.width, bounds.height));
 

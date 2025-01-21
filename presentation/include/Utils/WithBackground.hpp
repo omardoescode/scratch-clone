@@ -4,7 +4,7 @@
 #include <memory>
 class WithBackground : public Container {
 public:
-  WithBackground(std::unique_ptr<Widget> widget, sf::Color color);
+  WithBackground(std::shared_ptr<Widget> widget, sf::Color color);
 
   void render(RenderData) override;
   void set_position(float x, float y) override;

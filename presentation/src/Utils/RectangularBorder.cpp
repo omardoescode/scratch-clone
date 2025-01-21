@@ -2,7 +2,7 @@
 #include "iostream"
 #include <memory>
 
-RectangularBorder::RectangularBorder(std::unique_ptr<Widget> widget,
+RectangularBorder::RectangularBorder(std::shared_ptr<Widget> widget,
                                      sf::Color color, EdgeInsets offsets)
     : Container(std::move(widget)), _offsets(offsets) {
   auto [x, y, width, height] = get_global_bounds();

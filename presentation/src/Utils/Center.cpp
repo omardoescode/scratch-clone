@@ -1,7 +1,7 @@
 #include "Utils/Center.hpp"
 
-Center::Center(std::unique_ptr<Widget> widget, unsigned width, unsigned height)
-    : _width(width), _height(height), Container(std::move(widget)) {}
+Center::Center(std::shared_ptr<Widget> widget, unsigned width, unsigned height)
+    : _width(width), _height(height), Container(widget) {}
 
 void Center::set_position(float x, float y) {
   Widget::set_position(x, y);

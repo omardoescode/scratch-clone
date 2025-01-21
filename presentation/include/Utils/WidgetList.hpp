@@ -6,7 +6,7 @@
 #include "Widget.hpp"
 #include <list>
 #include <memory>
-class WidgetList : public std::list<std::unique_ptr<Widget>> {
+class WidgetList {
 public:
   /**
    * @brief Default constructor
@@ -18,22 +18,12 @@ public:
    *
    * @details Take a prepared list of pointers
    */
-  explicit WidgetList(std::list<std::unique_ptr<Widget>> elements);
-
-  /**
-   * @brief Move Constructor
-   */
-  WidgetList(WidgetList &&);
-
-  /**
-   * @brief Move Assignment
-   */
-  WidgetList &operator=(WidgetList &&);
+  explicit WidgetList(std::list<std::shared_ptr<Widget>> elements);
 
   /**
    * @brief Across all widgets
    */
-  const std::list<std::unique_ptr<Widget>> &widgets() const;
+  const std::list<std::shared_ptr<Widget>> &widgets() const;
 
   /**
    * @brief Getter for size
@@ -43,9 +33,9 @@ public:
   /**
    * @brief Append elements to the widget list
    */
-  void append_item(std::unique_ptr<Widget>);
+  void append_item(std::shared_ptr<Widget>);
 
 private:
-  std::list<std::unique_ptr<Widget>> _elems;
+  std::list<std::shared_ptr<Widget>> _elems;
   bool valid;
 };

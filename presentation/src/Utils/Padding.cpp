@@ -4,8 +4,8 @@
 #include "Utils/Container.hpp"
 
 // TODO: Figure out what to do with all of this
-Padding::Padding(std::unique_ptr<Widget> widget, EdgeInsets offsets)
-    : Container(std::move(widget)), _offsets(offsets) {
+Padding::Padding(std::shared_ptr<Widget> widget, EdgeInsets offsets)
+    : Container(widget), _offsets(offsets) {
 
   auto bounds = get_global_bounds();
   _paddings.setSize(sf::Vector2f(bounds.width, bounds.height));

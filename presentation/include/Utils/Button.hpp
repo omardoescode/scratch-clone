@@ -7,7 +7,7 @@
 // TODO: Document This Class
 class Button : public WithBackground, public Hoverable {
 public:
-  explicit Button(std::unique_ptr<Widget> widget, float width = -1,
+  explicit Button(std::shared_ptr<Widget> widget, float width = -1,
                   float height = -1, sf::Color color = sf::Color::Black);
 
   /*

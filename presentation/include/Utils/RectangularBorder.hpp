@@ -9,7 +9,7 @@
 // TODO: Document This Widget
 class RectangularBorder : public Container {
 public:
-  RectangularBorder(std::unique_ptr<Widget> widget, sf::Color color,
+  RectangularBorder(std::shared_ptr<Widget> widget, sf::Color color,
                     EdgeInsets offset);
 
   void render(RenderData) override;

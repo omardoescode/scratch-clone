@@ -7,7 +7,7 @@
 
 class Padding : public Container {
 public:
-  Padding(std::unique_ptr<Widget>, EdgeInsets offsets);
+  Padding(std::shared_ptr<Widget> widget, EdgeInsets offsets);
 
   void render(RenderData) override;
   void handle_events(EventData) override;

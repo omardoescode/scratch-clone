@@ -2,7 +2,7 @@
 
 #include "Data/UpdateData.hpp"
 #include "Interfaces/Hoverable.hpp"
-#include "Utils/Text.hpp"
+#include "Utils/Container.hpp"
 #include "Widget.hpp"
 
 class Input : public Widget, public Hoverable {
@@ -18,6 +18,6 @@ public:
   virtual bool is_valid_char(char c) const;
 
 private:
-  std::unique_ptr<Text> _widget;
+  std::unique_ptr<Container> _widget;
   bool _is_focused;
 };

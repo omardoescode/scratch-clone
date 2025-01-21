@@ -11,7 +11,7 @@ public:
   /**
    * @brief Basic Constructor
    */
-  Container(std::unique_ptr<Widget> wid);
+  Container(std::shared_ptr<Widget> wid);
 
   /**
    * @brief Move Constructor
@@ -66,6 +66,11 @@ public:
    */
   virtual sf::Color get_background_color() override;
 
+  /**
+   * @brief Get the Child Widget
+   */
+  std::shared_ptr<Widget> get_child() const;
+
 private:
-  std::unique_ptr<Widget> _widget;
+  std::shared_ptr<Widget> _widget;
 };

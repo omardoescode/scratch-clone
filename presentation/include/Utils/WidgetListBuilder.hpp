@@ -7,5 +7,5 @@ class WidgetListBuilder {
 public:
   WidgetListBuilder() = delete; // Delete the default constructor
   static WidgetList build(int count,
-                          std::function<std::unique_ptr<Widget>(int)> handler);
+                          std::function<std::shared_ptr<Widget>(int)> handler);
 };

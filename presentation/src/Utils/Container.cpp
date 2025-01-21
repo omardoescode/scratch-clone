@@ -1,8 +1,7 @@
 #include "Utils/Container.hpp"
 #include <memory>
 
-Container::Container(std::unique_ptr<Widget> widget)
-    : _widget(std::move(widget)) {}
+Container::Container(std::shared_ptr<Widget> widget) : _widget(widget) {}
 
 Container::Container(Container &&rhs) { _widget = std::move(rhs._widget); }
 void Container::operator=(Container &&rhs) { _widget = std::move(rhs._widget); }
@@ -21,3 +20,5 @@ sf::Color Container::get_background_color() {
   return _widget->get_background_color();
 }
 void Container::handle_click() { _widget->handle_click(); }
+
+std::shared_ptr<Widget> Container::get_child() const { return _widget; }
