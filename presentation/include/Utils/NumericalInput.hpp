@@ -5,7 +5,8 @@ public:
   /**
    * @breif Default Constructor
    */
-  NumericalInput(sf::Color clr = sf::Color::Black,
+  NumericalInput(std::shared_ptr<Constant> constant_exp,
+                 sf::Color clr = sf::Color::Black,
                  sf::Color background = sf::Color::White,
                  unsigned maximum_char_length = -1);
   /**

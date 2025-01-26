@@ -6,23 +6,24 @@
 #include "Utils/Padding.hpp"
 #include "Utils/RectangularBorder.hpp"
 #include "Utils/WithBackground.hpp"
-#include <algorithm>
 #include <cctype>
 #include <memory>
 
-Input::Input(sf::Color clr, sf::Color background, unsigned maximum_char_length)
-    : _is_focused(false), _txt_color(clr), _bg_color(background),
-      _maximum_char_length(maximum_char_length) {
+Input::Input(std::shared_ptr<Constant> constant_exp, sf::Color clr,
+             sf::Color background, unsigned maximum_char_length)
+    : _constant_exp(constant_exp), _is_focused(false), _txt_color(clr),
+      _bg_color(background), _maximum_char_length(maximum_char_length) {
+  assert(_constant_exp);
+
   __txt_widget =
       std::make_shared<Text>(std::make_shared<sf::Text>(),
                              FontFactory::get_instance().get_primary_font());
   __txt_widget->set_fill_color(_txt_color);
-  __txt_widget->set_string("0");
+  __txt_widget->set_string(_constant_exp->get_value());
 
   _border = std::make_shared<RectangularBorder>(
       __txt_widget, sf::Color::Transparent, EdgeInsets(EdgeInsets::RIGHT, 2));
 
-  // TODO: Fix the bug of WithBackground not changing size with `update` here
   _widget = std::make_shared<WithBackground>(
       std::make_shared<Padding>(_border, EdgeInsets(EdgeInsets::ALL, 10)),
       _bg_color);
@@ -64,14 +65,14 @@ void Input::handle_events(EventData evt) {
     char new_char = evt.event.text.unicode;
     if (new_char == '\b') {
       std::string new_string = __txt_widget->get_string();
-      __txt_widget->set_string(new_string.substr(0, new_string.length() - 1));
+      set_value(new_string.substr(0, new_string.length() - 1));
     } else {
       auto str = __txt_widget->get_string() + new_char;
       if (!is_valid_char(new_char) || str.size() > _maximum_char_length ||
           !is_valid_value(str))
         return;
 
-      __txt_widget->set_string(std::move(str));
+      set_value(std::move(str));
     }
   }
 }
@@ -93,9 +94,14 @@ void Input::set_position(float x, float y) {
 }
 
 bool Input::is_valid_char(char c) const {
-  return std::isalpha(c) || std::isdigit(c) || std::isspace(c);
+  return std::isalpha(c) || std::isdigit(c) || std::isspace(c) || c == '.';
 }
 
 bool Input::is_valid_value(const std::string &inp) const { return true; }
 
 void Input::on_unfocus() {}
+
+void Input::set_value(std::string &&value) {
+  __txt_widget->set_string(value);
+  _constant_exp->set_value(std::move(value));
+}

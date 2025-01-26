@@ -11,7 +11,9 @@
 #include <memory>
 #include <stdexcept>
 
+// TODO: Refactor the whole thing buddy
 CommandView::CommandView(std::shared_ptr<Command> cmd) {
+  assert(cmd);
   TextBuilder builder;
   auto parts = cmd->get_parts();
   WidgetList lst = WidgetListBuilder::build(
@@ -25,14 +27,23 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
                   .setFont(FontFactory::get_instance().get_primary_font())
                   .setSize(20)
                   .build());
+          // TODO: Change this code to a component that's we can drag
+          // expressions to
         case CommandPartType::EXPRESSION:
           switch (cmd->retreive_subexpression_datatype(part.part_name)) {
           case DataType::TEXT:
             throw std::runtime_error(
                 "Not supported command view for text expression");
-          case DataType::NUMBER:
-            return std::make_shared<NumericalInput>(sf::Color::Black,
-                                                    sf::Color::White, 10);
+          case DataType::NUMBER: {
+            // TODO:
+            if (auto constant = std::dynamic_pointer_cast<Constant>(
+                    cmd->retrieve_subexpression(part.part_name)))
+              return std::make_shared<NumericalInput>(
+                  constant, sf::Color::Black, sf::Color::White, 10);
+            else
+              throw std::runtime_error(
+                  "Not supported command view for text expression");
+          }
           case DataType::BOOLEAN:
             throw std::runtime_error(
                 "Not supported command view for boolean expression");

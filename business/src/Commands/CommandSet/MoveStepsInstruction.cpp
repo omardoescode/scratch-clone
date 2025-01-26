@@ -10,7 +10,7 @@
 #include <memory>
 
 MoveStepsInstruction::MoveStepsInstruction() : Instruction(DTO::MOTION) {
-  std::shared_ptr<Expression> initial_value = std::make_shared<Constant>(0.f);
+  std::shared_ptr<Expression> initial_value = std::make_shared<Constant>(1.f);
   add_subexpression("steps", initial_value);
 
   set_parts({{CommandPartType::TEXT, "move "},

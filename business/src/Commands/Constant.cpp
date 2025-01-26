@@ -4,9 +4,9 @@
 #include <string>
 
 Constant::Constant(DataType type, const Value &value)
-    : Expression(DTO::UNKNOWN, type), value(value) {}
+    : Expression(DTO::UNKNOWN, type), _value(value) {}
 Constant::Constant(DataType type, Value &&value)
-    : Expression(DTO::UNKNOWN, type), value(std::move(value)) {}
+    : Expression(DTO::UNKNOWN, type), _value(std::move(value)) {}
 
 Constant::Constant(const std::string &value)
     : Constant(DataType::TEXT, value) {}
@@ -20,5 +20,9 @@ Constant::Constant(bool value)
 Value Constant::execute(CharacterManager &character, SymbolTable &symbol_table,
                         ScriptExecution &exeuction,
                         Vector<double> mouse_pointer, Time time) {
-  return value;
+  return _value;
 }
+
+Value Constant::get_value() const { return _value; }
+
+void Constant::set_value(std::string &&value) { _value = value; }

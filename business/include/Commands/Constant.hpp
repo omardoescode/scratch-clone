@@ -45,6 +45,16 @@ public:
                 ScriptExecution &exeuction, Vector<double> mouse_pointer,
                 Time time) override;
 
+  /**
+   * @brief Getter for value
+   */
+  Value get_value() const;
+
+  /**
+   * @breif A setter for value
+   */
+  void set_value(std::string &&);
+
 private:
-  Value value;
+  Value _value;
 };
