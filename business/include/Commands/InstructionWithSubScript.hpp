@@ -1,11 +1,12 @@
 #pragma once
 #include "Commands/Instruction.hpp"
 #include "Commands/Script.hpp"
+#include "DTOs/Sections.hpp"
 #include <memory>
 
 class InstructionWithSubScript : public Instruction {
 public:
-  InstructionWithSubScript(Section section);
+  InstructionWithSubScript(DTO::Section section);
   virtual void execute(CharacterManager &character, SymbolTable &symbol_table,
                        ScriptExecution &exeuction, Vector<double> mouse_pointer,
                        Time time) override = 0;

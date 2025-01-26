@@ -26,13 +26,18 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
                   .setFont(FontFactory::get_instance().get_primary_font())
                   .setSize(20)
                   .build());
-        case CommandPartType::EXPRESSION: {
-          auto inp =
-              std::make_shared<Input>(sf::Color::Black, sf::Color::White, 10);
-          auto bounds = inp->get_global_bounds();
-          return std::make_shared<Center>(inp, 400,
-                                          inp->get_global_bounds().height);
-        }
+        case CommandPartType::EXPRESSION:
+          switch (cmd->retreive_subexpression_datatype(part.part_name)) {
+          case DataType::TEXT:
+            throw std::runtime_error(
+                "Not supported command view for text expression");
+          case DataType::NUMBER:
+            return std::make_shared<Input>(sf::Color::Black, sf::Color::White,
+                                           10);
+          case DataType::BOOLEAN:
+            throw std::runtime_error(
+                "Not supported command view for boolean expression");
+          }
         default:
           throw std::runtime_error("Unknown Command part type");
         }

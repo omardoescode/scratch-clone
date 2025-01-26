@@ -46,11 +46,11 @@ set(SOURCES
   # Command
   src/Commands/CommandSet.cpp
   src/Commands/Command.cpp
+  src/Commands/Expression.cpp
   src/Commands/Constant.cpp
   src/Commands/Instruction.cpp
-  src/Commands/InstructionWithStack.cpp
+  src/Commands/InstructionWithSubScript.cpp
   src/Commands/InstructionSet.cpp
-  src/Commands/InstructionWithValues.cpp
   src/Commands/Script.cpp
   src/Commands/ScriptExecution.cpp
 
