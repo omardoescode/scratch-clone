@@ -42,7 +42,7 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
                   constant, sf::Color::Black, sf::Color::White, 10);
             else
               throw std::runtime_error(
-                  "Not supported command view for text expression");
+                  "Not supported command view for sub-expression");
           }
           case DataType::BOOLEAN:
             throw std::runtime_error(
@@ -55,7 +55,7 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
 
   _widget = std::make_shared<Button>(
       std::make_shared<Padding>(std::make_shared<Row>(Row(std::move(lst))),
-                                EdgeInsets(EdgeInsets::ALL, 3)));
+                                EdgeInsets(EdgeInsets::ALL, 10)));
 }
 void CommandView::render(RenderData ren) { _widget->render(ren); }
 
