@@ -45,6 +45,7 @@ set (HEADERS
   include/Utils/Row.hpp
   include/Utils/WithBackground.hpp
   include/Utils/Input.hpp
+  include/Utils/NumericalInput.hpp
 
   # Timer
   include/Timer/Timer.hpp
@@ -82,6 +83,7 @@ set (SOURCES
   src/Utils/Row.cpp
   src/Utils/WithBackground.cpp
   src/Utils/Input.cpp
+  src/Utils/NumericalInput.cpp
 
   # Timer
   src/Timer/Timer.cpp

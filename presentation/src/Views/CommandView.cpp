@@ -1,10 +1,9 @@
 #include "Views/CommandView.hpp"
 #include "Commands/CommandPart.hpp"
 #include "Utils/Button.hpp"
-#include "Utils/Center.hpp"
 #include "Utils/EdgeInsets.hpp"
 #include "Utils/FontFactory.hpp"
-#include "Utils/Input.hpp"
+#include "Utils/NumericalInput.hpp"
 #include "Utils/Padding.hpp"
 #include "Utils/Row.hpp"
 #include "Utils/TextBuilder.hpp"
@@ -32,8 +31,8 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
             throw std::runtime_error(
                 "Not supported command view for text expression");
           case DataType::NUMBER:
-            return std::make_shared<Input>(sf::Color::Black, sf::Color::White,
-                                           10);
+            return std::make_shared<NumericalInput>(sf::Color::Black,
+                                                    sf::Color::White, 10);
           case DataType::BOOLEAN:
             throw std::runtime_error(
                 "Not supported command view for boolean expression");

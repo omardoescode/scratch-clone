@@ -22,11 +22,26 @@ public:
   sf::FloatRect get_global_bounds() const override;
   void set_position(float x, float y) override;
 
+  /**
+   * @brief A predicate to determine if the character inputted is valid for the
+   * input
+   */
   virtual bool is_valid_char(char c) const;
+
+  /**
+   * @brief A predicate to determine if the whole input is valid
+   * @note default no restrictions
+   * @note don't use to check for new characters, for that, use `is_valid_char`
+   */
+  virtual bool is_valid_value(const std::string &) const;
+
+  virtual void on_unfocus();
+
+protected:
+  std::shared_ptr<Text> __txt_widget;
 
 private:
   std::shared_ptr<Container> _widget;
-  std::shared_ptr<Text> _txt_widget;
   std::shared_ptr<RectangularBorder> _border;
   std::shared_ptr<unsigned> _cursor_change_id;
   std::function<void()> _cursor_change_callback;
