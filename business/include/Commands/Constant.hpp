@@ -1,6 +1,6 @@
 #pragma once
-#include "Commands/IExpression.hpp"
-class Constant : public IExpression {
+#include "Commands/Expression.hpp"
+class Constant : public Expression {
 public:
   /*
    * @brief Constructor

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Commands/InstructionWithExpressions.hpp"
-class MoveStepsInstruction : public InstructionWithExpressions {
+#include "Commands/Instruction.hpp"
+class MoveStepsInstruction : public Instruction {
 public:
   MoveStepsInstruction();
   void execute(CharacterManager &character, SymbolTable &symbol_table,

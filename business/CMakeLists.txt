@@ -27,8 +27,6 @@ set(HEADERS
   include/Commands/CommandPart.hpp
   include/Commands/Instruction.hpp
   include/Commands/InstructionWithSubScript.hpp
-  include/Commands/InstructionWithExpressions.hpp
-  include/Commands/IExpression.hpp
   include/Commands/Expression.hpp
   include/Commands/BaseExpression.hpp
   include/Commands/Script.hpp
@@ -48,11 +46,9 @@ set(SOURCES
   # Command
   src/Commands/CommandSet.cpp
   src/Commands/Command.cpp
-  src/Commands/IExpression.cpp
   src/Commands/Constant.cpp
   src/Commands/Instruction.cpp
   src/Commands/InstructionWithStack.cpp
-  src/Commands/InstructionWithExpressions.cpp
   src/Commands/InstructionSet.cpp
   src/Commands/InstructionWithValues.cpp
   src/Commands/Script.cpp

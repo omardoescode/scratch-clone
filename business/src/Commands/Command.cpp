@@ -1,5 +1,7 @@
 #include "Commands/Command.hpp"
+#include "Commands/Expression.hpp"
 #include "DTOs/Sections.hpp"
+#include <stdexcept>
 
 Command::Command(DTO::SectionType section) : _section{section} {}
 
@@ -17,3 +19,24 @@ std::vector<DTO::Section> Command::get_sections() {
 }
 
 const std::vector<CommandPart> &Command::get_parts() { return _parts; }
+
+void Command::add_subexpression(std::string name,
+                                std::shared_ptr<Expression> expression) {
+  auto itr = _expressions.find(name);
+  if (itr != _expressions.end())
+    throw std::runtime_error(name + " expression already exists\n");
+  _expressions[name] = expression;
+}
+
+std::shared_ptr<Expression> Command::retrieve_subexpression(std::string name) {
+  auto itr = _expressions.find(name);
+  if (itr == _expressions.end())
+    throw std::runtime_error("Invalid " + name +
+                             ": doesn't exist in the expression manage");
+  return itr->second;
+}
+
+DataType Command::retreive_subexpression_datatype(std::string name) {
+  auto exp = retrieve_subexpression(name);
+  return exp->get_datatype();
+}

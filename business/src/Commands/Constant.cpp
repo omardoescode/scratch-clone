@@ -5,9 +5,9 @@
 #include <string>
 
 Constant::Constant(DataType type, const Value &value)
-    : IExpression(DTO::UNKNOWN, type), value(value) {}
+    : Expression(DTO::UNKNOWN, type), value(value) {}
 Constant::Constant(DataType type, Value &&value)
-    : IExpression(DTO::UNKNOWN, type), value(std::move(value)) {}
+    : Expression(DTO::UNKNOWN, type), value(std::move(value)) {}
 
 Constant::Constant(const std::string &value)
     : Constant(DataType::TEXT, value) {}

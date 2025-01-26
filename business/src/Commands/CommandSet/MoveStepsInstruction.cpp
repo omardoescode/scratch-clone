@@ -3,17 +3,15 @@
 #include "Commands/CommandPart.hpp"
 #include "Commands/Constant.hpp"
 #include "Commands/Instruction.hpp"
-#include "Commands/InstructionWithExpressions.hpp"
 #include "Commands/ScriptExecution.hpp"
 #include "DTOs/Sections.hpp"
 #include <cassert>
 #include <cmath>
 #include <memory>
 
-MoveStepsInstruction::MoveStepsInstruction()
-    : InstructionWithExpressions(DTO::MOTION) {
-  auto initial_value = std::make_shared<Constant>(0.f);
-  set_expression("steps", initial_value);
+MoveStepsInstruction::MoveStepsInstruction() : Instruction(DTO::MOTION) {
+  std::shared_ptr<Expression> initial_value = std::make_shared<Constant>(0.f);
+  add_subexpression("steps", initial_value);
 
   set_parts({{CommandPartType::TEXT, "move "},
              {CommandPartType::EXPRESSION, "steps"},
@@ -24,10 +22,10 @@ void MoveStepsInstruction::execute(CharacterManager &character_mng,
                                    SymbolTable &symbol_table,
                                    ScriptExecution &execution,
                                    Vector<double> mouse_pointer, Time time) {
-  Value steps = get_expression("steps")->execute(
+  Value steps = retrieve_subexpression("steps")->execute(
       character_mng, symbol_table, execution, mouse_pointer, time);
 
-  int steps_value = static_cast<double>(std::stoi(steps));
+  int steps_value = std::stoi(steps);
 
   auto character = execution.get_character();
   PositionVector_t update = {cos(character->get_rotation()) * steps_value,

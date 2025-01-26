@@ -1,25 +1,31 @@
 #pragma once
 #include "CharacterManager.hpp"
-#include "Commands/IExpression.hpp"
+#include "Commands/Command.hpp"
+#include "Commands/ScriptExecution.hpp"
+#include "DTOs/Sections.hpp"
+#include "DataType.hpp"
+#include "SymbolTable.hpp"
 #include "Value.hpp"
-#include <map>
-#include <memory>
-#include <string>
 
-class Expression : public IExpression {
+class Expression : public Command {
 public:
+  /*
+   * @brief Constructor
+   *
+   * @param The return type for IExpression
+   */
+  Expression(DTO::SectionType type, DataType return_type);
+
   virtual Value execute(CharacterManager &character, SymbolTable &symbol_table,
                         ScriptExecution &exeuction,
-                        Vector<double> mouse_pointer, Time time) override = 0;
+                        Vector<double> mouse_pointer, Time time) = 0;
   virtual ~Expression() = default;
 
-  /*
-   * @brief Add/Insert a value to be altered with name `key` and info `value`
+  /**
+   * @brief Get the datatype
    */
-  void set_expression(std::string &&key, std::shared_ptr<IExpression>);
+  DataType get_datatype() const;
 
 private:
-  std::map<std::string, std::shared_ptr<IExpression>>
-      expressions; // Map distinct names set by each instruction to the
-                   // expressions
+  DataType _datatype;
 };
