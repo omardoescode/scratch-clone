@@ -20,11 +20,10 @@ public:
   void change_section(DTO::SectionType);
 
 private:
-  std::shared_ptr<Widget> get_current_instruction_set();
   std::shared_ptr<Widget> get_current_instruction_set() const;
 
 private:
   std::map<DTO::SectionType, std::shared_ptr<Widget>>
       _sections_instruction_sets;
-  DTO::SectionType _current_section;
+  DTO::SectionType _current_section_type;
 };

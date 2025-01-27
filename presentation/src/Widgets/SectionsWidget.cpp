@@ -12,10 +12,6 @@
 
 SectionsWidget::SectionsWidget(sf::Color background,
                                std::function<void(DTO::SectionType)> handler) {
-  // sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(width, height));
-  // rect.setFillColor(sf::Color(_bg_color));
-  // _box = std::make_unique<sf::RectangleShape>(std::move(rect));
-  //
   init_sections(handler);
 }
 
@@ -62,7 +58,9 @@ void SectionsWidget::init_sections(
   _grid = std::make_unique<GridView>(std::move(btns), 2, 120, 50);
 }
 
-sf::FloatRect SectionsWidget::get_global_bounds() const { return {0, 0, 0, 0}; }
+sf::FloatRect SectionsWidget::get_global_bounds() const {
+  return _grid->get_global_bounds();
+}
 
 void SectionsWidget::set_position(float x, float y) {
   Widget::set_position(x, y);

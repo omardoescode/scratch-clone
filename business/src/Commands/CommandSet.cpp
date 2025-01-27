@@ -1,6 +1,7 @@
 #include "Commands/CommandSet.hpp"
 #include "Commands/CommandSet/MoveStepsInstruction.hpp"
 #include "DTOs/Sections.hpp"
+#include <iostream>
 #include <memory>
 #include <stdexcept>
 
@@ -18,7 +19,9 @@ void CommandSet::initialize_commands() {
 std::vector<std::shared_ptr<Command>>
 CommandSet::get_section_commands(DTO::SectionType section) const {
   auto itr = commands.find(section);
-  if (itr == commands.end())
-    throw std::runtime_error("Uninitialized section yet!");
+  if (itr == commands.end()) {
+    std::cerr << "Uninitialized section yet!" << std::endl;
+    return {};
+  }
   return itr->second;
 }

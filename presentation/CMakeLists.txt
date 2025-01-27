@@ -12,6 +12,10 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 set (HEADERS 
+  # Debug
+  include/Debug/DebugRect.hpp
+
+  # App
   include/App.hpp
   include/AppWindow.hpp
   include/Widget.hpp
@@ -43,6 +47,7 @@ set (HEADERS
   include/Utils/WidgetList.hpp
   include/Utils/WidgetListBuilder.hpp
   include/Utils/Row.hpp
+  include/Utils/Column.hpp
   include/Utils/WithBackground.hpp
   include/Utils/Input.hpp
   include/Utils/NumericalInput.hpp
@@ -52,6 +57,10 @@ set (HEADERS
 )
 
 set (SOURCES 
+  # Debug
+  src/Debug/DebugRect.cpp
+
+  # App
   src/App.cpp
   src/AppWindow.cpp
   src/Widget.cpp
@@ -81,6 +90,7 @@ set (SOURCES
   src/Utils/WidgetList.cpp
   src/Utils/WidgetListBuilder.cpp
   src/Utils/Row.cpp
+  src/Utils/Column.cpp
   src/Utils/WithBackground.cpp
   src/Utils/Input.cpp
   src/Utils/NumericalInput.cpp

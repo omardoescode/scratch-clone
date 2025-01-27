@@ -5,7 +5,7 @@
 namespace DTO {
 enum SectionType {
   UNKNOWN = -1,
-  MOTION,
+  MOTION = 0,
   CONTROL,
   LOOKS,
   SENSING,
@@ -13,6 +13,10 @@ enum SectionType {
   OPERATORS,
   VARIABLES,
 };
+
+static const SectionType sections[] = {MOTION, CONTROL,   LOOKS,    SENSING,
+                                       SOUND,  OPERATORS, VARIABLES};
+
 struct Section {
   SectionType type;
   Color color;

@@ -35,7 +35,7 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
             throw std::runtime_error(
                 "Not supported command view for text expression");
           case DataType::NUMBER: {
-            // TODO:
+            // TODO: Is there a better way to check for a constant value
             if (auto constant = std::dynamic_pointer_cast<Constant>(
                     cmd->retrieve_subexpression(part.part_name)))
               return std::make_shared<NumericalInput>(
@@ -53,9 +53,8 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
         }
       });
 
-  _widget = std::make_shared<Button>(
-      std::make_shared<Padding>(std::make_shared<Row>(Row(std::move(lst))),
-                                EdgeInsets(EdgeInsets::ALL, 10)));
+  _widget = std::make_shared<Button>(std::make_shared<Padding>(
+      std::make_shared<Row>(std::move(lst)), EdgeInsets(EdgeInsets::ALL, 10)));
 }
 void CommandView::render(RenderData ren) { _widget->render(ren); }
 

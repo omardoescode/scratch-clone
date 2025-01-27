@@ -1,5 +1,6 @@
 #pragma once
 #include "DTOs/Sections.hpp"
+#include "Utils/Column.hpp"
 #include "Views/CommandView.hpp"
 #include "Widget.hpp"
 #include <list>
@@ -19,7 +20,5 @@ public:
 
 private:
   DTO::SectionType _section;
-  std::list<std::shared_ptr<CommandView>>
-      _commands; // < This is shared to enable drag-and-drop functionality to
-                 // copy into canvas later
+  std::shared_ptr<Column> _commands;
 };
