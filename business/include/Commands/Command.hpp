@@ -14,7 +14,7 @@ public:
   /*
    * @brief Getter for section
    */
-  DTO::SectionType get_section() const;
+  DTO::SectionType get_section_type() const;
 
   /*
    * @brief Getter for parts
@@ -24,7 +24,7 @@ public:
   /*
    * @brief Return all sections names and colors
    */
-  static std::vector<DTO::Section> get_sections();
+  static std::map<DTO::SectionType, DTO::SectionData> get_sections();
 
   /**
    * @breif Add a sub-expression to the command
@@ -48,7 +48,7 @@ protected:
   void set_parts(std::vector<CommandPart> &&);
 
 private:
-  DTO::SectionType _section;
+  DTO::SectionType _section_type;
   std::vector<CommandPart> _parts;
   std::map<std::string, std::shared_ptr<Expression>> _expressions;
 };

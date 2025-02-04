@@ -3,8 +3,7 @@
 #include <memory>
 #include <stdexcept>
 
-Button::Button(std::shared_ptr<Widget> widget, float width, float height,
-               sf::Color color)
+Button::Button(std::shared_ptr<Widget> widget, sf::Color color)
     : WithBackground(widget, color) {}
 
 void Button::set_position(float x, float y) {

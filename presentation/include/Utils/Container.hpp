@@ -64,7 +64,7 @@ public:
   /**
    * @brief Get the widget background color
    */
-  virtual sf::Color get_background_color() override;
+  virtual sf::Color get_background_color() const override;
 
   /**
    * @brief Get the Child Widget

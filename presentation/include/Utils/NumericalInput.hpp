@@ -8,7 +8,7 @@ public:
   NumericalInput(std::shared_ptr<Constant> constant_exp,
                  sf::Color clr = sf::Color::Black,
                  sf::Color background = sf::Color::White,
-                 unsigned maximum_char_length = -1);
+                 unsigned maximum_char_length = -1, int char_size = 15);
   /**
    * @brief Make sure the character is a digit
    */

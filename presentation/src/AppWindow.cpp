@@ -11,7 +11,7 @@ AppWindow::AppWindow() : _current_section(static_cast<DTO::SectionType>(0)) {
       std::make_shared<SectionsWidget>(
           sf::Color(216, 203, 219),
           [this](DTO::SectionType type) { set_current_section(type); }),
-      EdgeInsets(EdgeInsets::ALL, 10));
+      EdgeInsets(EdgeInsets::ALL, 15));
   _sections_widget->set_position(0, 0);
 
   _instruction_set = std::make_shared<InstructionSetView>();
@@ -32,6 +32,7 @@ void AppWindow::update(UpdateData upd) {
   _sections_widget->update(upd);
   _instruction_set->update(upd);
 }
+
 void AppWindow::set_current_section(DTO::SectionType type) {
   _current_section = type;
 }

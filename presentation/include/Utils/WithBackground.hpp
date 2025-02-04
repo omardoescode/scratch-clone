@@ -9,7 +9,7 @@ public:
   void render(RenderData) override;
   void update(UpdateData) override;
   void set_position(float x, float y) override;
-  sf::Color get_background_color() override;
+  sf::Color get_background_color() const override;
 
 protected:
   sf::RectangleShape __rect;

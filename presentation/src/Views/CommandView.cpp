@@ -1,5 +1,6 @@
 #include "Views/CommandView.hpp"
 #include "Commands/CommandPart.hpp"
+#include "Game.hpp"
 #include "Utils/Button.hpp"
 #include "Utils/EdgeInsets.hpp"
 #include "Utils/FontFactory.hpp"
@@ -15,7 +16,14 @@
 CommandView::CommandView(std::shared_ptr<Command> cmd) {
   assert(cmd);
   TextBuilder builder;
+
+  // Get the color
+  auto [r, g, b] =
+      Game::get_instance().get_sections_map()[cmd->get_section_type()].color;
+
   auto parts = cmd->get_parts();
+
+  // Build the parts in a row
   WidgetList lst = WidgetListBuilder::build(
       parts.size(), [&](int index) -> std::shared_ptr<Widget> {
         auto part = parts[index];
@@ -23,9 +31,9 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
         case CommandPartType::TEXT:
           return std::make_shared<Text>(
               builder.setText(part.part_name)
-                  .setColor(sf::Color::Red)
+                  .setColor(sf::Color::White)
                   .setFont(FontFactory::get_instance().get_primary_font())
-                  .setSize(20)
+                  .setSize(15)
                   .build());
           // TODO: Change this code to a component that's we can drag
           // expressions to
@@ -37,10 +45,12 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
           case DataType::NUMBER: {
             // TODO: Is there a better way to check for a constant value
             if (auto constant = std::dynamic_pointer_cast<Constant>(
-                    cmd->retrieve_subexpression(part.part_name)))
-              return std::make_shared<NumericalInput>(
-                  constant, sf::Color::Black, sf::Color::White, 10);
-            else
+                    cmd->retrieve_subexpression(part.part_name))) {
+              auto wid = std::make_shared<NumericalInput>(
+                  constant, sf::Color::Black, sf::Color::White, 10, 15);
+              return std::make_shared<Padding>(wid,
+                                               EdgeInsets(EdgeInsets::ALL, 10));
+            } else
               throw std::runtime_error(
                   "Not supported command view for sub-expression");
           }
@@ -53,8 +63,10 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
         }
       });
 
-  _widget = std::make_shared<Button>(std::make_shared<Padding>(
-      std::make_shared<Row>(std::move(lst)), EdgeInsets(EdgeInsets::ALL, 10)));
+  _widget = std::make_shared<Button>(
+      std::make_shared<Padding>(std::make_shared<Row>(std::move(lst)),
+                                EdgeInsets(EdgeInsets::ALL, 10)),
+      sf::Color(r, g, b));
 }
 void CommandView::render(RenderData ren) { _widget->render(ren); }
 

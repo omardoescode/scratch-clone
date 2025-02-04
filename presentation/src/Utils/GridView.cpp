@@ -33,10 +33,7 @@ sf::FloatRect GridView::get_global_bounds() const {
   auto [width, height] = calculate_size();
 
   // Calculate rows needed
-  std::cout << "List size " << _list.size() << std::endl;
-  std::cout << "_widgets_per_row " << _widgets_per_row << std::endl;
   size_t num_rows = (_list.size() + _widgets_per_row - 1) / _widgets_per_row;
-  std::cout << "num_rows " << num_rows << std::endl;
 
   // Total width = (widget width × widgets per row) + (spacing × (widgets per
   // row - 1))

@@ -55,7 +55,7 @@ public:
   /**
    * @brief Get the background of the widget
    */
-  virtual sf::Color get_background_color();
+  virtual sf::Color get_background_color() const;
 
 protected:
   sf::Vector2f __pos;

@@ -9,7 +9,7 @@ Game &Game::get_instance() {
   return game;
 }
 
-std::vector<DTO::Section> Game::get_sections() {
+std::map<DTO::SectionType, DTO::SectionData> Game::get_sections_map() {
   return Command::get_sections();
 }
 

@@ -38,7 +38,7 @@ public:
   /*
    * @brief Return the sections as DTOs
    */
-  std::vector<DTO::Section> get_sections();
+  std::map<DTO::SectionType, DTO::SectionData> get_sections_map();
 
   /*
    * @brief Return the instructino of a specific section

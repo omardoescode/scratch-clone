@@ -16,7 +16,7 @@ public:
   Input(std::shared_ptr<Constant> constant_exp,
         sf::Color clr = sf::Color::Black,
         sf::Color background = sf::Color::White,
-        unsigned maximum_char_length = -1);
+        unsigned maximum_char_length = -1, int char_size = 15);
 
   void render(RenderData) override;
   void handle_events(EventData) override;
@@ -39,6 +39,10 @@ public:
 
   virtual void on_unfocus();
 
+  virtual sf::Color get_background_color() const override;
+
+  virtual void handle_click() override;
+
 protected:
   void set_value(std::string &&);
 
@@ -47,7 +51,7 @@ protected:
 
 private:
   std::shared_ptr<Container> _widget;
-  std::shared_ptr<RectangularBorder> _border;
+  std::shared_ptr<RectangularBorder> _cursor;
   std::shared_ptr<unsigned> _cursor_change_id;
   std::shared_ptr<Constant> _constant_exp;
   std::function<void()> _cursor_change_callback;

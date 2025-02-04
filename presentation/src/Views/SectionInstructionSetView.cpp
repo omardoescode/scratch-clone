@@ -12,12 +12,11 @@ SectionInstructionSetView::SectionInstructionSetView(DTO::SectionType section) {
   auto instructions = CommandSet::get_instance().get_section_commands(section);
 
   // Create a command view for each
-  WidgetList ll = WidgetListBuilder::build(instructions.size(), [&](int index) {
-    return std::make_shared<CommandView>(instructions[index]);
-  });
-  _commands = std::make_shared<Column>(ll, 10);
-  // for (const auto &instance : instructions)
-  //   _commands.push_back(std::make_shared<CommandView>(instance));
+  WidgetList lst =
+      WidgetListBuilder::build(instructions.size(), [&](int index) {
+        return std::make_shared<CommandView>(instructions[index]);
+      });
+  _commands = std::make_shared<Column>(lst, 10);
 }
 
 void SectionInstructionSetView::render(RenderData ren) {

@@ -1,5 +1,6 @@
 #pragma once
 #include "DTOs/Sections.hpp"
+#include "Views/SectionInstructionSetView.hpp"
 #include "Widget.hpp"
 #include <map>
 

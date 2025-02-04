@@ -10,7 +10,7 @@
 #include <memory>
 
 Input::Input(std::shared_ptr<Constant> constant_exp, sf::Color clr,
-             sf::Color background, unsigned maximum_char_length)
+             sf::Color background, unsigned maximum_char_length, int char_size)
     : _constant_exp(constant_exp), _is_focused(false), _txt_color(clr),
       _bg_color(background), _maximum_char_length(maximum_char_length) {
   assert(_constant_exp);
@@ -20,16 +20,15 @@ Input::Input(std::shared_ptr<Constant> constant_exp, sf::Color clr,
                              FontFactory::get_instance().get_primary_font());
   __txt_widget->set_fill_color(_txt_color);
   __txt_widget->set_string(_constant_exp->get_value());
+  __txt_widget->set_character_size(char_size);
 
-  _border = std::make_shared<RectangularBorder>(
+  _cursor = std::make_shared<RectangularBorder>(
       __txt_widget, sf::Color::Transparent, EdgeInsets(EdgeInsets::RIGHT, 2));
 
-  _widget = std::make_shared<WithBackground>(
-      std::make_shared<Padding>(_border, EdgeInsets(EdgeInsets::ALL, 10)),
-      _bg_color);
+  _widget = std::make_shared<WithBackground>(_cursor, _bg_color);
 
   _cursor_change_callback = [this]() {
-    _border->set_color(_border->get_color() != sf::Color::Transparent
+    _cursor->set_color(_cursor->get_color() != sf::Color::Transparent
                            ? sf::Color::Transparent
                            : _txt_color);
   };
@@ -49,15 +48,12 @@ void Input::handle_events(EventData evt) {
       if (_cursor_change_id) {
         Timer::get_instance().cancel_interval(*_cursor_change_id);
         _cursor_change_id = nullptr;
-        _border->set_color(sf::Color::Transparent);
+        _cursor->set_color(sf::Color::Transparent);
         on_unfocus();
+        _is_focused = false;
       } else {
-        _cursor_change_id =
-            std::make_shared<unsigned>(Timer::get_instance().set_interval(
-                _cursor_change_callback, CURSOR_CHANGE_DELAY));
+        handle_click();
       }
-
-      _is_focused = new_focus;
     }
   }
   // Case 2: Handle Input
@@ -104,4 +100,16 @@ void Input::on_unfocus() {}
 void Input::set_value(std::string &&value) {
   __txt_widget->set_string(value);
   _constant_exp->set_value(std::move(value));
+}
+
+sf::Color Input::get_background_color() const { return _bg_color; }
+
+void Input::handle_click() {
+  std::cout << "made it here" << std::endl;
+  if (_cursor_change_id)
+    return;
+  _cursor_change_id =
+      std::make_shared<unsigned>(Timer::get_instance().set_interval(
+          _cursor_change_callback, CURSOR_CHANGE_DELAY));
+  _is_focused = true;
 }

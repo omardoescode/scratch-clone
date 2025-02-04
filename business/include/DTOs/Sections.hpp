@@ -2,6 +2,7 @@
 
 #include "DTOs/DTO.hpp"
 #include <string>
+#include <vector>
 namespace DTO {
 enum SectionType {
   UNKNOWN = -1,
@@ -14,11 +15,10 @@ enum SectionType {
   VARIABLES,
 };
 
-static const SectionType sections[] = {MOTION, CONTROL,   LOOKS,    SENSING,
-                                       SOUND,  OPERATORS, VARIABLES};
+static const std::vector<SectionType> sections = {
+    MOTION, CONTROL, LOOKS, SENSING, SOUND, OPERATORS, VARIABLES};
 
-struct Section {
-  SectionType type;
+struct SectionData {
   Color color;
 };
 

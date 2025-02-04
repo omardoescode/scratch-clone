@@ -7,8 +7,8 @@
 // TODO: Document This Class
 class Button : public WithBackground, public Hoverable {
 public:
-  explicit Button(std::shared_ptr<Widget> widget, float width = -1,
-                  float height = -1, sf::Color color = sf::Color::Black);
+  explicit Button(std::shared_ptr<Widget> widget,
+                  sf::Color color = sf::Color::Black);
 
   /*
    * @brief Set a handle that runs when the button is clicked

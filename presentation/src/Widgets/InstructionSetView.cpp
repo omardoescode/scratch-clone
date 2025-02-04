@@ -1,12 +1,14 @@
 #include "Widgets/InstructionSetView.hpp"
 #include "DTOs/Sections.hpp"
+#include "Utils/Padding.hpp"
 #include "Views/SectionInstructionSetView.hpp"
 #include <memory>
 
 InstructionSetView::InstructionSetView() {
   for (auto &section : DTO::sections)
-    _sections_instruction_sets[section] =
-        std::make_shared<SectionInstructionSetView>(section);
+    _sections_instruction_sets[section] = std::make_shared<Padding>(
+        std::make_shared<SectionInstructionSetView>(section),
+        EdgeInsets(EdgeInsets::ALL, 15));
   _current_section_type = static_cast<DTO::SectionType>(0);
 }
 

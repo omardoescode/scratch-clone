@@ -32,12 +32,14 @@ void SectionsWidget::update(UpdateData upd) {
 
 void SectionsWidget::init_sections(
     std::function<void(DTO::SectionType)> handler) {
-  auto sections = Game::get_instance().get_sections();
+  auto sections = DTO::sections;
+  auto sections_map = Game::get_instance().get_sections_map();
   TextBuilder builder;
 
   WidgetList btns = WidgetListBuilder::build(sections.size(), [&](int index) {
-    auto &[type, color] = sections[index];
-    auto &[r, g, b] = color;
+    auto type = sections[index];
+    auto data = sections_map[type];
+    auto &[r, g, b] = data.color;
     auto text = builder.setText(DTO::sectiontype_name_mapper(type))
                     .setColor(sf::Color::White)
                     .setFont(FontFactory::get_instance().get_primary_font())
@@ -45,7 +47,7 @@ void SectionsWidget::init_sections(
                     .build();
 
     auto btn =
-        std::make_shared<Button>(std::make_unique<Text>(std::move(text)), 80);
+        std::make_shared<Button>(std::make_unique<Text>(std::move(text)));
 
     // clang -Wc++20-extensions
     btn->set_handler([type, handler]() { handler(type); });
@@ -63,7 +65,6 @@ sf::FloatRect SectionsWidget::get_global_bounds() const {
 }
 
 void SectionsWidget::set_position(float x, float y) {
-  std::cout << "sections widget set to " << x << " " << y << std::endl;
   Widget::set_position(x, y);
   assert(_grid);
   _grid->set_position(x, y);

@@ -3,8 +3,8 @@
 
 NumericalInput::NumericalInput(std::shared_ptr<Constant> constant_exp,
                                sf::Color clr, sf::Color background,
-                               unsigned maximum_char_length)
-    : Input(constant_exp, clr, background, maximum_char_length) {}
+                               unsigned maximum_char_length, int char_size)
+    : Input(constant_exp, clr, background, maximum_char_length, char_size) {}
 bool NumericalInput::is_valid_char(char c) const {
   return std::isdigit(c) || c == '.';
 }

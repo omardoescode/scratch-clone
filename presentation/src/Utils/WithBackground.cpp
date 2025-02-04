@@ -18,7 +18,7 @@ void WithBackground::set_position(float x, float y) {
   __rect.setPosition(x, y);
 }
 
-sf::Color WithBackground::get_background_color() { return _bg_color; }
+sf::Color WithBackground::get_background_color() const { return _bg_color; }
 
 void WithBackground::update(UpdateData upd) {
   auto bounds = get_global_bounds();
