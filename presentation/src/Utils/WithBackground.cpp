@@ -4,7 +4,7 @@
 
 // FIX: The size of this thing is fixed, and won't change
 WithBackground::WithBackground(std::shared_ptr<Widget> widget, sf::Color color)
-    : Container(widget) {
+    : Container(widget), _bg_color(color) {
   __rect.setFillColor(color);
 }
 
