@@ -3,6 +3,8 @@
 #include "Data/RenderData.hpp"
 #include "Data/UpdateData.hpp"
 #include "Widget.hpp"
+#include "Widgets/InstructionSetView.hpp"
+#include "Widgets/SectionsWidget.hpp"
 
 class AppWindow {
 public:
@@ -38,7 +40,6 @@ private:
   void set_current_section(DTO::SectionType type);
 
 private:
-  std::shared_ptr<Widget> _sections_widget;
-  std::shared_ptr<Widget> _instruction_set;
-  DTO::SectionType _current_section;
+  std::shared_ptr<SectionsWidget> _sections_widget;
+  std::shared_ptr<InstructionSetView> _instruction_set;
 };

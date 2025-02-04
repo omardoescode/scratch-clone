@@ -105,7 +105,6 @@ void Input::set_value(std::string &&value) {
 sf::Color Input::get_background_color() const { return _bg_color; }
 
 void Input::handle_click() {
-  std::cout << "made it here" << std::endl;
   if (_cursor_change_id)
     return;
   _cursor_change_id =

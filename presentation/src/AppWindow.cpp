@@ -6,17 +6,16 @@
 #include "Widgets/SectionsWidget.hpp"
 #include <memory>
 
-AppWindow::AppWindow() : _current_section(static_cast<DTO::SectionType>(0)) {
-  _sections_widget = std::make_shared<Padding>(
-      std::make_shared<SectionsWidget>(
-          sf::Color(216, 203, 219),
-          [this](DTO::SectionType type) { set_current_section(type); }),
-      EdgeInsets(EdgeInsets::ALL, 15));
+AppWindow::AppWindow() {
+  _sections_widget = std::make_shared<SectionsWidget>(
+      sf::Color(216, 203, 219),
+      [this](DTO::SectionType type) { set_current_section(type); });
   _sections_widget->set_position(0, 0);
 
   _instruction_set = std::make_shared<InstructionSetView>();
   _instruction_set->set_position(0,
                                  _sections_widget->get_global_bounds().height);
+  set_current_section(static_cast<DTO::SectionType>(0));
 }
 void AppWindow::handle_events(EventData evt) {
   _sections_widget->handle_events(evt);
@@ -34,5 +33,5 @@ void AppWindow::update(UpdateData upd) {
 }
 
 void AppWindow::set_current_section(DTO::SectionType type) {
-  _current_section = type;
+  _instruction_set->set_current_section(type);
 }

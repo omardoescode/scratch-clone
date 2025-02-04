@@ -65,7 +65,7 @@ CommandView::CommandView(std::shared_ptr<Command> cmd) {
 
   _widget = std::make_shared<Button>(
       std::make_shared<Padding>(std::make_shared<Row>(std::move(lst)),
-                                EdgeInsets(EdgeInsets::ALL, 10)),
+                                EdgeInsets(EdgeInsets::ALL, 5)),
       sf::Color(r, g, b));
 }
 void CommandView::render(RenderData ren) { _widget->render(ren); }

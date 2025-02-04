@@ -37,6 +37,9 @@ void InstructionSetView::update(UpdateData upt) {
   assert(res);
   res->update(upt);
 }
+void InstructionSetView::set_current_section(DTO::SectionType type) {
+  _current_section_type = type;
+}
 
 sf::FloatRect InstructionSetView::get_global_bounds() const {
   return get_current_instruction_set()->get_global_bounds();

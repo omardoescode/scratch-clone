@@ -20,6 +20,8 @@ public:
 
   void change_section(DTO::SectionType);
 
+  void set_current_section(DTO::SectionType type);
+
 private:
   std::shared_ptr<Widget> get_current_instruction_set() const;
 

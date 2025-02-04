@@ -14,6 +14,8 @@ CommandSet &CommandSet::get_instance() {
 
 void CommandSet::initialize_commands() {
   commands[DTO::MOTION].push_back(std::make_shared<MoveStepsInstruction>());
+  commands[DTO::MOTION].push_back(std::make_shared<MoveStepsInstruction>());
+  commands[DTO::LOOKS].push_back(std::make_shared<MoveStepsInstruction>());
 }
 
 std::vector<std::shared_ptr<Command>>
