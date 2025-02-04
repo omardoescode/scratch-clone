@@ -39,7 +39,7 @@ sf::FloatRect Padding::get_global_bounds() const {
 }
 
 void Padding::set_position(float x, float y) {
-  Widget::set_position(x, y);
   _paddings.setPosition(x, y);
   Container::set_position(x + _offsets.left(), y + _offsets.top());
+  Widget::set_position(x, y);
 }

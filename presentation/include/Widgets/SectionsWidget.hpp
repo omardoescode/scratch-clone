@@ -1,8 +1,6 @@
 #pragma once
 #include "DTOs/Sections.hpp"
-#include "SFML/Graphics.hpp"
-#include "SFML/Graphics/RectangleShape.hpp"
-#include "SFML/Graphics/RenderWindow.hpp"
+#include "Debug/DebugRect.hpp"
 #include "Utils/Button.hpp"
 #include "Utils/GridView.hpp"
 #include "Widget.hpp"
@@ -30,5 +28,5 @@ private:
   void init_sections(std::function<void(DTO::SectionType)> handler);
 
 private:
-  std::unique_ptr<GridView> _grid;
+  std::shared_ptr<GridView> _grid;
 };

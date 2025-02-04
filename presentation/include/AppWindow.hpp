@@ -2,7 +2,6 @@
 #include "Data/EventData.hpp"
 #include "Data/RenderData.hpp"
 #include "Data/UpdateData.hpp"
-#include "Debug/DebugRect.hpp"
 #include "Widget.hpp"
 
 class AppWindow {
@@ -42,5 +41,4 @@ private:
   std::shared_ptr<Widget> _sections_widget;
   std::shared_ptr<Widget> _instruction_set;
   DTO::SectionType _current_section;
-  std::shared_ptr<DebugRect> r;
 };

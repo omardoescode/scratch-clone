@@ -2,21 +2,20 @@
 #include "DTOs/Sections.hpp"
 #include "Views/SectionInstructionSetView.hpp"
 #include <memory>
-#include <stdexcept>
 
 InstructionSetView::InstructionSetView() {
   for (auto &section : DTO::sections)
     _sections_instruction_sets[section] =
         std::make_shared<SectionInstructionSetView>(section);
+  _current_section_type = static_cast<DTO::SectionType>(0);
 }
 
 std::shared_ptr<Widget>
 InstructionSetView::get_current_instruction_set() const {
-  try {
-    return _sections_instruction_sets.at(_current_section_type);
-  } catch (std::out_of_range &) {
+  auto itr = _sections_instruction_sets.find(_current_section_type);
+  if (itr == _sections_instruction_sets.end())
     return nullptr;
-  }
+  return itr->second;
 }
 
 void InstructionSetView::render(RenderData ren) {

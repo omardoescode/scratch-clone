@@ -45,17 +45,17 @@ void SectionsWidget::init_sections(
                     .build();
 
     auto btn =
-        std::make_unique<Button>(std::make_unique<Text>(std::move(text)), 80);
+        std::make_shared<Button>(std::make_unique<Text>(std::move(text)), 80);
 
     // clang -Wc++20-extensions
     btn->set_handler([type, handler]() { handler(type); });
 
-    return std::make_unique<RectangularBorder>(
-        std::make_unique<Padding>(std::move(btn), EdgeInsets(8.f, 6.f)),
+    return std::make_shared<RectangularBorder>(
+        std::make_shared<Padding>(std::move(btn), EdgeInsets(8.f, 6.f)),
         sf::Color(r, g, b), EdgeInsets(EdgeInsets::LEFT, 3));
   });
 
-  _grid = std::make_unique<GridView>(std::move(btns), 2, 120, 50);
+  _grid = std::make_shared<GridView>(std::move(btns), 2, 20, 10);
 }
 
 sf::FloatRect SectionsWidget::get_global_bounds() const {
@@ -63,9 +63,8 @@ sf::FloatRect SectionsWidget::get_global_bounds() const {
 }
 
 void SectionsWidget::set_position(float x, float y) {
+  std::cout << "sections widget set to " << x << " " << y << std::endl;
   Widget::set_position(x, y);
   assert(_grid);
   _grid->set_position(x, y);
 }
-
-// sf::Color SectionsWidget::get_background_color() { return _bg_color; }

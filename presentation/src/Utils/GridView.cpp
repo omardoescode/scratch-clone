@@ -33,7 +33,10 @@ sf::FloatRect GridView::get_global_bounds() const {
   auto [width, height] = calculate_size();
 
   // Calculate rows needed
+  std::cout << "List size " << _list.size() << std::endl;
+  std::cout << "_widgets_per_row " << _widgets_per_row << std::endl;
   size_t num_rows = (_list.size() + _widgets_per_row - 1) / _widgets_per_row;
+  std::cout << "num_rows " << num_rows << std::endl;
 
   // Total width = (widget width × widgets per row) + (spacing × (widgets per
   // row - 1))
@@ -52,14 +55,15 @@ void GridView::set_position(float x, float y) {
   float wid_x = x, wid_y = y;
   int columns = 0;
 
+  auto [width, height] = calculate_size();
   for (auto &widget : _list.widgets()) {
     widget->set_position(wid_x, wid_y);
     columns++;
 
     if (columns == _widgets_per_row)
-      columns = 0, wid_x = x, wid_y += _cross_axis_spacing;
+      columns = 0, wid_x = x, wid_y += _cross_axis_spacing + height;
     else
-      wid_x += _main_axis_spacing;
+      wid_x += _main_axis_spacing + width;
   }
 }
 
